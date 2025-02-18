@@ -8,10 +8,15 @@ namespace Super_Cartes_Infinies.Models
 		public Card() { }
 
 		public int Id { get; set; }
+		[DisplayName("Nom")]
 		public string Name { get; set; } = "";
-		public int Attack { get; set; }
-		public int Health { get; set; }
-		public int Cost { get; set; }
+        [DisplayName("Attaque")]
+        public int Attack { get; set; }
+        [DisplayName("Points de vie")]
+        public int Health { get; set; }
+        [DisplayName("Coût")]
+        public int Cost { get; set; }
+        [DisplayName("Image")]
         public string ImageUrl { get; set; } = "";
     }
 }
