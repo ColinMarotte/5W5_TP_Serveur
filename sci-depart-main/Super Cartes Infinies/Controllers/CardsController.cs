@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using Super_Cartes_Infinies.Models;
 
 namespace Super_Cartes_Infinies.Controllers
 {
+    [Authorize(Roles= ApplicationDbContext.ADMIN_ROLE)]
     public class CardsController : Controller
     {
         private readonly ApplicationDbContext _context;
