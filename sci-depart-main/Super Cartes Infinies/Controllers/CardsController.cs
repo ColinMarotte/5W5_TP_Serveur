@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Super_Cartes_Infinies.Data;
 using Super_Cartes_Infinies.Models;
+using Super_Cartes_Infinies.Services;
 
 namespace Super_Cartes_Infinies.Controllers
 {
@@ -15,16 +16,17 @@ namespace Super_Cartes_Infinies.Controllers
     public class CardsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private CardsService _cardsService;
 
-        public CardsController(ApplicationDbContext context)
+        public CardsController(CardsService cardsService)
         {
-            _context = context;
+            _cardsService = cardsService;
         }
 
         // GET: Cards
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Cards.ToListAsync());
+            return View(await _cardsService.GetAllCards());
         }
 
         // GET: Cards/Details/5
@@ -34,13 +36,16 @@ namespace Super_Cartes_Infinies.Controllers
             {
                 return NotFound();
             }
-
-            var card = await _context.Cards
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (card == null)
+            Card card;
+            try
+            {
+                card = await _cardsService.GetCard(id);
+            }
+            catch(Exception e)
             {
                 return NotFound();
             }
+
 
             return View(card);
         }

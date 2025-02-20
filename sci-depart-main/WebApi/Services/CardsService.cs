@@ -1,4 +1,6 @@
-﻿using Super_Cartes_Infinies.Data;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
+using Super_Cartes_Infinies.Data;
 using Super_Cartes_Infinies.Models;
 
 namespace Super_Cartes_Infinies.Services
@@ -20,9 +22,23 @@ namespace Super_Cartes_Infinies.Services
             return _dbContext.Cards.Take(8).ToList();
         }
 
-        public IEnumerable<Card> GetAllCards()
+        public async Task<IEnumerable<Card>> GetAllCards()
         {
-            return _dbContext.Cards;
+            return await _dbContext.Cards.ToListAsync();
+        }
+
+        public async Task<Card> GetCard(int? id)
+        {
+            if(id == null)
+            {
+                throw new ArgumentException();
+            }
+            Card card = await _dbContext.Cards.FindAsync(id);
+            if(card == null)
+            {
+                throw new Exception();
+            }
+            return card;
         }
     }
 }
