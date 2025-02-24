@@ -27,10 +27,8 @@ namespace Super_Cartes_Infinies.Services
                 User = user
             };
 
-            // TODO: Utilisez le service StartingCardsService pour obtenir les cartes de départ
             List<Card> startingCards = _startingCardsService.GetStartingCards();
 
-            // TODO: Ajoutez ces cartes au joueur en utilisant le modèle OwnedCard que vous allez devoir ajouter
             foreach(Card c in startingCards)
             {
                 OwnedCard newOwnedCard = new OwnedCard()
