@@ -20,6 +20,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>()
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<CardsService>();
+builder.Services.AddScoped<StartingCardsService>();
 
 
 var app = builder.Build();

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Models.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class Init4 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -319,9 +319,9 @@ namespace Models.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "11111111-1111-1111-1111-111111111111", 0, "587f40b9-1505-4a28-9fdd-12aab3a9f40c", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEAE9Zt0zGSDBZPniqiu9ouLSWrbpYPAxCpL1AcpXCv4vMyyiktUp7Fryjrw4A8JFFw==", null, false, "c49f8905-6a94-4b2b-a12e-6780da6d56a0", false, "admin@admin.com" },
-                    { "User1Id", 0, "858f5b5a-4ebc-43c5-9600-45aca6260f2d", null, false, false, null, null, null, null, null, false, "891b9895-cf3c-468d-9feb-e2173df55a61", false, null },
-                    { "User2Id", 0, "1389fece-f29e-4e64-8a22-7d0055ba7a9e", null, false, false, null, null, null, null, null, false, "9aeb3456-13f8-4e16-a8d9-469befc9cf97", false, null }
+                    { "11111111-1111-1111-1111-111111111111", 0, "82715421-a322-430a-a52b-d37a394eb7b1", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAELjV8ptmDr/fbAj4kE5VEvVhJvTudH/7s/SL3bdhnBHp0XMvBw3bEXilxIIKW8efoA==", null, false, "3d1d4131-4bcd-42e8-b7f5-809127f80910", false, "admin@admin.com" },
+                    { "User1Id", 0, "de7b60b6-21d7-4b3e-8c51-ed50638b3bda", null, false, false, null, null, null, null, null, false, "9fa6443a-fd0b-4abe-8d87-ee9ba8fff00b", false, null },
+                    { "User2Id", 0, "7ec5855e-709b-43d5-9f23-14858f2e9eea", null, false, false, null, null, null, null, null, false, "972197aa-78eb-4036-bb1f-fc951d808c9c", false, null }
                 });
 
             migrationBuilder.InsertData(
@@ -353,6 +353,22 @@ namespace Models.Migrations
                 {
                     { 1, "Test player 1", "User1Id" },
                     { 2, "Test player 2", "User2Id" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "StartingCards",
+                columns: new[] { "Id", "CardId" },
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 2, 2 },
+                    { 3, 3 },
+                    { 4, 4 },
+                    { 5, 4 },
+                    { 6, 4 },
+                    { 7, 5 },
+                    { 8, 5 },
+                    { 9, 5 }
                 });
 
             migrationBuilder.CreateIndex(

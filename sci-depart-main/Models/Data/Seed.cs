@@ -96,6 +96,49 @@ namespace Super_Cartes_Infinies.Data
             };
         }
 
+        public static StartingCard[] SeedStartingCards()
+        {
+            return new StartingCard[] {
+                new StartingCard
+                {
+                    Id = 1,
+                    CardId = 1
+                },new StartingCard
+                {
+                    Id = 2,
+                    CardId = 2
+                },new StartingCard
+                {
+                    Id = 3,
+                    CardId = 3
+                },new StartingCard
+                {
+                    Id = 4,
+                    CardId = 4
+                },new StartingCard
+                {
+                    Id = 5,
+                    CardId = 4
+                },new StartingCard
+                {
+                    Id = 6,
+                    CardId = 4
+                },new StartingCard
+                {
+                    Id = 7,
+                    CardId = 5
+                },new StartingCard
+                {
+                    Id = 8,
+                    CardId = 5
+                },new StartingCard
+                {
+                    Id = 9,
+                    CardId = 5
+                },
+            };
+        }
+
         public static IdentityUser[] SeedUsers()
         {
             var hasher = new PasswordHasher<IdentityUser>();
