@@ -139,6 +139,16 @@ namespace Super_Cartes_Infinies.Data
             };
         }
 
+        public static GameConfig SeedGameConfig()
+        {
+            return new GameConfig
+            {
+                Id = 1,
+                NbCardsToDraw = 4,
+                QtyManaPerTurn = 3
+            };
+        }
+
         public static IdentityUser[] SeedUsers()
         {
             var hasher = new PasswordHasher<IdentityUser>();
