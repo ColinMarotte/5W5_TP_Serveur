@@ -12,7 +12,7 @@ using Super_Cartes_Infinies.Services;
 
 namespace Super_Cartes_Infinies.Controllers
 {
-    [Authorize(Roles= ApplicationDbContext.ADMIN_ROLE)]
+    [Authorize(Roles = ApplicationDbContext.ADMIN_ROLE)]
     public class CardsController : Controller
     {
         private CardsService _cardsService;
@@ -40,7 +40,7 @@ namespace Super_Cartes_Infinies.Controllers
                 Card card = await _cardsService.GetCard(id);
                 return View(card);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return NotFound();
             }
@@ -81,7 +81,7 @@ namespace Super_Cartes_Infinies.Controllers
                 var card = await _cardsService.GetCard(id);
                 return View(card);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return NotFound();
             }
@@ -100,7 +100,7 @@ namespace Super_Cartes_Infinies.Controllers
             }
             Card? oldCard = await _cardsService.GetCard(id);
 
-            if(oldCard == null)
+            if (oldCard == null)
             {
                 return NotFound();
             }
@@ -110,7 +110,7 @@ namespace Super_Cartes_Infinies.Controllers
             {
                 Card? newCard = await _cardsService.EditCard(id, card);
 
-                if(newCard == null)
+                if (newCard == null)
                 {
                     return StatusCode(StatusCodes.Status500InternalServerError);
                 }
@@ -149,11 +149,13 @@ namespace Super_Cartes_Infinies.Controllers
             }
 
             Card? deletedCard = await _cardsService.DeleteCard(card);
-            if(deletedCard == null)
+            if (deletedCard == null)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
             return RedirectToAction(nameof(Index));
         }
+
+
     }
 }

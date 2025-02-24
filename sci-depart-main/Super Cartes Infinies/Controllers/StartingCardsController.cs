@@ -14,10 +14,13 @@ namespace Super_Cartes_Infinies.Controllers
     public class StartingCardsController : Controller
     {
         private StartingCardsService _startingCardsService;
+        private CardsService _cardsService;
 
-        public StartingCardsController(StartingCardsService startingCardsService)
+
+        public StartingCardsController(CardsService cardsService, StartingCardsService startingCardsService)
         {
             _startingCardsService = startingCardsService;
+            _cardsService = cardsService;
         }
 
         // GET: StartingCards
@@ -43,7 +46,36 @@ namespace Super_Cartes_Infinies.Controllers
             return View(staringCard);
         }
 
-        // POST: Cards/Delete/5
+        public async Task<IActionResult> AddStartingCard(int? id)
+        {
+            Card card = await _cardsService.GetCard(id);
+            if(card == null)
+            {
+                return NotFound();
+            }
+            return View(card);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddStartingCard(int? id, Card card)
+        {
+            if(id != card.Id || card == null)
+            {
+                return NotFound();
+            }
+            try
+            {
+                await _startingCardsService.AddStartingCard(card);
+                return RedirectToAction(nameof(Index));
+            }
+            catch(Exception e)
+            {
+                return View(card);
+            }
+
+        }
+
+    // POST: Cards/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

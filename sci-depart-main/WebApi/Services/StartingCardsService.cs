@@ -34,6 +34,26 @@ namespace Super_Cartes_Infinies.Services
             return startingCard;
         }
 
+        public async Task<StartingCard> AddStartingCard(Card? card)
+        {
+            if (card == null)
+            {
+                throw new ArgumentNullException();
+            }
+            try
+            {
+                var startingCard = new StartingCard();
+                startingCard.CardId = card.Id;
+                await _dbContext.StartingCards.AddAsync(startingCard);
+                await _dbContext.SaveChangesAsync();
+                return startingCard;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public async Task<StartingCard?> DeleteStartingCard(StartingCard startingCard)
         {
             if (startingCard == null) return null;
