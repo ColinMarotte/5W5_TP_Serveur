@@ -15,7 +15,6 @@ namespace Super_Cartes_Infinies.Controllers
     [Authorize(Roles= ApplicationDbContext.ADMIN_ROLE)]
     public class CardsController : Controller
     {
-        private readonly ApplicationDbContext _context;
         private CardsService _cardsService;
 
         public CardsController(CardsService cardsService)
@@ -36,10 +35,10 @@ namespace Super_Cartes_Infinies.Controllers
             {
                 return NotFound();
             }
-            Card card;
             try
             {
-                card = await _cardsService.GetCard(id);
+                Card card = await _cardsService.GetCard(id);
+                return View(card);
             }
             catch(Exception e)
             {
@@ -47,7 +46,6 @@ namespace Super_Cartes_Infinies.Controllers
             }
 
 
-            return View(card);
         }
 
         // GET: Cards/Create
@@ -65,8 +63,7 @@ namespace Super_Cartes_Infinies.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(card);
-                await _context.SaveChangesAsync();
+                await _cardsService.CreateCard(card);
                 return RedirectToAction(nameof(Index));
             }
             return View(card);
@@ -79,13 +76,15 @@ namespace Super_Cartes_Infinies.Controllers
             {
                 return NotFound();
             }
-
-            var card = await _context.Cards.FindAsync(id);
-            if (card == null)
+            try
+            {
+                var card = await _cardsService.GetCard(id);
+                return View(card);
+            }
+            catch(Exception e)
             {
                 return NotFound();
             }
-            return View(card);
         }
 
         // POST: Cards/Edit/5
@@ -99,25 +98,23 @@ namespace Super_Cartes_Infinies.Controllers
             {
                 return NotFound();
             }
+            Card? oldCard = await _cardsService.GetCard(id);
+
+            if(oldCard == null)
+            {
+                return NotFound();
+            }
+
 
             if (ModelState.IsValid)
             {
-                try
+                Card? newCard = await _cardsService.EditCard(id, card);
+
+                if(newCard == null)
                 {
-                    _context.Update(card);
-                    await _context.SaveChangesAsync();
+                    return StatusCode(StatusCodes.Status500InternalServerError);
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CardExists(card.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+
                 return RedirectToAction(nameof(Index));
             }
             return View(card);
@@ -131,8 +128,7 @@ namespace Super_Cartes_Infinies.Controllers
                 return NotFound();
             }
 
-            var card = await _context.Cards
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var card = await _cardsService.GetCard(id);
             if (card == null)
             {
                 return NotFound();
@@ -146,19 +142,18 @@ namespace Super_Cartes_Infinies.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var card = await _context.Cards.FindAsync(id);
-            if (card != null)
+            var card = await _cardsService.GetCard(id);
+            if (card == null)
             {
-                _context.Cards.Remove(card);
+                return NotFound();
             }
 
-            await _context.SaveChangesAsync();
+            Card? deletedCard = await _cardsService.DeleteCard(card);
+            if(deletedCard == null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool CardExists(int id)
-        {
-            return _context.Cards.Any(e => e.Id == id);
         }
     }
 }
