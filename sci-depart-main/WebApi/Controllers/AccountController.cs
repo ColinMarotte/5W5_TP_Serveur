@@ -46,6 +46,8 @@ namespace WebApi.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { Error = identityResult.Errors });
             }
 
+            _playersService.CreatePlayer(user);
+
             return Ok();
         }
 
