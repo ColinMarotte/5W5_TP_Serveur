@@ -68,6 +68,8 @@ public class ApplicationDbContext : IdentityDbContext
 
     public DbSet<StartingCard> StartingCards { get; set; } = default!;
 
+    public DbSet<GameConfig> GameConfigs { get; set; } = default!;
+
     
 }
 
