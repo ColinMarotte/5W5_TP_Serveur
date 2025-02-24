@@ -19,6 +19,29 @@ namespace Super_Cartes_Infinies.Services
             // L'implémentation est la responsabilité de la personne en charge de la partie [Administration MVC]
             return await _dbContext.StartingCards.ToListAsync();
         }
+
+        public async Task<StartingCard> GetStartingCard(int? id)
+        {
+            if (id == null)
+            {
+                throw new ArgumentException();
+            }
+            StartingCard startingCard = await _dbContext.StartingCards.FindAsync(id);
+            if (startingCard == null)
+            {
+                throw new Exception();
+            }
+            return startingCard;
+        }
+
+        public async Task<StartingCard?> DeleteStartingCard(StartingCard startingCard)
+        {
+            if (startingCard == null) return null;
+
+            _dbContext.Remove(startingCard);
+            await _dbContext.SaveChangesAsync();
+            return startingCard;
+        }
     }
 }
 

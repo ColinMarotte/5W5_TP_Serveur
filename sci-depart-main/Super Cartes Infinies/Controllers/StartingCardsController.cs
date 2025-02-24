@@ -6,18 +6,17 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Super_Cartes_Infinies.Data;
+using Super_Cartes_Infinies.Models;
 using Super_Cartes_Infinies.Services;
 
 namespace Super_Cartes_Infinies.Controllers
 {
     public class StartingCardsController : Controller
     {
-        private readonly ApplicationDbContext _context;
         private StartingCardsService _startingCardsService;
 
-        public StartingCardsController(ApplicationDbContext context, StartingCardsService startingCardsService)
+        public StartingCardsController(StartingCardsService startingCardsService)
         {
-            _context = context;
             _startingCardsService = startingCardsService;
         }
 
@@ -27,10 +26,40 @@ namespace Super_Cartes_Infinies.Controllers
             return View(await _startingCardsService.GetStartingCards());
         }
 
-
-        private bool StartingCardExists(int id)
+        // GET: StartingCards/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
-            return _context.StartingCards.Any(e => e.Id == id);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var staringCard = await _startingCardsService.GetStartingCard(id);
+            if (staringCard == null)
+            {
+                return NotFound();
+            }
+
+            return View(staringCard);
+        }
+
+        // POST: Cards/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var startingCard = await _startingCardsService.GetStartingCard(id);
+            if (startingCard == null)
+            {
+                return NotFound();
+            }
+
+            StartingCard? deletedCard = await _startingCardsService.DeleteStartingCard(startingCard);
+            if (deletedCard == null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }
