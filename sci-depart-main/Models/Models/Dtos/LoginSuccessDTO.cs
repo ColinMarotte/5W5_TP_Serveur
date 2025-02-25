@@ -11,5 +11,6 @@ namespace Models.Models.Dtos
     {
         [Required]
         public string Token { get; set; } = "";
+        public string PlayerId { get; set; } = "";
     }
 }

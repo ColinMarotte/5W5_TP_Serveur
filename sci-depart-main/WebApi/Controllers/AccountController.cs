@@ -48,7 +48,7 @@ namespace WebApi.Controllers
 
             _playersService.CreatePlayer(user);
 
-            return Ok();
+            return Ok(new { Message = "L'utilisateur a été créé avec succès!" });
         }
 
         [HttpPost]
@@ -58,6 +58,8 @@ namespace WebApi.Controllers
 
             if (result.Succeeded)
             {
+                IdentityUser user = await _userManager.FindByEmailAsync(loginDTO.Email);
+
                 Claim? nameIdentifierClaim = User.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
 
                 // Note: On ajoute simplement le NameIdentifier dans les claims. Il n'y aura pas de rôles pour les utilisateurs du WebAPI.
@@ -79,10 +81,9 @@ namespace WebApi.Controllers
                 );
 
                 string tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+                string playerId = _playersService.GetPlayerFromUserId(user.Id).Id.ToString();
 
-                // On ne veut JAMAIS retouner une string directement lorsque l'on utilise Angular.
-                // Angular assume que l'on retourne un objet et donne une erreur lorsque le résultat obtenu est une simple string!
-                return Ok(new LoginSuccessDTO() { Token = tokenString });
+                return Ok(new LoginSuccessDTO() { Token = tokenString, PlayerId = playerId });
             }
 
             return NotFound(new { Error = "L'utilisateur est introuvable ou le mot de passe ne concorde pas" });
