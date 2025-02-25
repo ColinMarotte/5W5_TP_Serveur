@@ -2,27 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Super_Cartes_Infinies.Data;
 using Super_Cartes_Infinies.Models;
+using Super_Cartes_Infinies.Services;
+using WebApi.Services;
 
 namespace Super_Cartes_Infinies.Controllers
 {
+    [Authorize(Roles = ApplicationDbContext.ADMIN_ROLE)]
     public class GameConfigsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private GameConfigsService _gamesConfigsService;
 
-        public GameConfigsController(ApplicationDbContext context)
+        public GameConfigsController(GameConfigsService gameConfigsService)
         {
-            _context = context;
+            _gamesConfigsService = gameConfigsService;
         }
 
         // GET: GameConfigs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.GameConfigs.ToListAsync());
+            return View(await _gamesConfigsService.GetGameConfigs());
         }
 
         // GET: GameConfigs/Details/5
@@ -33,8 +38,7 @@ namespace Super_Cartes_Infinies.Controllers
                 return NotFound();
             }
 
-            var gameConfig = await _context.GameConfigs
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var gameConfig = await _gamesConfigsService.GetGameConfig(id);
             if (gameConfig == null)
             {
                 return NotFound();
@@ -58,8 +62,7 @@ namespace Super_Cartes_Infinies.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(gameConfig);
-                await _context.SaveChangesAsync();
+                await _gamesConfigsService.CreateGameConfig(gameConfig);
                 return RedirectToAction(nameof(Index));
             }
             return View(gameConfig);
@@ -73,7 +76,7 @@ namespace Super_Cartes_Infinies.Controllers
                 return NotFound();
             }
 
-            var gameConfig = await _context.GameConfigs.FindAsync(id);
+            var gameConfig = await _gamesConfigsService.GetGameConfig(id);
             if (gameConfig == null)
             {
                 return NotFound();
@@ -97,8 +100,7 @@ namespace Super_Cartes_Infinies.Controllers
             {
                 try
                 {
-                    _context.Update(gameConfig);
-                    await _context.SaveChangesAsync();
+                    await _gamesConfigsService.EditGameConfig(id, gameConfig);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -124,8 +126,7 @@ namespace Super_Cartes_Infinies.Controllers
                 return NotFound();
             }
 
-            var gameConfig = await _context.GameConfigs
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var gameConfig = await _gamesConfigsService.GetGameConfig(id);
             if (gameConfig == null)
             {
                 return NotFound();
@@ -139,13 +140,12 @@ namespace Super_Cartes_Infinies.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var gameConfig = await _context.GameConfigs.FindAsync(id);
+            var gameConfig = await _gamesConfigsService.GetGameConfig(id);
             if (gameConfig != null)
             {
-                _context.GameConfigs.Remove(gameConfig);
+                await _gamesConfigsService.DeleteGameConfig(gameConfig);
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
