@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Models.Migrations
 {
     /// <inheritdoc />
-    public partial class Init4 : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -67,6 +67,20 @@ namespace Models.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cards", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "GameConfigs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NbCardsToDraw = table.Column<int>(type: "int", nullable: false),
+                    QtyManaPerTurn = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GameConfigs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -319,9 +333,9 @@ namespace Models.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "11111111-1111-1111-1111-111111111111", 0, "82715421-a322-430a-a52b-d37a394eb7b1", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAELjV8ptmDr/fbAj4kE5VEvVhJvTudH/7s/SL3bdhnBHp0XMvBw3bEXilxIIKW8efoA==", null, false, "3d1d4131-4bcd-42e8-b7f5-809127f80910", false, "admin@admin.com" },
-                    { "User1Id", 0, "de7b60b6-21d7-4b3e-8c51-ed50638b3bda", null, false, false, null, null, null, null, null, false, "9fa6443a-fd0b-4abe-8d87-ee9ba8fff00b", false, null },
-                    { "User2Id", 0, "7ec5855e-709b-43d5-9f23-14858f2e9eea", null, false, false, null, null, null, null, null, false, "972197aa-78eb-4036-bb1f-fc951d808c9c", false, null }
+                    { "11111111-1111-1111-1111-111111111111", 0, "7348f696-964f-4d2a-b00b-d0f60371260d", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEKkvBFN6v9bed1d6IQ8jj2NTk4HRrJOilzJiRod5kexDslOsS0/9FmsC3NJ2hLXMzQ==", null, false, "0a19a2c4-430a-4083-9f9b-b8c8c6dae6c3", false, "admin@admin.com" },
+                    { "User1Id", 0, "288db35b-fac4-4ecc-932e-9101a1cd9b6f", null, false, false, null, null, null, null, null, false, "53f7c155-8987-408f-a295-92f05475514b", false, null },
+                    { "User2Id", 0, "fef8566b-9f3d-43be-97a5-48d99e889133", null, false, false, null, null, null, null, null, false, "eaa832df-4e5c-40a6-9e77-80fe8b3d26ca", false, null }
                 });
 
             migrationBuilder.InsertData(
@@ -336,10 +350,17 @@ namespace Models.Migrations
                     { 5, 7, 5, 7, "https://i.etsystatic.com/6230905/r/il/32aa5a/3474618751/il_fullxfull.3474618751_mfvf.jpg", "Chat Guerrier" },
                     { 6, 4, 2, 2, "https://store.playstation.com/store/api/chihiro/00_09_000/container/AU/en/99/EP2402-CUSA05624_00-ETH0000000002875/0/image?_version=00_09_000&platform=chihiro&bg_color=000000&opacity=100&w=720&h=720", "Chat Laser" },
                     { 7, 6, 4, 3, "https://images.squarespace-cdn.com/content/51b3dc8ee4b051b96ceb10de/1394662654865-JKOZ7ZFF39247VYDTGG9/hilarious-jedi-cats-fight-video-preview.jpg?content-type=image%2Fjpeg", "Jedi Chat" },
-                    { 8, 1, 2, 9, "https://i.ytimg.com/vi/2I7pZlUhZak/maxresdefault.jpg", "Blob Chat" },
+                    { 8, 1, 2, 9, "https://i.pinimg.com/736x/48/ba/94/48ba9440c4f87e42af99774ec51f53a1.jpg", "Blob Chat" },
                     { 9, 5, 2, 1, "https://townsquare.media/site/142/files/2011/08/jedicats.jpg?w=980&q=75", "Jedi Chatton" },
-                    { 10, 6, 2, 1, "https://cdn.theatlantic.com/thumbor/fOZjgqHH0RmXA1A5ek-yDz697W4=/133x0:2091x1020/1200x625/media/img/mt/2015/12/RTRD62Q/original.jpg", "Chat Furtif" }
+                    { 10, 6, 2, 1, "https://cdn.theatlantic.com/thumbor/fOZjgqHH0RmXA1A5ek-yDz697W4=/133x0:2091x1020/1200x625/media/img/mt/2015/12/RTRD62Q/original.jpg", "Chat Furtif" },
+                    { 11, 6, 4, 6, "https://i.imgur.com/07zax4t.jpeg", "Grosse Minoune" },
+                    { 12, 2, 2, 4, "https://i.imgur.com/QuDe5RH.jpeg", "Petite Minoune" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "GameConfigs",
+                columns: new[] { "Id", "NbCardsToDraw", "QtyManaPerTurn" },
+                values: new object[] { 1, 4, 3 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -365,10 +386,10 @@ namespace Models.Migrations
                     { 3, 3 },
                     { 4, 4 },
                     { 5, 4 },
-                    { 6, 4 },
+                    { 6, 5 },
                     { 7, 5 },
-                    { 8, 5 },
-                    { 9, 5 }
+                    { 8, 6 },
+                    { 9, 6 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -478,6 +499,9 @@ namespace Models.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "GameConfigs");
 
             migrationBuilder.DropTable(
                 name: "Matches");

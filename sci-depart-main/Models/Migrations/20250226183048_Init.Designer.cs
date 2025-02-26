@@ -12,7 +12,7 @@ using Super_Cartes_Infinies.Data;
 namespace Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250224164051_Init")]
+    [Migration("20250226183048_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -157,15 +157,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9ebd32dd-79de-43ab-9f87-d989cc775205",
+                            ConcurrencyStamp = "7348f696-964f-4d2a-b00b-d0f60371260d",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGtFXpM9wq8RJa/oG7+P1LnxJrdI1o6S8qedebe1+gHjq+RaRi9pN/B2aesN3zoVgQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKkvBFN6v9bed1d6IQ8jj2NTk4HRrJOilzJiRod5kexDslOsS0/9FmsC3NJ2hLXMzQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4df78f49-0c5a-4ca1-a315-b9e93207e8d2",
+                            SecurityStamp = "0a19a2c4-430a-4083-9f9b-b8c8c6dae6c3",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -173,22 +173,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4771c939-7269-4922-a216-fe5208635126",
+                            ConcurrencyStamp = "288db35b-fac4-4ecc-932e-9101a1cd9b6f",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fbe90098-37f9-4c05-9a13-7ad89edf312b",
+                            SecurityStamp = "53f7c155-8987-408f-a295-92f05475514b",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "94b9e6e5-7f18-48c2-8a88-35a33e7533e2",
+                            ConcurrencyStamp = "fef8566b-9f3d-43be-97a5-48d99e889133",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c06eb0d0-b421-4db8-b549-9e87bd840457",
+                            SecurityStamp = "eaa832df-4e5c-40a6-9e77-80fe8b3d26ca",
                             TwoFactorEnabled = false
                         });
                 });
@@ -384,7 +384,7 @@ namespace Models.Migrations
                             Attack = 1,
                             Cost = 2,
                             Health = 9,
-                            ImageUrl = "https://i.ytimg.com/vi/2I7pZlUhZak/maxresdefault.jpg",
+                            ImageUrl = "https://i.pinimg.com/736x/48/ba/94/48ba9440c4f87e42af99774ec51f53a1.jpg",
                             Name = "Blob Chat"
                         },
                         new
@@ -404,6 +404,24 @@ namespace Models.Migrations
                             Health = 1,
                             ImageUrl = "https://cdn.theatlantic.com/thumbor/fOZjgqHH0RmXA1A5ek-yDz697W4=/133x0:2091x1020/1200x625/media/img/mt/2015/12/RTRD62Q/original.jpg",
                             Name = "Chat Furtif"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Attack = 6,
+                            Cost = 4,
+                            Health = 6,
+                            ImageUrl = "https://i.imgur.com/07zax4t.jpeg",
+                            Name = "Grosse Minoune"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Attack = 2,
+                            Cost = 2,
+                            Health = 4,
+                            ImageUrl = "https://i.imgur.com/QuDe5RH.jpeg",
+                            Name = "Petite Minoune"
                         });
                 });
 
@@ -424,6 +442,14 @@ namespace Models.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("GameConfigs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            NbCardsToDraw = 4,
+                            QtyManaPerTurn = 3
+                        });
                 });
 
             modelBuilder.Entity("Super_Cartes_Infinies.Models.Match", b =>
@@ -617,7 +643,7 @@ namespace Models.Migrations
                         new
                         {
                             Id = 6,
-                            CardId = 4
+                            CardId = 5
                         },
                         new
                         {
@@ -627,12 +653,12 @@ namespace Models.Migrations
                         new
                         {
                             Id = 8,
-                            CardId = 5
+                            CardId = 6
                         },
                         new
                         {
                             Id = 9,
-                            CardId = 5
+                            CardId = 6
                         });
                 });
 
