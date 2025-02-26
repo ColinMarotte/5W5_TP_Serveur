@@ -17,7 +17,10 @@ namespace Super_Cartes_Infinies.Services
             // Stub: Pour l'intant, le stub retourne simplement les 7 premières cartes
             // L'implémentation réelle devra retourner les cartes référées par les starting cards configuré par l'administarteur
             // L'implémentation est la responsabilité de la personne en charge de la partie [Administration MVC]
-            List<StartingCard> startingCards = await _dbContext.StartingCards.OrderBy(s => s.Card.Name).ToListAsync();
+            List<StartingCard> startingCards = await _dbContext.StartingCards.ToListAsync();
+            startingCards= startingCards.OrderBy(x => x.Card.Name[0]).ThenBy(c => c.Card.Name).ToList();
+            //as List<StartingCard>;
+
             return startingCards;
         }
 
