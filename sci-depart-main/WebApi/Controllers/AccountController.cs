@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -62,7 +63,7 @@ namespace WebApi.Controllers
 
                 Claim? nameIdentifierClaim = User.Claims?.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
 
-                // Note: On ajoute simplement le NameIdentifier dans les claims. Il n'y aura pas de rôles pour les utilisateurs du WebAPI.
+                // Note: On ajoute simplement le NameIdentifier dans les claims. Il n'y aura pas de rôles pour les utilisateurs simples du WebAPI.
                 List<Claim> authClaims = new List<Claim>();
                 authClaims.Add(nameIdentifierClaim);
 
@@ -87,6 +88,13 @@ namespace WebApi.Controllers
             }
 
             return NotFound(new { Error = "L'utilisateur est introuvable ou le mot de passe ne concorde pas" });
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult<string[]> PrivateData()
+        {
+            return new string[] { "figue", "banane", "noix" };
         }
     }
 }
