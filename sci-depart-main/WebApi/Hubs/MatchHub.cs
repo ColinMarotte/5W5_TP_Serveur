@@ -36,26 +36,19 @@ public class MatchHub : Hub
 
             if (matchData.IsStarted)
             {
-                var startMatchEvent = await _matchService.StartMatch(userId, matchData.Match);
+                StartMatchEvent startMatchEvent = await _matchService.StartMatch(userId, matchData.Match);
                 await Clients.Group(matchGroup).SendAsync("StartMatchEvent", startMatchEvent);
             }
         }
     }
 
-    public async Task EndTurn(int matchId)
+    public async Task EndTurn(string userId, int matchId)
     {
-        var userId = Context.UserIdentifier;
-
-        if (userId == null)
-        {
-            throw new Exception("User identifier is missing.");
-        }
-
         var endTurnEvent = await _matchService.EndTurn(userId, matchId);
 
         if (endTurnEvent != null)
         {
-            await Clients.Group(matchId.ToString()).SendAsync("ApplyEvents", endTurnEvent);
+            await Clients.Group(matchId.ToString()).SendAsync("EndTurnEvent", endTurnEvent);
         }
     }
 
