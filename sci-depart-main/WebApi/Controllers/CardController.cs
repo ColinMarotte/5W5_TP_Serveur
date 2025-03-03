@@ -20,9 +20,9 @@ namespace Super_Cartes_Infinies.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Card>> GetAllCards()
+        public async Task<ActionResult<IEnumerable<Card>> >GetAllCards()
         {
-            return Ok(_cardsService.GetAllCards());
+            return Ok(await _cardsService.GetAllCards());
         }
 
         // TODO: La version réelle devra utiliser [Authorize] pour protéger les données est s'assurer d'avoir accès au User

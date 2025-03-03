@@ -74,7 +74,7 @@ namespace WebApi.Controllers
                 }
             }
 
-            _playersService.CreatePlayer(user);
+            await _playersService.CreatePlayer(user);
 
             return Ok(new { Message = "L'utilisateur a été créé avec succès!" });
         }

@@ -2,7 +2,7 @@
 using Super_Cartes_Infinies.Data;
 using Super_Cartes_Infinies.Models;
 
-namespace WebApi.Services
+namespace Super_Cartes_Infinies.Services
 {
     public class GameConfigsService
     {
@@ -27,7 +27,7 @@ namespace WebApi.Services
             {
                 throw new ArgumentException();
             }
-            GameConfig gameConfig = await _dbContext.GameConfigs.FindAsync(id);
+            GameConfig? gameConfig = await _dbContext.GameConfigs.FindAsync(id);
             if (gameConfig == null)
             {
                 throw new Exception();
