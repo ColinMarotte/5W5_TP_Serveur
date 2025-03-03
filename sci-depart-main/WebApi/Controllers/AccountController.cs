@@ -44,7 +44,34 @@ namespace WebApi.Controllers
 
             if (!identityResult.Succeeded)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new { Error = identityResult.Errors });
+                if (identityResult.Errors.First().Code == "DuplicateUserName")
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, new { Error = "Ce nom d'utilisateur est déjà utilisé." });
+                }
+                if (identityResult.Errors.First().Code == "PasswordTooShort")
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, new { Error = "Le mot de passe doit être d'au moins 6 caractères de long." });
+                }
+                if (identityResult.Errors.First().Code == "PasswordRequiresLower")
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, new { Error = "Le mot de passe doit contenir au moins une lettre minuscule." });
+                }
+                if (identityResult.Errors.First().Code == "PasswordRequiresUpper")
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, new { Error = "Le mot de passe doit contenir au moins une lettre majuscule." });
+                }
+                if (identityResult.Errors.First().Code == "PasswordRequiresDigit")
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, new { Error = "Le mot de passe doit contenir au moins un chiffre." });
+                }
+                if (identityResult.Errors.First().Code == "PasswordRequiresNonAlphanumeric")
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, new { Error = "Le mot de passe doit contenir au moins un caractère spécial." });
+                }
+                else
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, new { Error = identityResult.Errors });
+                }
             }
 
             _playersService.CreatePlayer(user);
@@ -87,7 +114,7 @@ namespace WebApi.Controllers
                 return Ok(new LoginSuccessDTO() { Token = tokenString, PlayerId = playerId });
             }
 
-            return NotFound(new { Error = "L'utilisateur est introuvable ou le mot de passe ne concorde pas" });
+            return NotFound(new { Error = "L'utilisateur est introuvable ou le mot de passe ne concorde pas." });
         }
 
         [Authorize]
