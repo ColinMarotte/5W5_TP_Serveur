@@ -75,7 +75,7 @@ namespace Super_Cartes_Infinies.Data
                     Attack = 1,
                     Health = 9,
                     Cost = 2,
-                    ImageUrl = "https://i.ytimg.com/vi/2I7pZlUhZak/maxresdefault.jpg"
+                    ImageUrl = "https://i.pinimg.com/736x/48/ba/94/48ba9440c4f87e42af99774ec51f53a1.jpg"
                 }, new Card
                 {
                     Id = 9,
@@ -92,7 +92,76 @@ namespace Super_Cartes_Infinies.Data
                     Health = 1,
                     Cost = 2,
                     ImageUrl = "https://cdn.theatlantic.com/thumbor/fOZjgqHH0RmXA1A5ek-yDz697W4=/133x0:2091x1020/1200x625/media/img/mt/2015/12/RTRD62Q/original.jpg"
+                }, new Card
+                {
+                    Id = 11,
+                    Name = "Grosse Minoune",
+                    Attack = 6,
+                    Health = 6,
+                    Cost = 4,
+                    ImageUrl = "https://i.imgur.com/07zax4t.jpeg"
+                }, new Card
+                {
+                    Id = 12,
+                    Name = "Petite Minoune",
+                    Attack = 2,
+                    Health = 4,
+                    Cost = 2,
+                    ImageUrl = "https://i.imgur.com/QuDe5RH.jpeg"
                 }
+            };
+        }
+
+        public static StartingCard[] SeedStartingCards()
+        {
+            return new StartingCard[] {
+                new StartingCard
+                {
+                    Id = 1,
+                    CardId = 1
+                },new StartingCard
+                {
+                    Id = 2,
+                    CardId = 2
+                },new StartingCard
+                {
+                    Id = 3,
+                    CardId = 3
+                },new StartingCard
+                {
+                    Id = 4,
+                    CardId = 4
+                },new StartingCard
+                {
+                    Id = 5,
+                    CardId = 4
+                },new StartingCard
+                {
+                    Id = 6,
+                    CardId = 5
+                },new StartingCard
+                {
+                    Id = 7,
+                    CardId = 5
+                },new StartingCard
+                {
+                    Id = 8,
+                    CardId = 6
+                },new StartingCard
+                {
+                    Id = 9,
+                    CardId = 6
+                },
+            };
+        }
+
+        public static GameConfig SeedGameConfig()
+        {
+            return new GameConfig
+            {
+                Id = 1,
+                NbCardsToDraw = 4,
+                QtyManaPerTurn = 3
             };
         }
 

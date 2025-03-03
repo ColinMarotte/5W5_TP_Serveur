@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Super_Cartes_Infinies.Data;
+using Super_Cartes_Infinies.Services;
+using WebApi.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +20,10 @@ builder.Services.AddDefaultIdentity<IdentityUser>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<CardsService>();
+builder.Services.AddScoped<StartingCardsService>();
+builder.Services.AddScoped<GameConfigsService>();
+
 
 var app = builder.Build();
 
