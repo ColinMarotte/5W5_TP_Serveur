@@ -1,4 +1,4 @@
-﻿using Super_Cartes_Infinies.Models;
+using Super_Cartes_Infinies.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
