@@ -31,10 +31,11 @@ public class MatchHub : Hub
 
             if (matchData.OtherPlayerConnectionId != null)
             {
+                await Groups.AddToGroupAsync(matchData.OtherPlayerConnectionId, matchGroup);
                 await Clients.Client(matchData.OtherPlayerConnectionId).SendAsync("JoiningMatchData", matchData);
             }
 
-            if (matchData.IsStarted)
+            if (!matchData.IsStarted)
             {
                 StartMatchEvent startMatchEvent = await _matchService.StartMatch(userId, matchData.Match);
                 await Clients.Group(matchGroup).SendAsync("StartMatchEvent", startMatchEvent);
