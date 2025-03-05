@@ -17,9 +17,9 @@ namespace Super_Cartes_Infinies.Services
             _playersService = playersService;
         }
 
-        public IEnumerable<Card> GetPlayersCards(string userId)
+        public IEnumerable<Card> GetPlayersCards(string playerId)
         {
-            Player player = _playersService.GetPlayerFromUserId(userId);
+            Player player = _playersService.GetPlayerFromPlayerId(playerId);
 
             List<Card> playerCards = player.OwnedCards.Select(c => c.Card).ToList();
 

@@ -53,6 +53,11 @@ namespace Super_Cartes_Infinies.Services
             return _dbContext.Players.Single(p => p.UserId == userId);
         }
 
+        public virtual Player GetPlayerFromPlayerId(string playerId)
+        {
+            return _dbContext.Players.Single(p => p.Id.ToString() == playerId);
+        }
+
         public Player GetPlayerFromUserName(string userName)
         {
             return _dbContext.Players.Single(p => p.User!.UserName == userName);

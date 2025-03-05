@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Text.Json.Serialization;
 using Models.Interfaces;
 using Models.Models;
 
@@ -19,8 +20,10 @@ namespace Super_Cartes_Infinies.Models
         public int Cost { get; set; }
         [DisplayName("Image")]
         public string ImageUrl { get; set; } = "";
+        [JsonIgnore]
 		public virtual List<StartingCard> StartingCards { get; set; } = new List<StartingCard>();
-		public virtual List<OwnedCard> OwnedCards { get; set; } = new List<OwnedCard>();
+        [JsonIgnore]
+        public virtual List<OwnedCard> OwnedCards { get; set; } = new List<OwnedCard>();
     }
 }
 
