@@ -12,15 +12,15 @@ using Super_Cartes_Infinies.Data;
 namespace Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240902193349_initiale")]
-    partial class initiale
+    [Migration("20250303145939_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
@@ -157,17 +157,39 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "15737eb5-ccbd-41a5-95c3-7673da11002d",
+                            ConcurrencyStamp = "9cd94229-3d67-4fd1-8662-0a31920cbbb4",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEt7UDtdSyqqUKMmHWzVERMzmHzxy4pGYGlf51nBOnxe5heThQge9I6h4clZYHwhEw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELadEcuykd0JP2F1zAQQNlZktYrOptygt4L7C9e0szKN1FmKtrG3iNBecLH3IOvMDA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9543085e-f54c-4442-9e5d-efecb7a7d684",
+                            SecurityStamp = "c4ffbb74-8dc5-4f8d-8305-80fb666629a3",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
+                        },
+                        new
+                        {
+                            Id = "User1Id",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "01d698e2-ed71-4d38-bd97-e91de3b778e2",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "182bbd21-afe4-491c-8246-a377d24e5bca",
+                            TwoFactorEnabled = false
+                        },
+                        new
+                        {
+                            Id = "User2Id",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "0567b1f5-aaeb-472e-88a9-c7b9e2961bf7",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "ed036e38-e601-4d3d-87ae-21ef8552885e",
+                            TwoFactorEnabled = false
                         });
                 });
 
@@ -307,7 +329,7 @@ namespace Models.Migrations
                             Id = 2,
                             Attack = 2,
                             Cost = 3,
-                            Health = 4,
+                            Health = 5,
                             ImageUrl = "https://i0.wp.com/thediscerningcat.com/wp-content/uploads/2021/02/tabby-cat-wearing-sunglasses.jpg",
                             Name = "Chat Awesome"
                         },
@@ -323,18 +345,18 @@ namespace Models.Migrations
                         new
                         {
                             Id = 4,
-                            Attack = 7,
+                            Attack = 8,
                             Cost = 4,
-                            Health = 6,
+                            Health = 4,
                             ImageUrl = "https://wallpapers.com/images/hd/epic-cat-poster-baavft05ylgta4j8.jpg",
                             Name = "Chat Spacial"
                         },
                         new
                         {
                             Id = 5,
-                            Attack = 8,
+                            Attack = 7,
                             Cost = 5,
-                            Health = 8,
+                            Health = 7,
                             ImageUrl = "https://i.etsystatic.com/6230905/r/il/32aa5a/3474618751/il_fullxfull.3474618751_mfvf.jpg",
                             Name = "Chat Guerrier"
                         },
@@ -342,7 +364,7 @@ namespace Models.Migrations
                         {
                             Id = 6,
                             Attack = 4,
-                            Cost = 3,
+                            Cost = 2,
                             Health = 2,
                             ImageUrl = "https://store.playstation.com/store/api/chihiro/00_09_000/container/AU/en/99/EP2402-CUSA05624_00-ETH0000000002875/0/image?_version=00_09_000&platform=chihiro&bg_color=000000&opacity=100&w=720&h=720",
                             Name = "Chat Laser"
@@ -362,15 +384,15 @@ namespace Models.Migrations
                             Attack = 1,
                             Cost = 2,
                             Health = 9,
-                            ImageUrl = "https://i.ytimg.com/vi/2I7pZlUhZak/maxresdefault.jpg",
+                            ImageUrl = "https://i.pinimg.com/736x/48/ba/94/48ba9440c4f87e42af99774ec51f53a1.jpg",
                             Name = "Blob Chat"
                         },
                         new
                         {
                             Id = 9,
-                            Attack = 4,
+                            Attack = 5,
                             Cost = 2,
-                            Health = 2,
+                            Health = 1,
                             ImageUrl = "https://townsquare.media/site/142/files/2011/08/jedicats.jpg?w=980&q=75",
                             Name = "Jedi Chatton"
                         },
@@ -382,6 +404,51 @@ namespace Models.Migrations
                             Health = 1,
                             ImageUrl = "https://cdn.theatlantic.com/thumbor/fOZjgqHH0RmXA1A5ek-yDz697W4=/133x0:2091x1020/1200x625/media/img/mt/2015/12/RTRD62Q/original.jpg",
                             Name = "Chat Furtif"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Attack = 6,
+                            Cost = 4,
+                            Health = 6,
+                            ImageUrl = "https://i.imgur.com/07zax4t.jpeg",
+                            Name = "Grosse Minoune"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Attack = 2,
+                            Cost = 2,
+                            Health = 4,
+                            ImageUrl = "https://i.imgur.com/QuDe5RH.jpeg",
+                            Name = "Petite Minoune"
+                        });
+                });
+
+            modelBuilder.Entity("Super_Cartes_Infinies.Models.GameConfig", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("NbCardsToDraw")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QtyManaPerTurn")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GameConfigs");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            NbCardsToDraw = 4,
+                            QtyManaPerTurn = 3
                         });
                 });
 
@@ -449,6 +516,29 @@ namespace Models.Migrations
                     b.ToTable("MatchPlayersData");
                 });
 
+            modelBuilder.Entity("Super_Cartes_Infinies.Models.OwnedCard", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CardId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PlayerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CardId");
+
+                    b.HasIndex("PlayerId");
+
+                    b.ToTable("OwnedCards");
+                });
+
             modelBuilder.Entity("Super_Cartes_Infinies.Models.PlayableCard", b =>
                 {
                     b.Property<int>("Id")
@@ -514,6 +604,90 @@ namespace Models.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Players");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Test player 1",
+                            UserId = "User1Id"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Test player 2",
+                            UserId = "User2Id"
+                        });
+                });
+
+            modelBuilder.Entity("Super_Cartes_Infinies.Models.StartingCard", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CardId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CardId1")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CardId");
+
+                    b.HasIndex("CardId1");
+
+                    b.ToTable("StartingCards");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CardId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CardId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CardId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CardId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CardId = 4
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CardId = 5
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CardId = 5
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CardId = 6
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CardId = 6
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -597,6 +771,25 @@ namespace Models.Migrations
                     b.Navigation("Player");
                 });
 
+            modelBuilder.Entity("Super_Cartes_Infinies.Models.OwnedCard", b =>
+                {
+                    b.HasOne("Super_Cartes_Infinies.Models.Card", "Card")
+                        .WithMany("OwnedCards")
+                        .HasForeignKey("CardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Super_Cartes_Infinies.Models.Player", "Player")
+                        .WithMany("OwnedCards")
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Card");
+
+                    b.Navigation("Player");
+                });
+
             modelBuilder.Entity("Super_Cartes_Infinies.Models.PlayableCard", b =>
                 {
                     b.HasOne("Super_Cartes_Infinies.Models.Card", "Card")
@@ -635,6 +828,28 @@ namespace Models.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Super_Cartes_Infinies.Models.StartingCard", b =>
+                {
+                    b.HasOne("Super_Cartes_Infinies.Models.Card", "Card")
+                        .WithMany()
+                        .HasForeignKey("CardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Super_Cartes_Infinies.Models.Card", null)
+                        .WithMany("StartingCards")
+                        .HasForeignKey("CardId1");
+
+                    b.Navigation("Card");
+                });
+
+            modelBuilder.Entity("Super_Cartes_Infinies.Models.Card", b =>
+                {
+                    b.Navigation("OwnedCards");
+
+                    b.Navigation("StartingCards");
+                });
+
             modelBuilder.Entity("Super_Cartes_Infinies.Models.MatchPlayerData", b =>
                 {
                     b.Navigation("BattleField");
@@ -644,6 +859,11 @@ namespace Models.Migrations
                     b.Navigation("Graveyard");
 
                     b.Navigation("Hand");
+                });
+
+            modelBuilder.Entity("Super_Cartes_Infinies.Models.Player", b =>
+                {
+                    b.Navigation("OwnedCards");
                 });
 #pragma warning restore 612, 618
         }

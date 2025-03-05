@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Models.Models;
 using Super_Cartes_Infinies.Models;
 
 namespace Super_Cartes_Infinies.Data;
@@ -19,6 +20,7 @@ public class ApplicationDbContext : IdentityDbContext
         base.OnModelCreating(builder);
 
         builder.Entity<Card>().HasData(Seed.SeedCards());
+        builder.Entity<GameConfig>().HasData(Seed.SeedGameConfig());
 
         builder.Entity<IdentityUser>().HasData(Seed.SeedUsers());
         builder.Entity<IdentityRole>().HasData(Seed.SeedRoles());
@@ -40,6 +42,20 @@ public class ApplicationDbContext : IdentityDbContext
             .HasOne(m => m.PlayerDataB)
             .WithMany()
             .OnDelete(DeleteBehavior.NoAction);
+
+
+        builder.Entity<StartingCard>()
+            .HasOne(s => s.Card)
+            .WithMany()
+            .HasForeignKey(s => s.CardId);
+
+        builder.Entity<Card>()
+            .HasMany<StartingCard>()
+            .WithOne(s => s.Card)
+            .HasForeignKey(c => c.CardId);
+
+        builder.Entity<StartingCard>().HasData(Seed.SeedStartingCards());
+
         // Fin de Fluent API
     }
 
@@ -50,5 +66,11 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Match> Matches { get; set; } = default!;
 
     public DbSet<MatchPlayerData> MatchPlayersData { get; set; } = default!;
+
+    public DbSet<StartingCard> StartingCards { get; set; } = default!;
+
+    public DbSet<GameConfig> GameConfigs { get; set; } = default!;
+
+    public DbSet<OwnedCard> OwnedCards { get; set; } = default!;
 }
 

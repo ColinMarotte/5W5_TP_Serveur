@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Super_Cartes_Infinies.Models
+{
+    public class GameConfig
+    {
+        public int Id { get; set; }
+        [DisplayName("Nbr cartes à piger avant de commencer la partie")]
+        public int NbCardsToDraw { get; set; }
+        [DisplayName("Qti Mana reçu au début de chaque tour")]
+        public int QtyManaPerTurn { get; set; }
+    }
+}
