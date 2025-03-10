@@ -38,24 +38,43 @@ namespace Super_Cartes_Infinies.Controllers
             {
                 return NotFound();
             }
+            try
+            {
+                var staringCard = await _startingCardsService.GetStartingCard(id);
+                if (staringCard == null)
+                {
+                    return NotFound();
+                }
 
-            var staringCard = await _startingCardsService.GetStartingCard(id);
-            if (staringCard == null)
+                return View(staringCard);
+            }
+            catch(Exception e)
             {
                 return NotFound();
             }
-
-            return View(staringCard);
+            
         }
 
         public async Task<IActionResult> AddStartingCard(int? id)
         {
-            Card card = await _cardsService.GetCard(id);
-            if(card == null)
+            if(id == null)
             {
                 return NotFound();
             }
-            return View(card);
+            try
+            {
+                var staringCard = await _cardsService.GetCard(id);
+                if (staringCard == null)
+                {
+                    return NotFound();
+                }
+
+                return View(staringCard);
+            }
+            catch (Exception e)
+            {
+                return NotFound();
+            }
         }
 
         [HttpPost]
@@ -82,18 +101,26 @@ namespace Super_Cartes_Infinies.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var startingCard = await _startingCardsService.GetStartingCard(id);
-            if (startingCard == null)
+            try
+            {
+                var startingCard = await _startingCardsService.GetStartingCard(id);
+                if (startingCard == null)
+                {
+                    return NotFound();
+                }
+                StartingCard? deletedCard = await _startingCardsService.DeleteStartingCard(startingCard);
+                if (deletedCard == null)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError);
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
             {
                 return NotFound();
             }
 
-            StartingCard? deletedCard = await _startingCardsService.DeleteStartingCard(startingCard);
-            if (deletedCard == null)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
-            return RedirectToAction(nameof(Index));
+            
         }
     }
 }

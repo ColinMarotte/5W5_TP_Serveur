@@ -36,14 +36,19 @@ namespace Super_Cartes_Infinies.Controllers
             {
                 return NotFound();
             }
-
-            var gameConfig = await _gamesConfigsService.GetGameConfig(id);
-            if (gameConfig == null)
+            try
+            {
+                var gameConfig = await _gamesConfigsService.GetGameConfig(id);
+                if (gameConfig == null)
+                {
+                    return NotFound();
+                }
+                return View(gameConfig);
+            }
+            catch(Exception e)
             {
                 return NotFound();
             }
-
-            return View(gameConfig);
         }
 
         // GET: GameConfigs/Create
@@ -61,8 +66,15 @@ namespace Super_Cartes_Infinies.Controllers
         {
             if (ModelState.IsValid)
             {
-                await _gamesConfigsService.CreateGameConfig(gameConfig);
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    await _gamesConfigsService.CreateGameConfig(gameConfig);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch(Exception e)
+                {
+                    return View(gameConfig);
+                }
             }
             return View(gameConfig);
         }
@@ -74,13 +86,20 @@ namespace Super_Cartes_Infinies.Controllers
             {
                 return NotFound();
             }
-
-            var gameConfig = await _gamesConfigsService.GetGameConfig(id);
-            if (gameConfig == null)
+            try
+            {
+                var gameConfig = await _gamesConfigsService.GetGameConfig(id);
+                if (gameConfig == null)
+                {
+                    return NotFound();
+                }
+                return View(gameConfig);
+            }
+            catch(Exception e)
             {
                 return NotFound();
             }
-            return View(gameConfig);
+            
         }
 
         // POST: GameConfigs/Edit/5
@@ -124,14 +143,19 @@ namespace Super_Cartes_Infinies.Controllers
             {
                 return NotFound();
             }
-
-            var gameConfig = await _gamesConfigsService.GetGameConfig(id);
-            if (gameConfig == null)
+            try
+            {
+                var gameConfig = await _gamesConfigsService.GetGameConfig(id);
+                if (gameConfig == null)
+                {
+                    return NotFound();
+                }
+                return View(gameConfig);
+            }
+            catch (Exception e)
             {
                 return NotFound();
             }
-
-            return View(gameConfig);
         }
 
         // POST: GameConfigs/Delete/5

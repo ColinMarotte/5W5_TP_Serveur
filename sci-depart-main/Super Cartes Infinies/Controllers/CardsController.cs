@@ -98,9 +98,15 @@ namespace Super_Cartes_Infinies.Controllers
             {
                 return NotFound();
             }
-            Card? oldCard = await _cardsService.GetCard(id);
-
-            if (oldCard == null)
+            try
+            {
+                var oldCard = await _cardsService.GetCard(id);
+                if(oldCard == null)
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception e)
             {
                 return NotFound();
             }
@@ -128,13 +134,15 @@ namespace Super_Cartes_Infinies.Controllers
                 return NotFound();
             }
 
-            var card = await _cardsService.GetCard(id);
-            if (card == null)
+            try
+            {
+                Card card = await _cardsService.GetCard(id);
+                return View(card);
+            }
+            catch (Exception e)
             {
                 return NotFound();
             }
-
-            return View(card);
         }
 
         // POST: Cards/Delete/5
@@ -147,13 +155,20 @@ namespace Super_Cartes_Infinies.Controllers
             {
                 return NotFound();
             }
-
-            Card? deletedCard = await _cardsService.DeleteCard(card);
-            if (deletedCard == null)
+            try
             {
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                Card? deletedCard = await _cardsService.DeleteCard(card);
+                if (deletedCard == null)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError);
+                }
+                return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction(nameof(Index));
+            catch(Exception e)
+            {
+                return NotFound();
+            }
+
         }
 
 
