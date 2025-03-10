@@ -10,9 +10,11 @@ namespace Super_Cartes_Infinies.Combat
             Events = new List<MatchEvent> { };
 
             // TODO: Faire piger le nombre de cartes de la configuration (nbCardsToDraw) au DEUX joueurs
-            Events.Add(new DrawCardEvent(currentPlayerData));
-            Events.Add(new DrawCardEvent(opposingPlayerData));
-            Events.Add(new PlayerStartTurnEvent(opposingPlayerData, nbManaPerTurn));
+            for (int i = 0; i < nbCardsToDraw; i++) {
+                Events.Add(new DrawCardEvent(currentPlayerData));
+                Events.Add(new DrawCardEvent(opposingPlayerData));
+            }
+
             Events.Add(new PlayerStartTurnEvent(currentPlayerData, nbManaPerTurn));
         }
     }

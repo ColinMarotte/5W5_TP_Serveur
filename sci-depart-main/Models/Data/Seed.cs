@@ -236,7 +236,14 @@ namespace Super_Cartes_Infinies.Data
                     Id = 2,
                     Name = "Test player 2",
                     UserId = "User2Id"
+                },
+                new Player
+                {
+                    Id = 3,
+                    Name = "Admin",
+                    UserId = "11111111-1111-1111-1111-111111111111"
                 }
+
             };
         }
     }

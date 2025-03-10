@@ -1,12 +1,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using Super_Cartes_Infinies.Combat;
-using Super_Cartes_Infinies.Models;
 using Super_Cartes_Infinies.Services;
 
 namespace Super_Cartes_Infinies.Hubs;
 
-//[Authorize]
+[Authorize]
 public class MatchHub : Hub
 {
 
@@ -26,7 +25,7 @@ public class MatchHub : Hub
             string matchGroup = matchData.Match.Id.ToString();
 
             await Groups.AddToGroupAsync(Context.ConnectionId, matchGroup);
-
+              
             await Clients.Client(Context.ConnectionId).SendAsync("JoiningMatchData", matchData);
 
             if (matchData.OtherPlayerConnectionId != null)
