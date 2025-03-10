@@ -17,7 +17,7 @@ namespace Super_Cartes_Infinies.Services
             _startingCardsService = startingCardsService;
         }
 
-        public Player CreatePlayer(IdentityUser user)
+        public async Task<Player> CreatePlayer(IdentityUser user)
         {
             Player p = new Player()
             {
@@ -27,19 +27,19 @@ namespace Super_Cartes_Infinies.Services
                 User = user
             };
 
-            List<Card> startingCards = _startingCardsService.GetStartingCards();
+            List<StartingCard> startingCards = await _startingCardsService.GetStartingCards();
 
-            foreach(Card c in startingCards)
+            foreach(StartingCard c in startingCards)
             {
                 OwnedCard newOwnedCard = new OwnedCard()
                 {
                     Id = 0,
-                    Card = c,
+                    Card = c.Card,
                     Player = p
                 };
 
                 p.OwnedCards.Add(newOwnedCard);
-                c.OwnedCards.Add(newOwnedCard);
+                c.Card.OwnedCards.Add(newOwnedCard);
             }
 
             _dbContext.Add(p);
@@ -51,6 +51,11 @@ namespace Super_Cartes_Infinies.Services
         public virtual Player GetPlayerFromUserId(string userId)
         {
             return _dbContext.Players.Single(p => p.UserId == userId);
+        }
+
+        public virtual Player GetPlayerFromPlayerId(string playerId)
+        {
+            return _dbContext.Players.Single(p => p.Id.ToString() == playerId);
         }
 
         public Player GetPlayerFromUserName(string userName)

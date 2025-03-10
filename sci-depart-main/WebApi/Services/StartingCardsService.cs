@@ -30,7 +30,7 @@ namespace Super_Cartes_Infinies.Services
             {
                 throw new ArgumentException();
             }
-            StartingCard startingCard = await _dbContext.StartingCards.FindAsync(id);
+            StartingCard? startingCard = await _dbContext.StartingCards.FindAsync(id);
             if (startingCard == null)
             {
                 throw new Exception();
