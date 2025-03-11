@@ -16,6 +16,12 @@ public class MatchHub : Hub
         _matchService = matchesService;
     }
 
+    public async Task StopJoiningMatch()
+    {
+        var stoppedJoiningStatus = await _matchService.StopJoiningMatch(Context.ConnectionId);
+        await Clients.Caller.SendAsync("StoppedJoiningStatus", stoppedJoiningStatus);
+    }
+
     public async Task JoinMatch(string userId)
     {
         var matchData = await _matchService.JoinMatch(userId, Context.ConnectionId, null);
