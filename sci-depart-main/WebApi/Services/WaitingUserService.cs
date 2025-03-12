@@ -31,10 +31,10 @@
         {
             await _semaphore.WaitAsync();
             bool stoppedWaiting = false;
-            if (_userAConnectionId == userId)
+            if (_userAId == userId)
             {
                 _userAConnectionId = null;
-                _userAConnectionId = null;
+                _userAId = null;
                 stoppedWaiting = true;
             }
             _semaphore.Release();
@@ -48,7 +48,6 @@
             // Si c'est encore le même player qui attendait déjà, on retourne null
             if (_userAId == userId)
             {
-                _userAConnectionId = connectionId;
                 return null;
             }
 
