@@ -18,14 +18,15 @@ public class MatchHub : Hub
 
     public async Task StopJoiningMatch()
     {
-        var userId = Context.UserIdentifier;
+        var userId = Context.UserIdentifier ;
         var stoppedJoiningStatus = await _matchService.StopJoiningMatch(userId);
         await Clients.Caller.SendAsync("StoppedJoiningStatus", stoppedJoiningStatus);
+        
     }
 
     public async Task JoinMatch()
     {
-        var userId = Context.UserIdentifier;
+        var userId = Context.UserIdentifier!;
 
         var matchData = await _matchService.JoinMatch(userId, Context.ConnectionId, null);
 
@@ -53,7 +54,7 @@ public class MatchHub : Hub
 
     public async Task EndTurn(int matchId)
     {
-        var userId = Context.UserIdentifier;
+        var userId = Context.UserIdentifier!;
 
         var endTurnEvent = await _matchService.EndTurn(userId, matchId);
 
@@ -66,7 +67,7 @@ public class MatchHub : Hub
 
     public async Task Surrender(int matchId)
     {
-        var userId = Context.UserIdentifier;
+        var userId = Context.UserIdentifier!;
 
         SurrenderEvent surrenderEvent = await _matchService.Surrender(userId, matchId);
 
