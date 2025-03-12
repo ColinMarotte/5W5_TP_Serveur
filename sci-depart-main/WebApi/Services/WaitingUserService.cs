@@ -47,7 +47,10 @@
         {
             // Si c'est encore le même player qui attendait déjà, on retourne null
             if (_userAId == userId)
+            {
+                _userAConnectionId = connectionId;
                 return null;
+            }
 
             await _semaphore.WaitAsync();
 
