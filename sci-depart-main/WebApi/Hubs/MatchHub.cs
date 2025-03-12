@@ -16,14 +16,17 @@ public class MatchHub : Hub
         _matchService = matchesService;
     }
 
-    public async Task StopJoiningMatch(string userId)
+    public async Task StopJoiningMatch()
     {
+        var userId = Context.UserIdentifier;
         var stoppedJoiningStatus = await _matchService.StopJoiningMatch(userId);
         await Clients.Caller.SendAsync("StoppedJoiningStatus", stoppedJoiningStatus);
     }
 
-    public async Task JoinMatch(string userId)
+    public async Task JoinMatch()
     {
+        var userId = Context.UserIdentifier;
+
         var matchData = await _matchService.JoinMatch(userId, Context.ConnectionId, null);
 
         if (matchData != null)
@@ -48,8 +51,10 @@ public class MatchHub : Hub
         }
     }
 
-    public async Task EndTurn(string userId, int matchId)
+    public async Task EndTurn(int matchId)
     {
+        var userId = Context.UserIdentifier;
+
         var endTurnEvent = await _matchService.EndTurn(userId, matchId);
 
         if (endTurnEvent != null)
@@ -59,8 +64,10 @@ public class MatchHub : Hub
     }
 
 
-    public async Task Surrender(string userId, int matchId)
+    public async Task Surrender(int matchId)
     {
+        var userId = Context.UserIdentifier;
+
         SurrenderEvent surrenderEvent = await _matchService.Surrender(userId, matchId);
 
         if (surrenderEvent != null)
