@@ -13,8 +13,6 @@ namespace Super_Cartes_Infinies.Services
         }
 
         public int GetNbCardsToDraw() {
-            // Stub: Pour l'intant, le stub retourne simplement 3
-            // L'implémentation réelle devra la valeur configué
             // L'implémentation est la responsabilité de la personne en charge de la partie [Administration MVC]
             GameConfig gameConfig = _dbContext.GameConfigs.First();
             return gameConfig.NbCardsToDraw;
@@ -22,8 +20,6 @@ namespace Super_Cartes_Infinies.Services
 
         public int GetNbManaPerTurn()
         {
-            // Stub: Pour l'intant, le stub retourne simplement 2
-            // L'implémentation réelle devra la valeur configué
             // L'implémentation est la responsabilité de la personne en charge de la partie [Administration MVC]
             GameConfig gameConfig = _dbContext.GameConfigs.First();
             return gameConfig.QtyManaPerTurn;

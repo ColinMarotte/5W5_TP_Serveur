@@ -29,7 +29,7 @@ namespace Super_Cartes_Infinies.Controllers
         // TODO: La version réelle devra utiliser [Authorize] pour protéger les données est s'assurer d'avoir accès au User
         // Et l'utiliser pour obtenir l'Id de l'utilisateur
         [Authorize]
-        [HttpGet("/api/Card/GetPlayersCards/{playerId}")]
+        [HttpGet("{playerId}")]
         public ActionResult<IEnumerable<Card>> GetPlayersCards(string playerId)
         {
             return Ok(_cardsService.GetPlayersCards(playerId));

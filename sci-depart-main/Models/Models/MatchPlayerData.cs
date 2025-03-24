@@ -21,11 +21,11 @@ namespace Super_Cartes_Infinies.Models
             Graveyard = new List<PlayableCard>();
         }
 
-        public MatchPlayerData(Player p, IEnumerable<Card> cardList) : this(p.Id)
+        public MatchPlayerData(Player p) : this(p.Id)
         {
             // TODO: Lors de l'intégration, remplacer par les cartes du joueur, on n'aura plus besoin de la liste de cartes
-            foreach (var card in cardList) {
-                CardsPile.Add(new PlayableCard(card));
+            foreach (var card in p.OwnedCards) {
+                CardsPile.Add(new PlayableCard(card.Card));
             }
         }
 
