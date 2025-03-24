@@ -72,5 +72,9 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<GameConfig> GameConfigs { get; set; } = default!;
 
     public DbSet<OwnedCard> OwnedCards { get; set; } = default!;
+
+    public DbSet<Power> Powers { get; set; } = default!;
+
+    public DbSet<CardPower> CardPowers { get; set; } = default!;
 }
 
