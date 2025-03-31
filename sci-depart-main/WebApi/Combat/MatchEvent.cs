@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using WebApi.Combat;
 
 namespace Super_Cartes_Infinies.Combat
 {
@@ -9,6 +10,7 @@ namespace Super_Cartes_Infinies.Combat
     [JsonDerivedType(typeof(PlayerStartTurnEvent))]
     [JsonDerivedType(typeof(StartMatchEvent))]
     [JsonDerivedType(typeof(SurrenderEvent))]
+    [JsonDerivedType(typeof(PlayCardEvent))]
     public abstract class MatchEvent
     {
         public abstract string EventType { get; }

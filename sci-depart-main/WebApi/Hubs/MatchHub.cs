@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using Super_Cartes_Infinies.Combat;
 using Super_Cartes_Infinies.Services;
+using WebApi.Combat;
 
 namespace Super_Cartes_Infinies.Hubs;
 
@@ -77,6 +78,18 @@ public class MatchHub : Hub
         }
         
 
+    }
+
+    public async Task PlayCard(int matchId, int playableCardId)
+    {
+        var userId = Context.UserIdentifier!;
+
+        PlayCardEvent playCardEvent = await _matchService.PlayCard(userId, matchId, playableCardId);
+
+        if(playCardEvent != null)
+        {
+            await Clients.Group(matchId.ToString()).SendAsync("PlayCardEvent", playCardEvent);
+        }
     }
 
 }

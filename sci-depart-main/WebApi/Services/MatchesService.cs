@@ -2,6 +2,7 @@
 using Super_Cartes_Infinies.Data;
 using Super_Cartes_Infinies.Models;
 using Super_Cartes_Infinies.Models.Dtos;
+using WebApi.Combat;
 
 namespace Super_Cartes_Infinies.Services
 {
@@ -192,6 +193,45 @@ namespace Super_Cartes_Infinies.Services
             await _dbContext.SaveChangesAsync();
 
             return surrenderEvent;
+        }
+
+        public async Task<PlayCardEvent> PlayCard(string userId, int matchId, int playableCardId)
+        {
+            Match? match = await _dbContext.Matches.FindAsync(matchId);
+
+            if (match == null)
+                throw new Exception("Impossible de trouver le match");
+
+            if (match.IsMatchCompleted)
+                throw new Exception("Le match est déjà terminé");
+
+            if (match.UserAId != userId && match.UserBId != userId)
+                throw new Exception("Le joueur n'est pas dans ce match");
+
+            MatchPlayerData currentPlayerData;
+
+            if (match.UserAId == userId)
+            {
+                currentPlayerData = match.PlayerDataA;
+            }
+            else
+            {
+                currentPlayerData = match.PlayerDataB;
+            }
+            try
+            {
+                var playCardEvent = new PlayCardEvent(currentPlayerData, playableCardId);
+                await _dbContext.SaveChangesAsync();
+
+                return playCardEvent;
+            }
+            catch (Exception)
+            {
+
+                throw new Exception("Le joueur ne peut pas jouer la carte");
+            }
+
+
         }
     }
 }
