@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Models.Interfaces;
 using Models.Models;
+using Models.Models.Enums;
 
 namespace Super_Cartes_Infinies.Models
 {
@@ -27,6 +28,8 @@ namespace Super_Cartes_Infinies.Models
         public virtual List<OwnedCard> OwnedCards { get; set; } = new List<OwnedCard>();
         [ValidateNever]
         public virtual List<CardPower> CardPowers { get; set; } = new List<CardPower>();
+        [DisplayName("Rareté")]
+        public Rarity Rarity { get; set; }
     }
 }
 
