@@ -56,6 +56,18 @@ public class ApplicationDbContext : IdentityDbContext
 
         builder.Entity<StartingCard>().HasData(Seed.SeedStartingCards());
 
+        builder.Entity<DeckOwnedCard>()
+            .HasOne(d => d.Deck)
+            .WithMany()
+            .HasForeignKey(d => d.DeckId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        builder.Entity<DeckOwnedCard>()
+            .HasOne(d => d.OwnedCard)
+            .WithMany()
+            .HasForeignKey(d => d.OwnedCardId)
+            .OnDelete(DeleteBehavior.NoAction);
+
         // Fin de Fluent API
     }
 
@@ -76,5 +88,9 @@ public class ApplicationDbContext : IdentityDbContext
     public DbSet<Power> Powers { get; set; } = default!;
 
     public DbSet<CardPower> CardPowers { get; set; } = default!;
+
+    public DbSet<Deck> Decks { get; set; } = default!;
+
+    public DbSet<DeckOwnedCard> DeckOwnedCards { get; set; } = default!;
 }
 
