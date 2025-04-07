@@ -17,7 +17,7 @@ namespace Models.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.11")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
@@ -154,15 +154,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "90f92e2c-864b-4988-b6bf-a5e0eb8aa6dd",
+                            ConcurrencyStamp = "0fbe6c3e-087a-4612-b55b-333857427133",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHWD1fARgTnafW8XsFeNJNO6FJlTEwiuD5XZhqo6ERDmnzgpGJDW8Tdr8K+4YWPh9w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMWgUFlx0lkMRvHuCbKjWMrE2ZAskiy+pL5vpjidc9c/3wY401Wr4plcp/J5fFe6yg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ff31701a-be27-4363-9848-18082fb1cd51",
+                            SecurityStamp = "e48b1583-7206-4b8b-a182-6f88f6e34230",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -170,22 +170,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "987b061f-7de8-42a5-8e33-ced2f6a48b14",
+                            ConcurrencyStamp = "f63d6a13-8f4d-47b0-bd72-8b557ffdba62",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8db73eb2-54c5-4619-8298-0afa863339aa",
+                            SecurityStamp = "2263fe2a-5171-4890-8c36-1bc976324276",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cd7352b7-b740-4eac-9a01-cc9f7c7dee17",
+                            ConcurrencyStamp = "dea0ffe3-7522-48fb-89e8-a0b2bf4867c8",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ed0799cb-f6f9-4cfd-a880-ab464df4b708",
+                            SecurityStamp = "ae25ae30-5819-45b0-82e7-b98d33859a5f",
                             TwoFactorEnabled = false
                         });
                 });
