@@ -69,6 +69,9 @@ public class ApplicationDbContext : IdentityDbContext
             .OnDelete(DeleteBehavior.NoAction);
 
         // Fin de Fluent API
+        builder.Entity<Power>().HasData(Seed.SeedPowers());
+
+
     }
 
     public DbSet<Card> Cards { get; set; } = default!;

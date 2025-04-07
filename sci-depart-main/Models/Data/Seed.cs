@@ -245,7 +245,75 @@ namespace Super_Cartes_Infinies.Data
                 }
 
             };
+
+
         }
+
+        public static Power[] SeedPowers()
+        {
+            return new Power[]
+            {
+                new Power
+                {
+                    Id = Power.FIRST_STRIKE_ID,
+                    Name = "First Strike",
+                    Description = "Attaque l'adversaire",
+                    Icone = "fa-bolt"//TODO 1 voir avec prof
+                },
+                new Power
+                {
+                    Id = Power.THORNS_ID,
+                    Name = "Thorns",
+                    Description = "Inflige des dégâts au moment où la carte reçoit des dégâts.",
+                    Icone = "fa-spikes" //TODO 2
+                },
+                new Power
+                {
+                    Id = Power.HEAL_ID,
+                    Name = "Heal",
+                    Description = "Rend des points de vie à une carte.",
+                    Icone = "fa-heart" //TODO 3
+                },
+                new Power
+                {
+                    Id = 4,
+                    Name = "Shield X",
+                    Description = "Absorbe X dégâts.",
+                    Icone = "fa-shield" //TODO 4
+                }
+            };
+        }
+
+        public static List<CardPower> SeedCardPowers()
+        {
+            return new List<CardPower>
+            {
+                new CardPower
+                {
+                    Id = 1,
+                    CardId = 1, 
+                    PowerId = Power.FIRST_STRIKE_ID,
+                    Value = 2
+                },
+                new CardPower
+                {
+                    Id = 2,
+                    CardId = 2,
+                    PowerId = Power.THORNS_ID,
+                    Value = 1
+                },
+                new CardPower
+                {
+                    Id = 3,
+                    CardId = 3,
+                    PowerId = Power.HEAL_ID,
+                    Value = 5
+                }
+            };
+        }
+
+
+
     }
 }
 
