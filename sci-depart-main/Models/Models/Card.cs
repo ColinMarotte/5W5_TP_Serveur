@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Models.Interfaces;
-using Models.Models;
 using Models.Models.Enums;
 
 namespace Super_Cartes_Infinies.Models
@@ -27,6 +26,8 @@ namespace Super_Cartes_Infinies.Models
         [DisplayName("Rareté")]
         [EnumDataType(typeof(Rarity))]
         public Rarity Rarity { get; set; }
+        [DisplayName("Prix")]
+        public int Price { get; set; }
         [JsonIgnore]
 		public virtual List<StartingCard> StartingCards { get; set; } = new List<StartingCard>();
         [JsonIgnore]

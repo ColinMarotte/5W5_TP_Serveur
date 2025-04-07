@@ -111,7 +111,7 @@ namespace WebApi.Controllers
                 string tokenString = new JwtSecurityTokenHandler().WriteToken(token);
                 string playerId = _playersService.GetPlayerFromUserId(user.Id).Id.ToString();
 
-                return Ok(new LoginSuccessDTO() { Token = tokenString, UserId = user.Id, PlayerId = playerId });
+                return Ok(new LoginSuccessDTO() { Token = tokenString, UserId = user.Id, PlayerId = playerId, Solde = _playersService.GetBalance(playerId) });
             }
 
             return NotFound(new { Error = "L'utilisateur est introuvable ou le mot de passe ne concorde pas." });

@@ -62,6 +62,11 @@ namespace Super_Cartes_Infinies.Services
         {
             return _dbContext.Players.Single(p => p.User!.UserName == userName);
         }
+
+        public int GetBalance(string playerId)
+        {
+            return GetPlayerFromPlayerId(playerId).Balance;
+        }
     }
 }
 
