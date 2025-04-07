@@ -154,15 +154,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3e8a2cfb-bdb3-4094-aba9-403acf786496",
+                            ConcurrencyStamp = "ff8ab12a-3fe8-4878-b4a8-cd60fcc71bcf",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEpUSusf6AUHabU5HipbJIzjxH2lYqHWZ+txhRWSNWLlr/qr9QUGsdDCEdIM8nvFQA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGRx2xIunsJSrqchVRKDCim5/A2EKtk1Fbt027rlI20hLPAOigynZNGAsQz5JOyBlA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "41359d38-43bc-41f7-9ad8-b17346303141",
+                            SecurityStamp = "56b1d8b2-9324-4fa7-949d-8a6804b872c6",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -170,22 +170,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "deadfaf1-52f0-4511-9348-7e438f745867",
+                            ConcurrencyStamp = "502fc178-e235-4ea1-9328-408b0c7ae707",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "cab0054a-4cd0-45e6-a426-7d749543d921",
+                            SecurityStamp = "03c4b614-031f-476e-b082-5e52256c7cb1",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bc6024df-688b-4de5-aa16-a4394a71adfb",
+                            ConcurrencyStamp = "48eace22-928f-47ba-91df-5d9a5efcb7f1",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2a388555-841b-4284-ad72-4f6d52fcff67",
+                            SecurityStamp = "4c1b779c-69c2-4e19-a403-48c1ee05f8c3",
                             TwoFactorEnabled = false
                         });
                 });
@@ -735,7 +735,7 @@ namespace Models.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "Attaque l'adversaire",
+                            Description = "Attaque l'adversaire.",
                             Icone = "fa-bolt",
                             Name = "First Strike"
                         },
@@ -756,9 +756,9 @@ namespace Models.Migrations
                         new
                         {
                             Id = 4,
-                            Description = "Absorbe X dégâts.",
+                            Description = "Absorbe les dégâts.",
                             Icone = "fa-shield",
-                            Name = "Shield X"
+                            Name = "Shield"
                         });
                 });
 

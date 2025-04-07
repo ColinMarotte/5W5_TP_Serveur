@@ -257,7 +257,7 @@ namespace Super_Cartes_Infinies.Data
                 {
                     Id = Power.FIRST_STRIKE_ID,
                     Name = "First Strike",
-                    Description = "Attaque l'adversaire",
+                    Description = "Attaque l'adversaire.",
                     Icone = "fa-bolt"//TODO 1 voir avec prof
                 },
                 new Power
@@ -277,8 +277,8 @@ namespace Super_Cartes_Infinies.Data
                 new Power
                 {
                     Id = 4,
-                    Name = "Shield X",
-                    Description = "Absorbe X dégâts.",
+                    Name = "Shield",
+                    Description = "Absorbe les dégâts.",
                     Icone = "fa-shield" //TODO 4
                 }
             };
@@ -308,6 +308,13 @@ namespace Super_Cartes_Infinies.Data
                     CardId = 3,
                     PowerId = Power.HEAL_ID,
                     Value = 5
+                },
+                new CardPower
+                {
+                    Id = 4,
+                    CardId = 4,
+                    PowerId = 4,
+                    Value = 3
                 }
             };
         }
