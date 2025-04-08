@@ -10,13 +10,20 @@ namespace Models.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AddColumn<int>(
+                name: "Balance",
+                table: "Players",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
+
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "11111111-1111-1111-1111-111111111111",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
                 values: new object[] { "0cc8d8d9-9b52-4faf-a26b-2764910b2e0b", "AQAAAAIAAYagAAAAEFEUx7TwTgCFwq07JpifK0xU5uZErQahLsxd6EQVNRm1rrzD0FlxrWA+laRuQoGACA==", "2cdcc11b-3f5b-4880-9bdb-cbaa8c2f4f4d" });
-
+            
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
@@ -30,6 +37,13 @@ namespace Models.Migrations
                 keyValue: "User2Id",
                 columns: new[] { "ConcurrencyStamp", "SecurityStamp" },
                 values: new object[] { "599e20be-bec2-474c-af11-cda1be78af49", "0767a3fd-d832-4c97-ba64-855c9e022528" });
+
+            migrationBuilder.AddColumn<int>(
+                name: "Price",
+                table: "Cards",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
 
             migrationBuilder.UpdateData(
                 table: "Cards",
