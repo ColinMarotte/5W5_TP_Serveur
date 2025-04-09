@@ -34,6 +34,15 @@
                 <span asp-validation-for="Cost" class="text-danger"></span>
             </div>
             <div class="form-group">
+                @Html.LabelFor(model => model.Rarity)
+                @Html.DropDownListFor(
+                         model => model.Rarity,
+                         new SelectList(Enum.GetValues(typeof(Rarity))),
+                         "Select Rarity",
+                         new { @class = "form-control" }
+                         )
+            </div>
+            <div class="form-group">
                 <label asp-for="ImageUrl" class="control-label">Url de l'image</label>
                 <input asp-for="ImageUrl" class="form-control" />
                 <span asp-validation-for="ImageUrl" class="text-danger"></span>

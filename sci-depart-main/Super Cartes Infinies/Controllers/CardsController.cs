@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -40,7 +41,7 @@ namespace Super_Cartes_Infinies.Controllers
                 Card card = await _cardsService.GetCard(id);
                 return View(card);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return NotFound();
             }
@@ -59,7 +60,7 @@ namespace Super_Cartes_Infinies.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Attack,Health,Cost,ImageUrl")] Card card)
+        public async Task<IActionResult> Create([Bind("Id,Name,Attack,Health,Cost,Rarity,ImageUrl")] Card card)
         {
             if (ModelState.IsValid)
             {
@@ -79,9 +80,14 @@ namespace Super_Cartes_Infinies.Controllers
             try
             {
                 var card = await _cardsService.GetCard(id);
+                ViewData["cardList"] = new SelectListItem()
+                {
+                    Text = "Rarity",
+                    Value = card.Rarity.ToString()
+                };
                 return View(card);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return NotFound();
             }
@@ -92,7 +98,7 @@ namespace Super_Cartes_Infinies.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Attack,Health,Cost,ImageUrl")] Card card)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Attack,Health,Cost,Rarity,ImageUrl")] Card card)
         {
             if (id != card.Id)
             {
@@ -106,7 +112,7 @@ namespace Super_Cartes_Infinies.Controllers
                     return NotFound();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return NotFound();
             }
@@ -139,7 +145,7 @@ namespace Super_Cartes_Infinies.Controllers
                 Card card = await _cardsService.GetCard(id);
                 return View(card);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return NotFound();
             }
@@ -164,7 +170,7 @@ namespace Super_Cartes_Infinies.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            catch(Exception e)
+            catch(Exception)
             {
                 return NotFound();
             }
