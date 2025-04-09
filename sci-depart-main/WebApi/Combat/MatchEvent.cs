@@ -11,6 +11,7 @@ namespace Super_Cartes_Infinies.Combat
     [JsonDerivedType(typeof(StartMatchEvent))]
     [JsonDerivedType(typeof(SurrenderEvent))]
     [JsonDerivedType(typeof(PlayCardEvent))]
+    [JsonDerivedType(typeof(CombatEvent))]
     public abstract class MatchEvent
     {
         public abstract string EventType { get; }
