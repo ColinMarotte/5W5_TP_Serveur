@@ -12,165 +12,174 @@ using Super_Cartes_Infinies.Services;
 
 namespace Super_Cartes_Infinies.Controllers
 {
-    [Authorize(Roles = ApplicationDbContext.ADMIN_ROLE)]
-    public class CardsController : Controller
-    {
-        private CardsService _cardsService;
+	[Authorize(Roles = ApplicationDbContext.ADMIN_ROLE)]
+	public class CardsController : Controller
+	{
+		private CardsService _cardsService;
 
-        public CardsController(CardsService cardsService)
-        {
-            _cardsService = cardsService;
-        }
+		public CardsController(CardsService cardsService)
+		{
+			_cardsService = cardsService;
+		}
 
-        // GET: Cards
-        public async Task<IActionResult> Index()
-        {
-            return View(await _cardsService.GetAllCards());
-        }
+		// GET: Cards
+		public async Task<IActionResult> Index()
+		{
+			return View(await _cardsService.GetAllCards());
+		}
 
-        // GET: Cards/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            try
-            {
-                Card card = await _cardsService.GetCard(id);
-                return View(card);
-            }
-            catch (Exception e)
-            {
-                return NotFound();
-            }
-
-
-        }
-
-        // GET: Cards/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Cards/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Attack,Health,Cost,ImageUrl")] Card card)
-        {
-            if (ModelState.IsValid)
-            {
-                await _cardsService.CreateCard(card);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(card);
-        }
-
-        // GET: Cards/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            try
-            {
-                var card = await _cardsService.GetCard(id);
-                return View(card);
-            }
-            catch (Exception e)
-            {
-                return NotFound();
-            }
-        }
-
-        // POST: Cards/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Attack,Health,Cost,ImageUrl")] Card card)
-        {
-            if (id != card.Id)
-            {
-                return NotFound();
-            }
-            try
-            {
-                var oldCard = await _cardsService.GetCard(id);
-                if(oldCard == null)
-                {
-                    return NotFound();
-                }
-            }
-            catch (Exception e)
-            {
-                return NotFound();
-            }
+		// GET: Cards/Details/5
+		public async Task<IActionResult> Details(int? id)
+		{
+			if (id == null)
+			{
+				return NotFound();
+			}
+			try
+			{
+				Card card = await _cardsService.GetCard(id);
+				return View(card);
+			}
+			catch (Exception e)
+			{
+				return NotFound();
+			}
 
 
-            if (ModelState.IsValid)
-            {
-                Card? newCard = await _cardsService.EditCard(id, card);
+		}
 
-                if (newCard == null)
-                {
-                    return StatusCode(StatusCodes.Status500InternalServerError);
-                }
+		// GET: Cards/Create
+		public IActionResult Create()
+		{
+			return View();
+		}
 
-                return RedirectToAction(nameof(Index));
-            }
-            return View(card);
-        }
+		// POST: Cards/Create
+		// To protect from overposting attacks, enable the specific properties you want to bind to.
+		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Create([Bind("Id,Name,Attack,Health,Cost,ImageUrl")] Card card)
+		{
+			if (ModelState.IsValid)
+			{
+				await _cardsService.CreateCard(card);
+				return RedirectToAction(nameof(Index));
+			}
+			return View(card);
+		}
 
-        // GET: Cards/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+		// GET: Cards/Edit/5
+		public async Task<IActionResult> Edit(int? id)
+		{
+			if (id == null)
+			{
+				return NotFound();
+			}
 
-            try
-            {
-                Card card = await _cardsService.GetCard(id);
-                return View(card);
-            }
-            catch (Exception e)
-            {
-                return NotFound();
-            }
-        }
+			try
+			{
+				var card = await _cardsService.GetCard(id);
+				ViewBag.AllPowers = await _cardsService.GetAllPowers();
+				ViewBag.SelectedPowers = card.CardPowers.Select(cp => cp.PowerId).ToList();
+				return View(card);
+			}
+			catch (Exception e)
+			{
+				return NotFound();
+			}
+		}
 
-        // POST: Cards/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var card = await _cardsService.GetCard(id);
-            if (card == null)
-            {
-                return NotFound();
-            }
-            try
-            {
-                Card? deletedCard = await _cardsService.DeleteCard(card);
-                if (deletedCard == null)
-                {
-                    return StatusCode(StatusCodes.Status500InternalServerError);
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            catch(Exception e)
-            {
-                return NotFound();
-            }
+		// POST: Cards/Edit/5
+		// To protect from overposting attacks, enable the specific properties you want to bind to.
+		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Attack,Health,Cost,ImageUrl,CardPowers")] Card card, int[] selectedPowers)
+		{
+			if (id != card.Id)
+			{
+				return NotFound();
+			}
+			try
+			{
+				var oldCard = await _cardsService.GetCard(id);
+				if(oldCard == null)
+				{
+					return NotFound();
+				}
+				card.CardPowers = selectedPowers.Select(powerId => new CardPower
+				{
+					PowerId = powerId,
+					CardId = card.Id
+				}).ToList();
+			}
+			catch (Exception e)
+			{
+				return NotFound();
+			}
 
-        }
+
+			if (ModelState.IsValid)
+			{
+				Card? newCard = await _cardsService.EditCard(id, card);
+
+				if (newCard == null)
+				{
+					return StatusCode(StatusCodes.Status500InternalServerError);
+				}
+
+				await _cardsService.UpdateCardPowers(id, card.CardPowers); 
+				return RedirectToAction(nameof(Index));
+			}
+			return View(card);
+		}
+
+		// GET: Cards/Delete/5
+		public async Task<IActionResult> Delete(int? id)
+		{
+			if (id == null)
+			{
+				return NotFound();
+			}
+
+			try
+			{
+				Card card = await _cardsService.GetCard(id);
+				return View(card);
+			}
+			catch (Exception e)
+			{
+				return NotFound();
+			}
+		}
+
+		// POST: Cards/Delete/5
+		[HttpPost, ActionName("Delete")]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> DeleteConfirmed(int id)
+		{
+			var card = await _cardsService.GetCard(id);
+			if (card == null)
+			{
+				return NotFound();
+			}
+			try
+			{
+				Card? deletedCard = await _cardsService.DeleteCard(card);
+				if (deletedCard == null)
+				{
+					return StatusCode(StatusCodes.Status500InternalServerError);
+				}
+				return RedirectToAction(nameof(Index));
+			}
+			catch(Exception e)
+			{
+				return NotFound();
+			}
+
+		}
 
 
-    }
+	}
 }

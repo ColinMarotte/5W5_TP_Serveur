@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Modifier";
+    var allPowers = ViewBag.AllPowers as List<Super_Cartes_Infinies.Models.Power>;
 }
 
 <h1>Modifier</h1>
@@ -9,46 +10,130 @@
 <h4>Cartes Modèle</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
+	<div class="col-md-4">
+        <form asp-action="Edit" method="post">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<input type="hidden" asp-for="Id" />
+
+			<div class="col">
+
+				<div class="form-group">
+					<label asp-for="Name" class="control-label"></label>
+					<input asp-for="Name" class="form-control" />
+					<span asp-validation-for="Name" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label asp-for="Attack" class="control-label"></label>
+					<input asp-for="Attack" class="form-control" />
+					<span asp-validation-for="Attack" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label asp-for="Health" class="control-label"></label>
+					<input asp-for="Health" class="form-control" />
+					<span asp-validation-for="Health" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label asp-for="Cost" class="control-label"></label>
+					<input asp-for="Cost" class="form-control" />
+					<span asp-validation-for="Cost" class="text-danger"></span>
+				</div>
+				<div class="form-group">
+					<label asp-for="ImageUrl" class="control-label">Url de l'image</label>
+					<input asp-for="ImageUrl" class="form-control" />
+					<span asp-validation-for="ImageUrl" class="text-danger"></span>
+				</div>
+			</div>
+
+
+
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label>Pouvoirs sélectionnés :</label>
+                <div id="selected-powers">
+                    @foreach (var cp in Model.CardPowers)
+                    {
+                        var power = allPowers.FirstOrDefault(p => p.Id == cp.PowerId);
+                        if (power != null)
+                        {
+                            <p data-id="@power.Id">
+                                @power.Name
+                                <button type="button" onclick="removePower(@power.Id)">❌</button>
+                                <input type="hidden" name="CardPowers[@power.Id].PowerId" value="@power.Id" />
+                                <input type="hidden" name="CardPowers[@power.Id].Value" value="@cp.Value" />
+                            </p>
+                        }
+                    }
+                </div>
             </div>
+
+            @* Dropdown pour ajouter des pouvoirs *@
             <div class="form-group">
-                <label asp-for="Attack" class="control-label"></label>
-                <input asp-for="Attack" class="form-control" />
-                <span asp-validation-for="Attack" class="text-danger"></span>
+                <label for="power-dropdown">Ajouter un pouvoir :</label>
+                <select id="power-dropdown" class="form-control">
+                    <option disabled selected>-- Choisir un pouvoir --</option>
+                    @foreach (var power in allPowers)
+                    {
+                        var isAlreadySelected = Model.CardPowers.Any(cp => cp.PowerId == power.Id);
+                        if (!isAlreadySelected)
+                        {
+                            <option value="@power.Id" data-name="@power.Name">@power.Name</option>
+                        }
+                    }
+                </select>
+                <button type="button" onclick="addPower()">Ajouter</button>
             </div>
-            <div class="form-group">
-                <label asp-for="Health" class="control-label"></label>
-                <input asp-for="Health" class="form-control" />
-                <span asp-validation-for="Health" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cost" class="control-label"></label>
-                <input asp-for="Cost" class="form-control" />
-                <span asp-validation-for="Cost" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImageUrl" class="control-label">Url de l'image</label>
-                <input asp-for="ImageUrl" class="form-control" />
-                <span asp-validation-for="ImageUrl" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Accepter" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+
+			<div class="form-group">
+				<input type="submit" value="Accepter" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
 </div>
 
 <div>
-    <a asp-action="Index">Retour à la liste</a>
+	<a asp-action="Index">Retour à la liste</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+    <script>
+        function addPower() {
+            const dropdown = document.getElementById("power-dropdown");
+            const selectedId = dropdown.value;
+            const selectedText = dropdown.options[dropdown.selectedIndex].text;
+
+            if (!selectedId) return;
+
+            // Ajouter à la liste
+            const container = document.getElementById("selected-powers");
+            const p = document.createElement("p");
+            p.setAttribute("data-id", selectedId);
+            p.innerHTML = `${selectedText}
+                                <button type="button" onclick="removePower(${selectedId})">❌</button>
+                                <input type="hidden" name="CardPowers[${selectedId}].PowerId" value="${selectedId}" />
+                                <input type="hidden" name="CardPowers[${selectedId}].Value" value="0" />`;
+            container.appendChild(p);
+
+            // Supprimer du dropdown
+            dropdown.remove(dropdown.selectedIndex);
+            dropdown.selectedIndex = 0;
+        }
+
+        function removePower(id) {
+            const container = document.getElementById("selected-powers");
+            const element = container.querySelector(`p[data-id='${id}']`);
+            if (element) {
+                const name = element.innerText.trim().replace("❌", "");
+                container.removeChild(element);
+
+                // Le rajouter dans le dropdown
+                const dropdown = document.getElementById("power-dropdown");
+                const option = document.createElement("option");
+                option.value = id;
+                option.innerText = name;
+                dropdown.appendChild(option);
+            }
+        }
+    </script>
 }

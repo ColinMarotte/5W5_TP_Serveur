@@ -94,6 +94,25 @@ namespace Super_Cartes_Infinies.Services
             await _dbContext.SaveChangesAsync();
             return card;
         }
+
+        public async Task<List<Power>> GetAllPowers()
+        {
+            return await _dbContext.Powers.ToListAsync();
+        }
+
+        public async Task UpdateCardPowers(int cardId, List<CardPower> newPowers)
+        {
+            var oldPowers = _dbContext.CardPowers.Where(cp => cp.CardId == cardId);
+            _dbContext.CardPowers.RemoveRange(oldPowers);
+
+            foreach (var power in newPowers)
+            {
+                power.CardId = cardId;
+                _dbContext.CardPowers.Add(power);
+            }
+
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }
 
