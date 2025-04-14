@@ -14,5 +14,9 @@ namespace Super_Cartes_Infinies.Models
         public int NbCardsToDraw { get; set; }
         [DisplayName("Qti Mana reçu au début de chaque tour")]
         public int QtyManaPerTurn { get; set; }
+        [DisplayName("Nombre maximum de decks")]
+        public int NbDecksMax { get; set; }
+        [DisplayName("Nombre maximum de cartes dans un deck")]
+        public int NbCardsMaxInDeck { get; set; }
     }
 }

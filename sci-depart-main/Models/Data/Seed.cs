@@ -161,7 +161,9 @@ namespace Super_Cartes_Infinies.Data
             {
                 Id = 1,
                 NbCardsToDraw = 4,
-                QtyManaPerTurn = 3
+                QtyManaPerTurn = 3,
+                NbDecksMax = 3,
+                NbCardsMaxInDeck = 10
             };
         }
 
