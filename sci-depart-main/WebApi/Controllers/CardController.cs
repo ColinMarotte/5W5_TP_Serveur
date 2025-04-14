@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Super_Cartes_Infinies.Data;
 using Super_Cartes_Infinies.Models;
 using Super_Cartes_Infinies.Services;
+using System.Security.Claims;
 
 namespace Super_Cartes_Infinies.Controllers
 {
@@ -11,13 +12,13 @@ namespace Super_Cartes_Infinies.Controllers
     [ApiController]
     public class CardController : ControllerBase
     {
-        private ApplicationDbContext _dbContext;
         private CardsService _cardsService;
+        private PlayersService _playersService;
 
-        public CardController(ApplicationDbContext dbContext, CardsService cardsService)
+        public CardController(CardsService cardsService, PlayersService playersService)
         {
-            _dbContext = dbContext;
             _cardsService = cardsService;
+            _playersService = playersService;
         }
 
         [HttpGet]
@@ -29,9 +30,14 @@ namespace Super_Cartes_Infinies.Controllers
         // TODO: La version réelle devra utiliser [Authorize] pour protéger les données est s'assurer d'avoir accès au User
         // Et l'utiliser pour obtenir l'Id de l'utilisateur
         [Authorize]
-        [HttpGet("{playerId}")]
-        public ActionResult<IEnumerable<Card>> GetPlayersCards(string playerId)
+        [HttpGet]
+        public ActionResult<IEnumerable<Card>> GetPlayersCards()
         {
+            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            var userId = claim.Value;
+            Player player = _playersService.GetPlayerFromUserId(userId);
+            string playerId = player.Id.ToString();
             return Ok(_cardsService.GetPlayersCards(playerId));
         }
     }

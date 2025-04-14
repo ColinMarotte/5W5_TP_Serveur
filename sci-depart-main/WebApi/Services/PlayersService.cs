@@ -43,7 +43,7 @@ namespace Super_Cartes_Infinies.Services
             }
 
             _dbContext.Add(p);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
 
             return p;
         }
