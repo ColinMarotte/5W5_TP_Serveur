@@ -21,6 +21,8 @@ namespace Super_Cartes_Infinies.Models
 		public int Health { get; set; }
         public int Attack { get; set; }
 
+        public int Index { get; set; }
+
         public bool HasPower(int powerId)
         {
             // Retourne true si la carte possède ce pouvoir.

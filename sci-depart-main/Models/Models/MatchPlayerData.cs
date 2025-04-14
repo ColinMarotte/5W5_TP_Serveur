@@ -47,6 +47,39 @@ namespace Super_Cartes_Infinies.Models
 
         public virtual List<PlayableCard> BattleField { get; set; }
         public virtual List<PlayableCard> Graveyard { get; set; }
+
+        // Assurez-vous d'utiliser cette méthode pour votre logique de combat!
+        public IEnumerable<PlayableCard> GetOrderedBattleField()
+        {
+            // Retourner les cartes dans l'ordre de l'Index
+            List<PlayableCard> lstPlayabeCards = BattleField.ToList();
+            return lstPlayabeCards.OrderBy(p => p.Index);
+        }
+
+        public void AddCardToBattleField(PlayableCard playableCard)
+        {
+            // Ajouter la carte au BattleField et lui donner le bon index (En fonction du nombre de cartes déjà sur le BattleField)
+            //if(BattleField.Count == BattleField.Capacity){
+            //    return;
+            //}
+            playableCard.Index = BattleField.Count;
+            BattleField.Add(playableCard);
+        }
+
+        public void RemoveCardFromBattleField(PlayableCard playableCard)
+        {
+            // Retirer la carte du BattleField
+            // Atention: Il faut mettre les autres cartes du BattleField à jour!
+            IEnumerable<PlayableCard> lstPlayableCards = GetOrderedBattleField();
+
+            for (int i = playableCard.Index+1; i < lstPlayableCards.Count(); i++)
+            {
+                lstPlayableCards.ElementAt(i).Index = i-1;
+            }
+            playableCard.Index = 0;
+            BattleField.Remove(playableCard);
+            Graveyard.Add(playableCard);
+        }
     }
 }
 

@@ -25,7 +25,7 @@ namespace WebApi.Combat
             {
                 throw new Exception();
             }
-            currentPlayerData.BattleField.Add(playableCard);
+            currentPlayerData.AddCardToBattleField(playableCard);
             currentPlayerData.Hand.Remove(playableCard);
             this.Events.Add(new GainManaEvent(currentPlayerData, -playableCard.Card.Cost));
         }

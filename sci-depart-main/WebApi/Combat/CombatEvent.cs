@@ -12,16 +12,21 @@ namespace WebApi.Combat
         public CombatEvent(MatchPlayerData currentPlayerData, MatchPlayerData oppositePlayerData)
         {
             Events = new List<MatchEvent>();
-
-            if(currentPlayerData.BattleField.Count <= 0)
+            IEnumerable<PlayableCard> currentPlayerBattleField = currentPlayerData.GetOrderedBattleField();
+            IEnumerable<PlayableCard> oppositePlayerBattleField = oppositePlayerData.GetOrderedBattleField();
+            if(currentPlayerBattleField.Count() <= 0)
             {
                 return;
             }
             PlayerId = currentPlayerData.PlayerId;
-            for (int i = 0; i < currentPlayerData.BattleField.Count; i++)
+            for (int i = 0; i < currentPlayerBattleField.Count(); i++)
             {
-                PlayableCard? playerCard = currentPlayerData.BattleField[i];
-                PlayableCard? oppositePlayerCard = oppositePlayerData.BattleField[i];
+                PlayableCard? playerCard = currentPlayerBattleField.ElementAt(i);
+                PlayableCard? oppositePlayerCard = null;
+                if (i < oppositePlayerBattleField.Count())
+                {
+                    oppositePlayerCard = oppositePlayerBattleField.ElementAt(i);
+                }
 
                 if (oppositePlayerCard == null)
                 {
