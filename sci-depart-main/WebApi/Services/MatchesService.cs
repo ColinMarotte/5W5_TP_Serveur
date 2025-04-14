@@ -233,6 +233,10 @@ namespace Super_Cartes_Infinies.Services
 
 
         }
+        //public async Task<CombatEvent> Combat()
+        //{
+
+        //}
     }
 }
 
