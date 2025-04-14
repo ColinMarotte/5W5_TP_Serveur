@@ -295,7 +295,7 @@ namespace Super_Cartes_Infinies.Data
                     Id = 1,
                     CardId = 1,
                     PowerId = Power.FIRST_STRIKE_ID,
-                    Value = 2,
+                    Value = 2
                   
                 },
                 new CardPower
@@ -321,8 +321,6 @@ namespace Super_Cartes_Infinies.Data
                 }
             };
         }
-
-
 
     }
 }
