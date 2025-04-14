@@ -12,8 +12,8 @@ using Super_Cartes_Infinies.Data;
 namespace Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250407142028_seedCardPowers")]
-    partial class seedCardPowers
+    [Migration("20250414151313_Seedpowercard2")]
+    partial class Seedpowercard2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,15 +157,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ff8ab12a-3fe8-4878-b4a8-cd60fcc71bcf",
+                            ConcurrencyStamp = "d71d98c2-0503-4f9b-a7a6-79f2daf75ee6",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGRx2xIunsJSrqchVRKDCim5/A2EKtk1Fbt027rlI20hLPAOigynZNGAsQz5JOyBlA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAED+Zm95vQJP2oCipS5efPBMVBK5ewbJ8Wzy0eqTzAxDJ8DI+pn2FzTidEMc9T4Qi6g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "56b1d8b2-9324-4fa7-949d-8a6804b872c6",
+                            SecurityStamp = "b58225ca-83cd-445d-9666-55b7dc4a7d7c",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -173,22 +173,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "502fc178-e235-4ea1-9328-408b0c7ae707",
+                            ConcurrencyStamp = "0d5ebe7f-8696-4cbc-a0be-f441203e6b2c",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "03c4b614-031f-476e-b082-5e52256c7cb1",
+                            SecurityStamp = "52ed84d1-5588-4668-a0bf-24c030eddf04",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "48eace22-928f-47ba-91df-5d9a5efcb7f1",
+                            ConcurrencyStamp = "fc3fac0f-581c-43e0-8035-57ab0731334c",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "4c1b779c-69c2-4e19-a403-48c1ee05f8c3",
+                            SecurityStamp = "32eeadba-e421-44e6-8b0d-1bef5230c406",
                             TwoFactorEnabled = false
                         });
                 });
@@ -449,6 +449,36 @@ namespace Models.Migrations
                     b.HasIndex("PowerId");
 
                     b.ToTable("CardPowers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CardId = 1,
+                            PowerId = 1,
+                            Value = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CardId = 2,
+                            PowerId = 2,
+                            Value = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CardId = 3,
+                            PowerId = 3,
+                            Value = 5
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CardId = 4,
+                            PowerId = 4,
+                            Value = 3
+                        });
                 });
 
             modelBuilder.Entity("Super_Cartes_Infinies.Models.Deck", b =>

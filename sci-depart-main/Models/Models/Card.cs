@@ -26,6 +26,7 @@ namespace Super_Cartes_Infinies.Models
         [JsonIgnore]
         public virtual List<OwnedCard> OwnedCards { get; set; } = new List<OwnedCard>();
         [ValidateNever]
+        [DisplayName("Pouvoirs")]
         public virtual List<CardPower> CardPowers { get; set; } = new List<CardPower>();
     }
 }

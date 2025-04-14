@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using Microsoft.AspNetCore.Identity;
+
 using Super_Cartes_Infinies.Models;
 
 namespace Super_Cartes_Infinies.Data
@@ -258,28 +259,29 @@ namespace Super_Cartes_Infinies.Data
                     Id = Power.FIRST_STRIKE_ID,
                     Name = "First Strike",
                     Description = "Attaque l'adversaire.",
-                    Icone = "fa-bolt"//TODO 1 voir avec prof
+                    Icone = "fa-bolt",
+                    
                 },
                 new Power
                 {
                     Id = Power.THORNS_ID,
                     Name = "Thorns",
                     Description = "Inflige des dégâts au moment où la carte reçoit des dégâts.",
-                    Icone = "fa-spikes" //TODO 2
+                    Icone = "fa-spikes" 
                 },
                 new Power
                 {
                     Id = Power.HEAL_ID,
                     Name = "Heal",
                     Description = "Rend des points de vie à une carte.",
-                    Icone = "fa-heart" //TODO 3
+                    Icone = "fa-heart"
                 },
                 new Power
                 {
                     Id = 4,
                     Name = "Shield",
                     Description = "Absorbe les dégâts.",
-                    Icone = "fa-shield" //TODO 4
+                    Icone = "fa-shield"
                 }
             };
         }
@@ -291,9 +293,10 @@ namespace Super_Cartes_Infinies.Data
                 new CardPower
                 {
                     Id = 1,
-                    CardId = 1, 
+                    CardId = 1,
                     PowerId = Power.FIRST_STRIKE_ID,
-                    Value = 2
+                    Value = 2,
+                  
                 },
                 new CardPower
                 {

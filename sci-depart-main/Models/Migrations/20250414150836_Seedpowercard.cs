@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Models.Migrations
 {
     /// <inheritdoc />
-    public partial class Initiale : Migration
+    public partial class Seedpowercard : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -464,9 +464,9 @@ namespace Models.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "11111111-1111-1111-1111-111111111111", 0, "06bcd834-931f-498d-ba04-8dd82f2b9550", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEKSTqsYYiXjNEZElh7RLlvofBsZEt7QvETokAUDO3hGXy71/1seG+Qu4HB6oDuZvoQ==", null, false, "d5faa97e-b560-417d-9107-8cebd3f42a95", false, "admin@admin.com" },
-                    { "User1Id", 0, "05bf7df2-ef13-496a-83d9-f074773e2ef7", null, false, false, null, null, null, null, null, false, "ee1091d5-707f-482f-af41-8ebcdfb3bdad", false, null },
-                    { "User2Id", 0, "5db8a036-51cd-459a-8428-dded27243e5f", null, false, false, null, null, null, null, null, false, "3fa307a0-c69e-4c2d-9bca-28a826d2f151", false, null }
+                    { "11111111-1111-1111-1111-111111111111", 0, "d22558ee-1ce7-41f7-9b26-e68899fac6e3", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEBax8vSOoEJTWp4fiwWaUngc2sAQahTUf6Z6Z8PbyPJMSE0yqReyHdMrWDvFN6ZJ3w==", null, false, "3bc86918-6572-4cd2-ba25-2c5f213d1e81", false, "admin@admin.com" },
+                    { "User1Id", 0, "47321a20-4113-4469-826e-af8c162ee8c0", null, false, false, null, null, null, null, null, false, "108ed3ec-3a74-4e14-973c-49035f173b0b", false, null },
+                    { "User2Id", 0, "c5435249-7a1b-4458-96b8-ac2b6298c72e", null, false, false, null, null, null, null, null, false, "b8ad3775-ce31-4ad1-b1f8-e077e64548f2", false, null }
                 });
 
             migrationBuilder.InsertData(
@@ -492,6 +492,17 @@ namespace Models.Migrations
                 table: "GameConfigs",
                 columns: new[] { "Id", "NbCardsToDraw", "QtyManaPerTurn" },
                 values: new object[] { 1, 4, 3 });
+
+            migrationBuilder.InsertData(
+                table: "Powers",
+                columns: new[] { "Id", "Description", "Icone", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Attaque l'adversaire.", "fa-bolt", "First Strike" },
+                    { 2, "Inflige des dégâts au moment où la carte reçoit des dégâts.", "fa-spikes", "Thorns" },
+                    { 3, "Rend des points de vie à une carte.", "fa-heart", "Heal" },
+                    { 4, "Absorbe les dégâts.", "fa-shield", "Shield" }
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

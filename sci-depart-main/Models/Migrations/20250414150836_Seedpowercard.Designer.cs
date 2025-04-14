@@ -12,8 +12,8 @@ using Super_Cartes_Infinies.Data;
 namespace Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250407140416_seedPowers")]
-    partial class seedPowers
+    [Migration("20250414150836_Seedpowercard")]
+    partial class Seedpowercard
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,15 +157,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4dda86f4-f5c7-4500-880f-41a1ef735d3e",
+                            ConcurrencyStamp = "d22558ee-1ce7-41f7-9b26-e68899fac6e3",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGv9t+fHqNZH99kkMBkN8CgyEo2PqzVDKDnOmYM0/WamBPFlHPC76dS1G0Xo83BNlQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBax8vSOoEJTWp4fiwWaUngc2sAQahTUf6Z6Z8PbyPJMSE0yqReyHdMrWDvFN6ZJ3w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "06c7c814-97db-4168-9c3f-81d45b5549b2",
+                            SecurityStamp = "3bc86918-6572-4cd2-ba25-2c5f213d1e81",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -173,22 +173,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5bc8b5fb-6e72-4aa6-8c1e-0ca34a35e87a",
+                            ConcurrencyStamp = "47321a20-4113-4469-826e-af8c162ee8c0",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b9a07b3e-7360-43cc-bd87-6acdae34f8fb",
+                            SecurityStamp = "108ed3ec-3a74-4e14-973c-49035f173b0b",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "401088a7-5b58-4315-af8e-d6ccf8694809",
+                            ConcurrencyStamp = "c5435249-7a1b-4458-96b8-ac2b6298c72e",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "661cc8a7-0705-4f91-9819-848b6f285d8f",
+                            SecurityStamp = "b8ad3775-ce31-4ad1-b1f8-e077e64548f2",
                             TwoFactorEnabled = false
                         });
                 });
@@ -738,7 +738,7 @@ namespace Models.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "Attaque l'adversaire",
+                            Description = "Attaque l'adversaire.",
                             Icone = "fa-bolt",
                             Name = "First Strike"
                         },
@@ -759,9 +759,9 @@ namespace Models.Migrations
                         new
                         {
                             Id = 4,
-                            Description = "Absorbe X dégâts.",
+                            Description = "Absorbe les dégâts.",
                             Icone = "fa-shield",
-                            Name = "Shield X"
+                            Name = "Shield"
                         });
                 });
 

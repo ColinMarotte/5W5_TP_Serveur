@@ -6,7 +6,7 @@ using Super_Cartes_Infinies.Models;
 
 namespace Super_Cartes_Infinies.Services
 {
-	public class CardsService
+    public class CardsService
     {
         private ApplicationDbContext _dbContext;
         private PlayersService _playersService;
@@ -28,17 +28,19 @@ namespace Super_Cartes_Infinies.Services
 
         public async Task<IEnumerable<Card>> GetAllCards()
         {
-            return await _dbContext.Cards.ToListAsync();
+            return await _dbContext.Cards.Include(c => c.CardPowers)
+                                            .ThenInclude(cp => cp.Power)
+                                            .ToListAsync();
         }
 
         public async Task<Card> GetCard(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 throw new ArgumentException();
             }
             Card? card = await _dbContext.Cards.FindAsync(id);
-            if(card == null)
+            if (card == null)
             {
                 throw new Exception();
             }
@@ -47,7 +49,7 @@ namespace Super_Cartes_Infinies.Services
 
         public async Task<Card?> CreateCard(Card card)
         {
-            if(card == null)
+            if (card == null)
             {
                 throw new ArgumentNullException();
             }
@@ -57,7 +59,7 @@ namespace Super_Cartes_Infinies.Services
                 await _dbContext.SaveChangesAsync();
                 return card;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw e;
             }
@@ -65,7 +67,7 @@ namespace Super_Cartes_Infinies.Services
 
         public async Task<Card?> EditCard(int id, Card card)
         {
-            if(card == null)
+            if (card == null)
             {
                 throw new ArgumentNullException();
 

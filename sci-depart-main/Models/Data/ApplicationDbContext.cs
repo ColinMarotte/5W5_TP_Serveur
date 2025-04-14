@@ -28,12 +28,13 @@ public class ApplicationDbContext : IdentityDbContext
 
         builder.Entity<IdentityUser>().HasData(Seed.SeedTestUsers());
         builder.Entity<Player>().HasData(Seed.SeedTestPlayers());
+		
 
-        // Lorsque le modèle de données se complexifient, il faut éventuellement utiliser Fluent API
-        // https://learn.microsoft.com/en-us/ef/ef6/modeling/code-first/fluent/types-and-properties
-        // pour préciser certaines relations.
-        // Nous allons couvrir ce sujet plus tard dans la session
-        builder.Entity<Match>()
+		// Lorsque le modèle de données se complexifient, il faut éventuellement utiliser Fluent API
+		// https://learn.microsoft.com/en-us/ef/ef6/modeling/code-first/fluent/types-and-properties
+		// pour préciser certaines relations.
+		// Nous allons couvrir ce sujet plus tard dans la session
+		builder.Entity<Match>()
             .HasOne(m => m.PlayerDataA)
             .WithMany()
             .OnDelete(DeleteBehavior.NoAction);
@@ -68,13 +69,15 @@ public class ApplicationDbContext : IdentityDbContext
             .HasForeignKey(d => d.OwnedCardId)
             .OnDelete(DeleteBehavior.NoAction);
 
-        // Fin de Fluent API
-        builder.Entity<Power>().HasData(Seed.SeedPowers());
+		// Fin de Fluent API
+		builder.Entity<Power>().HasData(Seed.SeedPowers());
+		 builder.Entity<CardPower>().HasData(Seed.SeedCardPowers());
 
 
-    }
 
-    public DbSet<Card> Cards { get; set; } = default!;
+	}
+
+	public DbSet<Card> Cards { get; set; } = default!;
 
     public DbSet<Player> Players { get; set; } = default!;
 
