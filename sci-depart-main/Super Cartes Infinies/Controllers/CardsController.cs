@@ -131,53 +131,65 @@ namespace Super_Cartes_Infinies.Controllers
             }
         }
 
-        // POST: Cards/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Attack,Health,Cost,ImageUrl,CardPowers")] Card card, int[] selectedPowers)
-        {
-            if (id != card.Id)
-            {
-                return NotFound();
-            }
-            try
-            {
-                var oldCard = await _cardsService.GetCard(id);
-                if (oldCard == null)
-                {
-                    return NotFound();
-                }
-                card.CardPowers = selectedPowers.Select(powerId => new CardPower
-                {
-                    PowerId = powerId,
-                    CardId = card.Id
-                }).ToList();
-            }
-            catch (Exception e)
-            {
-                return NotFound();
-            }
+		// POST: Cards/Edit/5
+		// To protect from overposting attacks, enable the specific properties you want to bind to.
+		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Attack,Health,Cost,ImageUrl,CardPowers")] Card card, string action, int? newPowerId, int? newPowerValue)
+		{
+			if (id != card.Id)
+				return NotFound();
+
+			// Recharger la carte depuis la DB (pour avoir les données complètes)
+			var oldCard = await _cardsService.GetCard(id);
+			if (oldCard == null)
+				return NotFound();
+
+			// Charger tous les pouvoirs (toujours utile pour la vue)
+			ViewBag.AllPowers = await _cardsService.GetAllPowers();
+
+			if (action == "addPower")
+			{
+				if (newPowerId.HasValue && newPowerValue.HasValue)
+				{
+					if (!oldCard.CardPowers.Any(cp => cp.PowerId == newPowerId.Value))
+					{
+						oldCard.CardPowers.Add(new CardPower
+						{
+							PowerId = newPowerId.Value,
+							Value = newPowerValue.Value,
+							CardId = id
+						});
+
+						await _cardsService.UpdateCardPowers(id, oldCard.CardPowers);
+					}
+				}
+
+				return View(oldCard); 
+			}
+
+			if (action == "save")
+			{
+				if (ModelState.IsValid)
+				{
+					var updatedCard = await _cardsService.EditCard(id, card);
+					if (updatedCard == null)
+						return StatusCode(StatusCodes.Status500InternalServerError);
+
+					await _cardsService.UpdateCardPowers(id, card.CardPowers);
+					return RedirectToAction(nameof(Index));
+				}
+
+				return View(card);
+			}
+
+			return View(card);
+		}
 
 
-            if (ModelState.IsValid)
-            {
-                Card? newCard = await _cardsService.EditCard(id, card);
-
-                if (newCard == null)
-                {
-                    return StatusCode(StatusCodes.Status500InternalServerError);
-                }
-
-                await _cardsService.UpdateCardPowers(id, card.CardPowers);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(card);
-        }
-
-        // GET: Cards/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+		// GET: Cards/Delete/5
+		public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {

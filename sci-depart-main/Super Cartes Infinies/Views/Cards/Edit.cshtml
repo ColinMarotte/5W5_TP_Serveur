@@ -13,7 +13,6 @@
 	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 	<input type="hidden" asp-for="Id" />
 
-	<!-- Première colonne : Informations principales -->
 	<div class="col-md-6">
 		<div class="form-group">
 			<label asp-for="Name" class="control-label"></label>
@@ -43,20 +42,19 @@
 	</div>
 
 
-	<!-- Deuxième colonne : Pouvoirs et options -->
 	<div class="col-md-6">
 		<div class="form-group">
-			<label>Pouvoirs sélectionnés :</label>
+
 			<div>
 				<ul>
 					<p>CardPowers count: @Model.CardPowers?.Count</p>
-					<p>AllPowers count: @allPowers?.Count</p>
+
 					@foreach (var cardpower in Model.CardPowers)
 					{
 						var power = allPowers.FirstOrDefault(p => p.Id == cardpower.PowerId);
 						if (power != null)
 						{
-							<li>PowerId: @cardpower.PowerId</li>
+							@* <li>PowerId: @cardpower.PowerId</li> *@
 							<li>
 								<strong>@power.Name</strong> — Valeur : @cardpower.Value
 							</li>
@@ -67,26 +65,25 @@
 		</div>
 
 		<div class="form-group">
-			<label for="power-dropdown">Ajouter un pouvoir :</label>
-			<select id="power-dropdown" class="form-control">
-				<option disabled selected>-- Choisir un pouvoir --</option>
+
+			<select name="newPowerId" class="form-control">
 				@foreach (var power in allPowers)
 				{
-					var isAlreadySelected = Model.CardPowers.Any(cp => cp.PowerId == power.Id);
-					if (!isAlreadySelected)
+					var dejaUnPouvoir = Model.CardPowers.Any(cp => cp.PowerId == power.Id);
+					if (!dejaUnPouvoir)
 					{
-						<option value="@power.Id" data-name="@power.Name">@power.Name</option>
+						<option value="@power.Id">@power.Name</option>
 					}
 				}
 			</select>
-			<input type="number" id="power-value" class="form-control" placeholder="Valeur" style="width: 100px;" />
+			<input type="number" name="newPowerValue" placeholder="Valeur" class="form-control mt-2" value="1" />
 			<button type="button" onclick="addPower()">Ajouter</button>
 		</div>
 	</div>
 
-	<!-- Bouton de soumission -->
-	<div class="form-group">
-		<input type="submit" value="Accepter" class="btn btn-primary" />
+	<div class="form-group mt-3">
+		<button type="submit" name="action" value="save" class="btn btn-primary">Enregistrer</button>
+		<button type="submit" name="action" value="addPower" class="btn btn-secondary">Ajouter le pouvoir</button>
 	</div>
 </form>
 
@@ -99,46 +96,5 @@
 	@{
 		await Html.RenderPartialAsync("_ValidationScriptsPartial");
 	}
-	<script>
-		function addPower() {
-			const dropdown = document.getElementById("power-dropdown");
-			const valueInput = document.getElementById("power-value");
-			const selectedId = dropdown.value;
-			const selectedText = dropdown.options[dropdown.selectedIndex].text;
-			const powerValue = parseInt(valueInput.value || "0");
 
-			if (!selectedId) return;
-
-			const container = document.getElementById("selected-powers");
-			const p = document.createElement("p");
-			p.setAttribute("data-id", selectedId);
-			p.innerHTML = `${selectedText} (valeur: ${powerValue})
-								<button type="button" onclick="removePower(${selectedId})">❌</button>
-								<input type="hidden" name="CardPowers[${selectedId}].PowerId" value="${selectedId}" />
-								<input type="hidden" name="CardPowers[${selectedId}].Value" value="${powerValue}" />`;
-
-			container.appendChild(p);
-
-			// Supprimer du dropdown
-			dropdown.remove(dropdown.selectedIndex);
-			dropdown.selectedIndex = 0;
-			valueInput.value = "";
-		}
-
-		function removePower(id) {
-			const container = document.getElementById("selected-powers");
-			const element = container.querySelector(`p[data-id='${id}']`);
-			if (element) {
-				const name = element.innerText.trim().replace("❌", "");
-				container.removeChild(element);
-
-				// Le rajouter dans le dropdown
-				const dropdown = document.getElementById("power-dropdown");
-				const option = document.createElement("option");
-				option.value = id;
-				option.innerText = name;
-				dropdown.appendChild(option);
-			}
-		}
-	</script>
 }
