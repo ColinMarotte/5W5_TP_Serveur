@@ -71,18 +71,18 @@ public class ApplicationDbContext : IdentityDbContext
 			.OnDelete(DeleteBehavior.NoAction);
 
 		// Fin de Fluent API
-		builder.Entity<Power>().HasData(Seed.SeedPowers());
-		builder.Entity<CardPower>()
-	.HasOne(cp => cp.Card)
-	.WithMany()
-	.HasForeignKey(cp => cp.CardId)
-	.OnDelete(DeleteBehavior.NoAction);
+	builder.Entity<Power>().HasData(Seed.SeedPowers());
+	//	builder.Entity<CardPower>()
+	//.HasOne(cp => cp.Card)
+	//.WithMany()
+	//.HasForeignKey(cp => cp.CardId)
+	//.OnDelete(DeleteBehavior.NoAction);
 
-		builder.Entity<CardPower>()
-			.HasOne(cp => cp.Power)
-			.WithMany()
-			.HasForeignKey(cp => cp.PowerId)
-			.OnDelete(DeleteBehavior.NoAction);
+	//	builder.Entity<CardPower>()
+	//		.HasOne(cp => cp.Power)
+	//		.WithMany()
+	//		.HasForeignKey(cp => cp.PowerId)
+	//		.OnDelete(DeleteBehavior.NoAction);
 
 		builder.Entity<CardPower>().HasKey(cp => cp.Id);
 		builder.Entity<CardPower>().HasData(Seed.SeedCardPowers());

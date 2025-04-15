@@ -154,15 +154,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "be19699d-d16f-4317-a28b-d7f5b89d12ff",
+                            ConcurrencyStamp = "92c59cda-43f4-4d4b-b384-4079d0b38bc5",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPHIBbNrOh3mN+eYZusDdsrqBD31XaqMo1TkO6xgzABtNpAn4HOMC9hfD1ejkxkNVA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEImpFAWBmCtvxFgClpCUdime2m77igIwbpi+VapVFFRHkkeDD3msuFXJpHT2g1Qmhw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1dd58b6a-a8ae-463f-bcf8-39a517a76a92",
+                            SecurityStamp = "a04fa49c-56ef-4ad1-99e3-7f565a00ab20",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -170,22 +170,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4ab6f175-6dfe-4f3c-a596-70dacafba1da",
+                            ConcurrencyStamp = "b9307ecb-7e4b-404e-9e49-47a6c6f0d709",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0ef599e3-47e8-4d8a-9215-6e2d24341817",
+                            SecurityStamp = "5c9b6219-03c3-4695-bf7d-d3a8666dce7f",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4a4479fa-df01-453d-8f6c-6d2eea2f78b2",
+                            ConcurrencyStamp = "acd1e959-3dff-427b-bed2-550498ae0626",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "87412a31-3851-4d40-bb6d-b848e715a045",
+                            SecurityStamp = "fb111403-c649-47fb-82c7-f65485a51c05",
                             TwoFactorEnabled = false
                         });
                 });
@@ -433,13 +433,7 @@ namespace Models.Migrations
                     b.Property<int>("CardId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CardId1")
-                        .HasColumnType("int");
-
                     b.Property<int>("PowerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PowerId1")
                         .HasColumnType("int");
 
                     b.Property<int>("Value")
@@ -449,11 +443,7 @@ namespace Models.Migrations
 
                     b.HasIndex("CardId");
 
-                    b.HasIndex("CardId1");
-
                     b.HasIndex("PowerId");
-
-                    b.HasIndex("PowerId1");
 
                     b.ToTable("CardPowers");
 
@@ -926,24 +916,16 @@ namespace Models.Migrations
             modelBuilder.Entity("Super_Cartes_Infinies.Models.CardPower", b =>
                 {
                     b.HasOne("Super_Cartes_Infinies.Models.Card", "Card")
-                        .WithMany()
-                        .HasForeignKey("CardId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("Super_Cartes_Infinies.Models.Card", null)
                         .WithMany("CardPowers")
-                        .HasForeignKey("CardId1");
+                        .HasForeignKey("CardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Super_Cartes_Infinies.Models.Power", "Power")
-                        .WithMany()
-                        .HasForeignKey("PowerId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("Super_Cartes_Infinies.Models.Power", null)
                         .WithMany("CardPowers")
-                        .HasForeignKey("PowerId1");
+                        .HasForeignKey("PowerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Card");
 

@@ -25,9 +25,6 @@ namespace Super_Cartes_Infinies.Controllers
         // GET: Cards
         public async Task<IActionResult> Index()
         {
-           
-
-
 			List<Power> list = new List<Power>()
 		   {
 				new Power
