@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Models.Models.Dtos;
+using Super_Cartes_Infinies.Models;
 using Super_Cartes_Infinies.Services;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -18,12 +19,14 @@ namespace WebApi.Controllers
         private UserManager<IdentityUser> _userManager;
         private SignInManager<IdentityUser> _signInManager;
         private PlayersService _playersService;
+        private DecksService _deckService;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, PlayersService playersService)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, PlayersService playersService, DecksService decksService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _playersService = playersService;
+            _deckService = decksService;
         }
 
         [HttpPost]
@@ -74,7 +77,9 @@ namespace WebApi.Controllers
                 }
             }
 
-            await _playersService.CreatePlayer(user);
+            Player player = await _playersService.CreatePlayer(user);
+            string playerId = player.Id.ToString();
+            await _deckService.CreateStartingDeck(playerId);
 
             return Ok(new { Message = "L'utilisateur a été créé avec succès!" });
         }
