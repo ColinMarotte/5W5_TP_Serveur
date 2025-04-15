@@ -52,10 +52,14 @@
 				<td>
 					@if (cardPowers != null && cardPowers.ContainsKey(item.Id))
 					{
-						foreach (var power in cardPowers[item.Id])
-						{
-							<span class="badge bg-primary me-1">@power.Name</span>
-						}
+						<ul>
+							@foreach (var power in cardPowers[item.Id])
+							{
+								<li>
+									<i class="@power.Icone"></i> <span>@power.Name @* @power.value *@</span>
+								</li>
+							}
+						</ul>
 					}
 				</td>
 				<td>
