@@ -85,15 +85,7 @@ public class ApplicationDbContext : IdentityDbContext
             .OnDelete(DeleteBehavior.NoAction);
 
         builder.Entity<CardPower>().HasKey(cp => cp.Id);
-        builder.InsertData(
-    table: "CardPowers",
-    columns: new[] { "Id", "CardId", "PowerId" },
-    values: new object[,]
-    {
-        { 1, 1, 1 },
-        { 2, 2, 2 }
-    });
-);
+        builder.Entity<CardPower>().HasData(Seed.SeedCardPowers());
 
 
 
