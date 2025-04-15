@@ -104,8 +104,17 @@ namespace Super_Cartes_Infinies.Services
 		{
 			return await _dbContext.Powers.ToListAsync();
 		}
+        public async Task<List<Power>> GetPowersById(int cardId)
+        {
+            // Rechercher tous les PowerIds associés à la carte via la table de relation CardPowers
+            var powers = await _dbContext.CardPowers
+                                        .Where(cp => cp.CardId == cardId)
+                                        .Select(cp => cp.Power)
+                                        .ToListAsync();
 
-		public async Task UpdateCardPowers(int cardId, List<CardPower> newPowers)
+            return powers;
+        }
+        public async Task UpdateCardPowers(int cardId, List<CardPower> newPowers)
 		{
 			var oldPowers = _dbContext.CardPowers.Where(cp => cp.CardId == cardId);
 			_dbContext.CardPowers.RemoveRange(oldPowers);
