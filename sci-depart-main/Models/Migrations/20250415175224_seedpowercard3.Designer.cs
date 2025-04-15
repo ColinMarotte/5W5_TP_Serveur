@@ -12,8 +12,8 @@ using Super_Cartes_Infinies.Data;
 namespace Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250415041626_seedpowerscards2")]
-    partial class seedpowerscards2
+    [Migration("20250415175224_seedpowercard3")]
+    partial class seedpowercard3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,15 +157,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "92c59cda-43f4-4d4b-b384-4079d0b38bc5",
+                            ConcurrencyStamp = "815ed1c7-d383-4641-8098-75f1851eabae",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEImpFAWBmCtvxFgClpCUdime2m77igIwbpi+VapVFFRHkkeDD3msuFXJpHT2g1Qmhw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEODKta9FGoa7e8ceOIabvynOZZxrOBlEoxLtsdg7ltPsAutEOjx/6ZnlOH7b9bsbCw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a04fa49c-56ef-4ad1-99e3-7f565a00ab20",
+                            SecurityStamp = "76dba0a5-abfa-49d6-ac1e-b259d8e2c1f6",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -173,22 +173,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b9307ecb-7e4b-404e-9e49-47a6c6f0d709",
+                            ConcurrencyStamp = "6d539742-6d81-4667-978a-9c11a69e57b8",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5c9b6219-03c3-4695-bf7d-d3a8666dce7f",
+                            SecurityStamp = "29fa813f-4309-4a32-813b-ee7556379f05",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "acd1e959-3dff-427b-bed2-550498ae0626",
+                            ConcurrencyStamp = "51e13703-af07-4beb-bfba-1e8463ba0b53",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fb111403-c649-47fb-82c7-f65485a51c05",
+                            SecurityStamp = "1130ab80-1eb3-4151-9b63-d8346293156c",
                             TwoFactorEnabled = false
                         });
                 });
@@ -436,7 +436,13 @@ namespace Models.Migrations
                     b.Property<int>("CardId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CardId1")
+                        .HasColumnType("int");
+
                     b.Property<int>("PowerId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PowerId1")
                         .HasColumnType("int");
 
                     b.Property<int>("Value")
@@ -446,7 +452,11 @@ namespace Models.Migrations
 
                     b.HasIndex("CardId");
 
+                    b.HasIndex("CardId1");
+
                     b.HasIndex("PowerId");
+
+                    b.HasIndex("PowerId1");
 
                     b.ToTable("CardPowers");
 
@@ -919,16 +929,24 @@ namespace Models.Migrations
             modelBuilder.Entity("Super_Cartes_Infinies.Models.CardPower", b =>
                 {
                     b.HasOne("Super_Cartes_Infinies.Models.Card", "Card")
-                        .WithMany("CardPowers")
+                        .WithMany()
                         .HasForeignKey("CardId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Super_Cartes_Infinies.Models.Power", "Power")
+                    b.HasOne("Super_Cartes_Infinies.Models.Card", null)
                         .WithMany("CardPowers")
+                        .HasForeignKey("CardId1");
+
+                    b.HasOne("Super_Cartes_Infinies.Models.Power", "Power")
+                        .WithMany()
                         .HasForeignKey("PowerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.HasOne("Super_Cartes_Infinies.Models.Power", null)
+                        .WithMany("CardPowers")
+                        .HasForeignKey("PowerId1");
 
                     b.Navigation("Card");
 

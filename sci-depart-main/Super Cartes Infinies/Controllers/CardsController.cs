@@ -25,44 +25,44 @@ namespace Super_Cartes_Infinies.Controllers
         // GET: Cards
         public async Task<IActionResult> Index()
         {
-            List<Power> list = new List<Power>()
-           {
-                new Power
-                {
-                    Id = Power.FIRST_STRIKE_ID,
-                    Name = "First Strike",
-                    Description = "Attaque l'adversaire.",
-                    Icone = "fa-bolt",
+           // List<Power> list = new List<Power>()
+           //{
+           //     new Power
+           //     {
+           //         Id = Power.FIRST_STRIKE_ID,
+           //         Name = "First Strike",
+           //         Description = "Attaque l'adversaire.",
+           //         Icone = "fa-bolt",
 
-                },
-                new Power
-                {
-                    Id = Power.THORNS_ID,
-                    Name = "Thorns",
-                    Description = "Inflige des dégâts au moment où la carte reçoit des dégâts.",
-                    Icone = "fa-spikes"
-                },
-                new Power
-                {
-                    Id = Power.HEAL_ID,
-                    Name = "Heal",
-                    Description = "Rend des points de vie à une carte.",
-                    Icone = "fa-heart"
-                },
-                new Power
-                {
-                    Id = 4,
-                    Name = "Shield",
-                    Description = "Absorbe les dégâts.",
-                    Icone = "fa-shield"
-                }
-           };
+           //     },
+           //     new Power
+           //     {
+           //         Id = Power.THORNS_ID,
+           //         Name = "Thorns",
+           //         Description = "Inflige des dégâts au moment où la carte reçoit des dégâts.",
+           //         Icone = "fa-spikes"
+           //     },
+           //     new Power
+           //     {
+           //         Id = Power.HEAL_ID,
+           //         Name = "Heal",
+           //         Description = "Rend des points de vie à une carte.",
+           //         Icone = "fa-heart"
+           //     },
+           //     new Power
+           //     {
+           //         Id = 4,
+           //         Name = "Shield",
+           //         Description = "Absorbe les dégâts.",
+           //         Icone = "fa-shield"
+           //     }
+           //};
 
             var cards = await _cardsService.GetAllCards();
 
             var cardPowers = cards.ToDictionary(
                 card => card.Id,
-                card => list//card.CardPowers.Select(cp => cp.Power).ToList()
+                card => card.CardPowers.Select(cp => cp.Power).ToList()//list
             );
             ViewBag.CardPowers = cardPowers;
 
