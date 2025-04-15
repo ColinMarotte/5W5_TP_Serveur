@@ -141,13 +141,27 @@ namespace Super_Cartes_Infinies.Controllers
 			if (id != card.Id)
 				return NotFound();
 
-			// Recharger la carte depuis la DB (pour avoir les données complètes)
-			var oldCard = await _cardsService.GetCard(id);
+			Card? oldCard = await _cardsService.GetCard(id);
 			if (oldCard == null)
 				return NotFound();
 
-			// Charger tous les pouvoirs (toujours utile pour la vue)
 			ViewBag.AllPowers = await _cardsService.GetAllPowers();
+
+			if (action == "deletepower")
+			{
+				if (newPowerId.HasValue)
+				{
+					var cardPower = oldCard.CardPowers.FirstOrDefault(cp => cp.PowerId == newPowerId.Value);
+					if (cardPower != null)
+					{
+						oldCard.CardPowers.Remove(cardPower); 
+					}
+
+					await _cardsService.UpdateCardPowers(id, oldCard.CardPowers); 
+				}
+				return View(oldCard);
+			}
+
 
 			if (action == "addPower")
 			{
@@ -173,7 +187,7 @@ namespace Super_Cartes_Infinies.Controllers
 			{
 				if (ModelState.IsValid)
 				{
-					var updatedCard = await _cardsService.EditCard(id, card);
+					Card? updatedCard = await _cardsService.EditCard(id, card);
 					if (updatedCard == null)
 						return StatusCode(StatusCodes.Status500InternalServerError);
 

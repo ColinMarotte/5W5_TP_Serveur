@@ -56,7 +56,10 @@
 						{
 							@* <li>PowerId: @cardpower.PowerId</li> *@
 							<li>
-								<strong>@power.Name</strong> — Valeur : @cardpower.Value
+								<p>@power.Name @cardpower.Value
+									<input type="hidden" name="newPowerId" value="@power.Id" />
+									<button type="submit" name="action" value="deletepower" class="btn btn-danger">X</button>
+								</p>
 							</li>
 						}
 					}
@@ -66,24 +69,23 @@
 
 		<div class="form-group">
 
-			<select name="newPowerId" class="form-control">
+			<select name="newPowerId">
 				@foreach (var power in allPowers)
 				{
 					var dejaUnPouvoir = Model.CardPowers.Any(cp => cp.PowerId == power.Id);
 					if (!dejaUnPouvoir)
 					{
-						<option value="@power.Id">@power.Name</option>
+						<option value="@power.Id"> <i class="@power.Icone"></i> @power.Name</option>
 					}
 				}
-			</select>
-			<input type="number" name="newPowerValue" placeholder="Valeur" class="form-control mt-2" value="1" />
-			<button type="button" onclick="addPower()">Ajouter</button>
+			</select><br />
+			<input type="number" name="newPowerValue" placeholder="Valeur"  value="1" /> <br />
+			<button type="submit" name="action" value="addPower" class="btn btn-primary">+</button>
 		</div>
 	</div>
 
 	<div class="form-group mt-3">
 		<button type="submit" name="action" value="save" class="btn btn-primary">Enregistrer</button>
-		<button type="submit" name="action" value="addPower" class="btn btn-secondary">Ajouter le pouvoir</button>
 	</div>
 </form>
 
