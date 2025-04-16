@@ -9,91 +9,91 @@
 
 <h4>Cartes Modèle</h4>
 <hr />
-<form asp-action="Edit" method="post" class="row">
-	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-	<input type="hidden" asp-for="Id" />
-
+<div class="row">
 	<div class="col-md-6">
-		<div class="form-group">
-			<label asp-for="Name" class="control-label"></label>
-			<input asp-for="Name" class="form-control" />
-			<span asp-validation-for="Name" class="text-danger"></span>
-		</div>
-		<div class="form-group">
-			<label asp-for="Attack" class="control-label"></label>
-			<input asp-for="Attack" class="form-control" />
-			<span asp-validation-for="Attack" class="text-danger"></span>
-		</div>
-		<div class="form-group">
-			<label asp-for="Health" class="control-label"></label>
-			<input asp-for="Health" class="form-control" />
-			<span asp-validation-for="Health" class="text-danger"></span>
-		</div>
-		<div class="form-group">
-			<label asp-for="Cost" class="control-label"></label>
-			<input asp-for="Cost" class="form-control" />
-			<span asp-validation-for="Cost" class="text-danger"></span>
-		</div>
-		<div class="form-group">
-			<label asp-for="ImageUrl" class="control-label">Url de l'image</label>
-			<input asp-for="ImageUrl" class="form-control" />
-			<span asp-validation-for="ImageUrl" class="text-danger"></span>
-		</div>
-	</div>
 
+		<form asp-action="Edit" method="post" class="row">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<input type="hidden" asp-for="Id" />
 
-	<div class="col-md-6">
-		<div class="form-group">
-
-			<div>
-				<ul>
-					<p>CardPowers count: @Model.CardPowers?.Count</p>
-
-					@foreach (var cardpower in Model.CardPowers)
-					{
-						var power = allPowers.FirstOrDefault(p => p.Id == cardpower.PowerId);
-						if (power != null)
-						{
-							@* <li>PowerId: @cardpower.PowerId</li> *@
-							<li>
-								<p>@power.Name @cardpower.Value
-									<input type="hidden" name="newPowerId" value="@power.Id" />
-									<button type="submit" name="action" value="deletepower" class="btn btn-danger">X</button>
-								</p>
-							</li>
-						}
-					}
-				</ul>
+			<div class="form-group">
+				<label asp-for="Name" class="control-label"></label>
+				<input asp-for="Name" class="form-control" />
+				<span asp-validation-for="Name" class="text-danger"></span>
 			</div>
-		</div>
-
-		<div class="form-group">
-
-			<select name="newPowerId">
-				@foreach (var power in allPowers)
-				{
-					var dejaUnPouvoir = Model.CardPowers.Any(cp => cp.PowerId == power.Id);
-					if (!dejaUnPouvoir)
-					{
-						<option value="@power.Id"> <i class="@power.Icone"></i> @power.Name</option>
-					}
-				}
-			</select><br />
-			<input type="number" name="newPowerValue" placeholder="Valeur"  value="1" /> <br />
-			<button type="submit" name="action" value="addPower" class="btn btn-primary">+</button>
-		</div>
+			<div class="form-group">
+				<label asp-for="Attack" class="control-label"></label>
+				<input asp-for="Attack" class="form-control" />
+				<span asp-validation-for="Attack" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Health" class="control-label"></label>
+				<input asp-for="Health" class="form-control" />
+				<span asp-validation-for="Health" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Cost" class="control-label"></label>
+				<input asp-for="Cost" class="form-control" />
+				<span asp-validation-for="Cost" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="ImageUrl" class="control-label">Url de l'image</label>
+				<input asp-for="ImageUrl" class="form-control" />
+				<span asp-validation-for="ImageUrl" class="text-danger"></span>
+			</div>
+			<div class="form-group mt-3">
+				<button type="submit" name="action" value="save" class="btn btn-primary">Enregistrer</button>
+			</div>
+		</form>
 	</div>
 
-	<div class="form-group mt-3">
-		<button type="submit" name="action" value="save" class="btn btn-primary">Enregistrer</button>
+	<div class="col-md-6">
+
+
+		<ul>
+			@foreach (var cardpower in Model.CardPowers)
+			{
+
+				<li>
+					<p>
+						@cardpower.Power.Icone @cardpower.Power.Name @cardpower.Value
+						<input type="hidden" name="newPowerId" value="@cardpower.PowerId" />
+					</p>
+					<form asp-action="DeletePower" method="post">
+						<input type="hidden" name="cardId" value="@Model.Id" />
+						<input type="hidden" name="powerId" value="@cardpower.PowerId" />
+						<button type="submit" class="btn btn-danger">X</button>
+					</form>
+				</li>
+
+			}
+		</ul>
+
+		<form asp-action="AddPower" method="post" class="row">
+			<input type="hidden" name="_id" value="@Model.Id" asp-for="Id" />
+			<div class="col-md-6">
+				<div class="form-group">
+					<select name="newPowerId" class="form-control">
+						@foreach (var power in allPowers)
+						{
+							var dejaUnPouvoir = Model.CardPowers.Any(cp => cp.PowerId == power.Id);
+							if (!dejaUnPouvoir)
+							{
+								<option value="@power.Id"> @power.Icone @power.Name</option>
+							}
+						}
+					</select><br />
+					<input type="number" name="newPowerValue" placeholder="Valeur" value="0" class="form-control" /> <br />
+					<button type="submit" class="btn btn-primary">+</button>
+				</div>
+			</div>
+		</form>
 	</div>
-</form>
 
-
+</div>
 <div>
 	<a asp-action="Index">Retour à la liste</a>
 </div>
-
 @section Scripts {
 	@{
 		await Html.RenderPartialAsync("_ValidationScriptsPartial");

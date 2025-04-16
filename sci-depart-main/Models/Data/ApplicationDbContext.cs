@@ -38,7 +38,7 @@ public class ApplicationDbContext : IdentityDbContext
             .HasOne(cp => cp.Card)
             .WithMany(c => c.CardPowers)
             .HasForeignKey(cp => cp.CardId)
-            .OnDelete(DeleteBehavior.NoAction);
+            .OnDelete(DeleteBehavior.Cascade);
 
         //builder.Entity<CardPower>()
         //    .HasOne(cp => cp.Power)

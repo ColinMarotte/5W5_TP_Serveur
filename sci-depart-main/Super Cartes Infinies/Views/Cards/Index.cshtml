@@ -50,16 +50,21 @@
 					@Html.DisplayFor(modelItem => item.Cost)
 				</td>
 				<td>
-					@if (cardPowers != null && cardPowers.ContainsKey(item.Id))
+					@if (item.CardPowers != null && item.CardPowers.Any())
 					{
-						<ul>
+							foreach (var power in item.CardPowers)
+							{
+								<div>@power.Power.Icone @power.Power.Name @power.Value</div>
+							}
+
+						  @* <ul>
 							@foreach (var power in cardPowers[item.Id])
 							{
 								<li>
-									<i class="@power.Icone"></i> <span>@power.Name @* @power.value *@</span>
+									<i class="@power.Icone"></i> <span>@power.Name  @power.value </span>
 								</li>
 							}
-						</ul>
+						</ul> *@ 
 					}
 				</td>
 				<td>

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Models.Migrations
 {
     /// <inheritdoc />
-    public partial class seeds : Migration
+    public partial class seed : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -267,7 +267,8 @@ namespace Models.Migrations
                         name: "FK_CardPowers_Cards_CardId",
                         column: x => x.CardId,
                         principalTable: "Cards",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_CardPowers_Powers_PowerId",
                         column: x => x.PowerId,
@@ -464,9 +465,9 @@ namespace Models.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "11111111-1111-1111-1111-111111111111", 0, "fa5d2bfb-2174-4afd-8897-5f1859a7461e", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEMfcb3lpC5oW3AxOSNwgXnG0v8krDSJzGfIXfRtX8Uqz6KALT7Vj4WStTiC0jYC4nA==", null, false, "45eb05e0-c834-4bc9-937b-754333c60eb9", false, "admin@admin.com" },
-                    { "User1Id", 0, "adb246d1-6e1d-4b83-8832-5a05d73abfbd", null, false, false, null, null, null, null, null, false, "6283292d-5422-42dc-a52a-bcef714172f7", false, null },
-                    { "User2Id", 0, "b516f958-e935-4757-a068-d32b26e1f2a4", null, false, false, null, null, null, null, null, false, "3d5e8ae2-32fd-48e9-bcad-0935a30b02e2", false, null }
+                    { "11111111-1111-1111-1111-111111111111", 0, "073d829d-611a-4cef-a7f5-105367d227ca", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEF7VcjnHpvf29WkJd3AAzX1WXCK5qDTx25vz3ahXbpSKca/Q6a2khrPvUnw1L4bLLA==", null, false, "ef1f6e33-5036-4826-8eb1-bd14402a3711", false, "admin@admin.com" },
+                    { "User1Id", 0, "33f8f190-23a0-49ee-97d6-edfefb6fbd50", null, false, false, null, null, null, null, null, false, "20d05fc8-8ad5-455c-9fc6-620922402dfe", false, null },
+                    { "User2Id", 0, "d355af63-a6c1-40eb-bc88-4300ccad344b", null, false, false, null, null, null, null, null, false, "2e6e2c6e-c8a7-4b14-bf41-52bddef174f3", false, null }
                 });
 
             migrationBuilder.InsertData(

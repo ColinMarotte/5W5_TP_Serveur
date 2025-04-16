@@ -42,17 +42,16 @@ namespace Super_Cartes_Infinies.Services
 		public async Task<Card> GetCard(int? id)
 		{
 			if (id == null)
-			{
-				throw new ArgumentException();
-			}
-			Card? card = await _dbContext.Cards
-								.Include(c => c.CardPowers)
-								.ThenInclude(cp => cp.Power)
-								.FirstOrDefaultAsync(c => c.Id == id);
+				return null;
+
+			var card = await _dbContext.Cards
+				.Include(c => c.CardPowers)
+					.ThenInclude(cp => cp.Power)
+				.FirstOrDefaultAsync(c => c.Id == id.Value);
+
 			if (card == null)
-			{
-				throw new Exception();
-			}
+				return null;
+
 			return card;
 		}
 
@@ -110,29 +109,34 @@ namespace Super_Cartes_Infinies.Services
 		{
 			return await _dbContext.Powers.ToListAsync();
 		}
-        public async Task<List<Power>> GetPowersById(int cardId)
+        public async Task<bool> GetPowersById(int cardId)
         {
-            // Rechercher tous les PowerIds associés à la carte via la table de relation CardPowers
             var powers = await _dbContext.CardPowers
                                         .Where(cp => cp.CardId == cardId)
                                         .Select(cp => cp.Power)
-                                        .ToListAsync();
+                                        .AnyAsync();
 
             return powers;
         }
-        public async Task UpdateCardPowers(int cardId, List<CardPower> newPowers)
+        
+		public async Task AddCardPower(CardPower cardPower)
 		{
-			var oldPowers = _dbContext.CardPowers.Where(cp => cp.CardId == cardId);
-			_dbContext.CardPowers.RemoveRange(oldPowers);
-
-			foreach (var power in newPowers)
-			{
-				power.CardId = cardId;
-				_dbContext.CardPowers.Add(power);
-			}
-
+			_dbContext.CardPowers.Add(cardPower);
 			await _dbContext.SaveChangesAsync();
 		}
+
+		public async Task DeleteCardPower(CardPower cardPower)
+		{
+			_dbContext.CardPowers.Remove(cardPower);
+			await _dbContext.SaveChangesAsync();
+		}
+
+		public async Task<bool> CardHasPower(int cardId, int powerId)
+		{
+			return await _dbContext.CardPowers
+				.AnyAsync(cp => cp.CardId == cardId && cp.PowerId == powerId);
+		}
+
 	}
 }
 

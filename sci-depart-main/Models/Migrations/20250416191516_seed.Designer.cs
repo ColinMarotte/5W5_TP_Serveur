@@ -12,8 +12,8 @@ using Super_Cartes_Infinies.Data;
 namespace Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250416172411_seeds")]
-    partial class seeds
+    [Migration("20250416191516_seed")]
+    partial class seed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,15 +157,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fa5d2bfb-2174-4afd-8897-5f1859a7461e",
+                            ConcurrencyStamp = "073d829d-611a-4cef-a7f5-105367d227ca",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMfcb3lpC5oW3AxOSNwgXnG0v8krDSJzGfIXfRtX8Uqz6KALT7Vj4WStTiC0jYC4nA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEF7VcjnHpvf29WkJd3AAzX1WXCK5qDTx25vz3ahXbpSKca/Q6a2khrPvUnw1L4bLLA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "45eb05e0-c834-4bc9-937b-754333c60eb9",
+                            SecurityStamp = "ef1f6e33-5036-4826-8eb1-bd14402a3711",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -173,22 +173,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "adb246d1-6e1d-4b83-8832-5a05d73abfbd",
+                            ConcurrencyStamp = "33f8f190-23a0-49ee-97d6-edfefb6fbd50",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6283292d-5422-42dc-a52a-bcef714172f7",
+                            SecurityStamp = "20d05fc8-8ad5-455c-9fc6-620922402dfe",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b516f958-e935-4757-a068-d32b26e1f2a4",
+                            ConcurrencyStamp = "d355af63-a6c1-40eb-bc88-4300ccad344b",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3d5e8ae2-32fd-48e9-bcad-0935a30b02e2",
+                            SecurityStamp = "2e6e2c6e-c8a7-4b14-bf41-52bddef174f3",
                             TwoFactorEnabled = false
                         });
                 });
@@ -928,7 +928,7 @@ namespace Models.Migrations
                     b.HasOne("Super_Cartes_Infinies.Models.Card", "Card")
                         .WithMany("CardPowers")
                         .HasForeignKey("CardId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Super_Cartes_Infinies.Models.Power", "Power")

@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Super_Cartes_Infinies.Models
@@ -18,6 +19,7 @@ namespace Super_Cartes_Infinies.Models
 
         [ForeignKey("Card")]
         public int CardId { get; set; }
+        [JsonIgnore]
         public virtual Card Card { get; set; }
 
         [ForeignKey("Power")]

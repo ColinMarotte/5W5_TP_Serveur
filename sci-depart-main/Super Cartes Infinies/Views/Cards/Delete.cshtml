@@ -45,7 +45,14 @@
             @Html.DisplayNameFor(model => model.CardPowers)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CardPowers)
+            @if (Model.CardPowers != null)
+            {
+                @foreach (var cp in Model.CardPowers)
+                {
+                    <div>@cp.Power.Icone @cp.Power.Name @cp.Value</div>
+                }
+
+            }
         </dd>
     </dl>
     
