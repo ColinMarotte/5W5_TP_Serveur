@@ -12,8 +12,8 @@ using Super_Cartes_Infinies.Data;
 namespace Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250416162250_seeds6")]
-    partial class seeds6
+    [Migration("20250416163345_seeds")]
+    partial class seeds
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,15 +157,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f57a66c2-7796-400a-8be0-22eb53a41ad5",
+                            ConcurrencyStamp = "02c6d625-fb4d-4ed8-b2b5-298bbfc350d9",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGhfBoHvsl1OMBhrOisD27Kog5jh2CcmKaEDc9V+85GWlEgth0tdv3ESeLlxpnOvYA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELpcUPu7CGy5TcHg+AzE5ppMb5b5zcmKppw+7/oHXFlFiWUFXqn4GEnwek8g5d4GOQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e0695feb-c346-4218-a665-8eee7eee0cfd",
+                            SecurityStamp = "4e74ffe5-de9a-46bb-9aa8-d77b2808e9c0",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -173,22 +173,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e9c86b4d-1866-4d5e-b468-47753a7eacaf",
+                            ConcurrencyStamp = "aef6ee5d-1829-4647-a006-5d11b6f9b9d1",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e3625399-e286-4651-a1be-852fd0d435a0",
+                            SecurityStamp = "f5645fe1-c038-4793-ad96-b1bbf9b265bc",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "464dcebf-1259-415d-a473-983d1f150bb5",
+                            ConcurrencyStamp = "883870e2-af91-4bd6-a5a5-81cb8022f59a",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "42033266-ed09-4b4b-8367-6f5bbf316ce3",
+                            SecurityStamp = "5109ffec-1e05-45c2-8e86-a9e8d08adfc5",
                             TwoFactorEnabled = false
                         });
                 });
@@ -760,6 +760,9 @@ namespace Models.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("PowerValue")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.ToTable("Powers");
@@ -770,28 +773,32 @@ namespace Models.Migrations
                             Id = 1,
                             Description = "Attaque l'adversaire.",
                             Icone = "fa-bolt",
-                            Name = "First Strike"
+                            Name = "First Strike",
+                            PowerValue = false
                         },
                         new
                         {
                             Id = 2,
                             Description = "Inflige des dégâts au moment où la carte reçoit des dégâts.",
                             Icone = "fa-spikes",
-                            Name = "Thorns"
+                            Name = "Thorns",
+                            PowerValue = false
                         },
                         new
                         {
                             Id = 3,
                             Description = "Rend des points de vie à une carte.",
                             Icone = "fa-heart",
-                            Name = "Heal"
+                            Name = "Heal",
+                            PowerValue = false
                         },
                         new
                         {
                             Id = 4,
                             Description = "Absorbe les dégâts.",
                             Icone = "fa-shield",
-                            Name = "Shield"
+                            Name = "Shield",
+                            PowerValue = false
                         });
                 });
 
@@ -921,13 +928,13 @@ namespace Models.Migrations
                     b.HasOne("Super_Cartes_Infinies.Models.Card", "Card")
                         .WithMany("CardPowers")
                         .HasForeignKey("CardId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Super_Cartes_Infinies.Models.Power", "Power")
                         .WithMany()
                         .HasForeignKey("PowerId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Super_Cartes_Infinies.Models.Power", null)

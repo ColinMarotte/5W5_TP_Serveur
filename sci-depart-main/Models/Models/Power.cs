@@ -22,6 +22,8 @@ namespace Super_Cartes_Infinies.Models
 
         public string Icone { get; set; } = "";
 
+        public bool PowerValue { get; set; }
+
         [JsonIgnore]
         [ValidateNever]
         public virtual List<CardPower> CardPowers { get; set; } = new List<CardPower>();

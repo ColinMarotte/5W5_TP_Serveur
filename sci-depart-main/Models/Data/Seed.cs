@@ -256,7 +256,7 @@ namespace Super_Cartes_Infinies.Data
             {
                 new Power
                 {
-                    Id = Power.FIRST_STRIKE_ID,
+                    Id = 1,
                     Name = "First Strike",
                     Description = "Attaque l'adversaire.",
                     Icone = "fa-bolt",
@@ -286,7 +286,7 @@ namespace Super_Cartes_Infinies.Data
             };
         }
 
-        public static List<CardPower> SeedCardPowers()
+        public static IEnumerable<CardPower> SeedCardPowers()
         {
             return new List<CardPower>
             {
