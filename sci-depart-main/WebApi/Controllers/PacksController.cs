@@ -42,31 +42,7 @@ namespace WebApi.Controllers
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             var userId = claim.Value;
             int playerBalance = _playersService.GetBalanceFromUserId(userId);
-
-            switch (paquetIndex)
-            {
-                case 0:
-                    if(playerBalance < 40)
-                    {
-                        return null;
-                    }
-                    break;
-                case 1:
-                    if (playerBalance < 75)
-                    {
-                        return null;
-                    }
-                    break;
-                case 2:
-                    if (playerBalance < 100)
-                    {
-                        return null;
-                    }
-                    break;
-                default:
-                    return null;
-            }
-
+                        
             var result = await _packsService.AcheterPaquet(paquetIndex, userId);
             return result;
         }

@@ -123,5 +123,16 @@ namespace WebApi.Controllers
         {
             return new string[] { "figue", "banane", "noix" };
         }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult<int> Solde()
+        {
+            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            var userId = claim.Value;
+            int playerBalance = _playersService.GetBalanceFromUserId(userId);
+            return playerBalance;
+        }
     }
 }

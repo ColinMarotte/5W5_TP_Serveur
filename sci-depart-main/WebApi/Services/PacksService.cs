@@ -19,36 +19,48 @@ namespace WebApi.Services
             _playersService = playersService;
         }
 
-        public async Task<List<Card>> AcheterPaquet(int paquetIndex, string userId)
+        public async Task<List<Card>?> AcheterPaquet(int paquetIndex, string userId)
         {
             List<Rarity> rarities;
+            int coutDuPaquet;
 
             switch (paquetIndex)
             {
                 case 0:
-                    var basicProbabilities = new List<Probability>() { new Probability() { Rarity = Rarity.Common, Value = 30, BaseQty = 0 } };
-                    rarities = GenerateRarities(3, Rarity.Common, basicProbabilities);
+                    var basicPackProbabilities = new List<Probability>() { new Probability() { Rarity = Rarity.Common, Value = 30, BaseQty = 0 } };
+                    rarities = GenerateRarities(3, Rarity.Common, basicPackProbabilities);
+                    coutDuPaquet = 40;
                     break;
                 case 1:
-                    List<Probability> normalProbabilities = new List<Probability>()
+                    List<Probability> normalPackProbabilities = new List<Probability>()
                     {
                         new Probability(){ Rarity = Rarity.Rare, Value = 30, BaseQty = 1},
                         new Probability(){ Rarity = Rarity.Epic, Value = 10, BaseQty = 0},
                         new Probability(){ Rarity = Rarity.Legendary, Value = 2, BaseQty = 0}
                     };
-                    rarities = GenerateRarities(4, Rarity.Common, normalProbabilities);
+                    rarities = GenerateRarities(4, Rarity.Common, normalPackProbabilities);
+                    coutDuPaquet = 75;
                     break;
                 case 2:
-                    List<Probability> superProbabilities = new List<Probability>()
+                    List<Probability> superPackProbabilities = new List<Probability>()
                     {
-                        new Probability(){ Rarity = Rarity.Epic, Value = 25, BaseQty = 11},
+                        new Probability(){ Rarity = Rarity.Epic, Value = 25, BaseQty = 1},
                         new Probability(){ Rarity = Rarity.Legendary, Value = 10, BaseQty = 0}
                     };
-                    rarities = GenerateRarities(5, Rarity.Rare, superProbabilities);
+                    rarities = GenerateRarities(5, Rarity.Rare, superPackProbabilities);
+                    coutDuPaquet = 100;
                     break;
                 default:
                     throw new Exception("L'index du paquet n'est pas valide");
             }
+
+            var player = await _dbContext.Players.Where(p=>p.UserId == userId).FirstAsync();
+            if(player.Balance < coutDuPaquet)
+            {
+                return null;
+            }
+
+            player.Balance -= coutDuPaquet;
 
             List<Card> newCards = new List<Card>();
 
@@ -67,11 +79,12 @@ namespace WebApi.Services
                 newOwnedCards.Add(new OwnedCard() { Card = card, Id = 0});
             }
 
-            var player = await _dbContext.Players.FindAsync(userId);
+            
             foreach (OwnedCard ownedCard in newOwnedCards)
             {
                 player.OwnedCards.Add(ownedCard);
             }
+            
             await _dbContext.SaveChangesAsync();
 
             return newCards;
@@ -79,8 +92,9 @@ namespace WebApi.Services
 
         private List<Rarity> GenerateRarities(int nbCards, Rarity defaultRarity, List<Probability> probabilities)
         {
-            List<Rarity>  rarities = new List<Rarity>();
+            List<Rarity> rarities = new List<Rarity>();
 
+            // Ajouter les raretés garanties, s'il y en a
             foreach(Probability probability in probabilities)
             {
                 for (int i = 0; i < probability.BaseQty; i++)
@@ -89,6 +103,7 @@ namespace WebApi.Services
                 }
             }
 
+            // Ajouter des raretés randoms
             while(rarities.Count < nbCards)
             {
                 Rarity? rarity = GetRandomRarity(probabilities);
@@ -109,15 +124,15 @@ namespace WebApi.Services
         private Rarity? GetRandomRarity(List<Probability> probabilities)
         {
             Random random = new Random();
-            int X = random.Next(0, 1);
+            int valeurPigée = random.Next(0, 100);
 
             foreach (Probability probability in probabilities)
             {
-                if (probability.Value < X)
+                if (probability.Value < valeurPigée)
                 {
                     return probability.Rarity;
                 }
-                else X -= probability.Value;
+                else valeurPigée -= probability.Value;
             }
 
             return null; 
