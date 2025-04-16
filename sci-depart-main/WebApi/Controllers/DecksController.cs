@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Models.Models.Dtos;
 using Super_Cartes_Infinies.Models;
 using Super_Cartes_Infinies.Services;
 using System.Security.Claims;
@@ -22,7 +23,7 @@ namespace WebApi.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<ActionResult> CreateDeck(string name)
+        public async Task<ActionResult> CreateDeck(NewDeckDTO newDeckDTO)
         {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
@@ -30,6 +31,7 @@ namespace WebApi.Controllers
             Player player = _playersService.GetPlayerFromUserId(userId);
             string playerId = player.Id.ToString();
 
+            string name = newDeckDTO.DeckName;
             await _decksService.CreateDeck(name, playerId);
             return Ok(new { Message = "Le deck " + name + " a été créé!"});
         }
@@ -91,6 +93,20 @@ namespace WebApi.Controllers
             string playerId = player.Id.ToString();
 
             return Ok(_decksService.GetPlayersDecks(playerId));
+        }
+
+        [Authorize]
+        [HttpGet("{deckId}")]
+        public async Task<ActionResult> MakeDeckCurrent(int deckId)
+        {
+            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            var userId = claim.Value;
+            Player player = _playersService.GetPlayerFromUserId(userId);
+            string playerId = player.Id.ToString();
+
+            await _decksService.MakeDeckCurrent(deckId, playerId);
+            return Ok(new { Message = "Le deck spécifié est maintenant courant!" });
         }
     }
 }

@@ -38,7 +38,7 @@ namespace Super_Cartes_Infinies.Services
             Deck newDeck = new Deck()
             {
                 Id = 0,
-                Name = "Depart",
+                Name = "Départ",
                 Current = true,
                 PlayerId = int.Parse(playerId),
                 Player = player
@@ -142,6 +142,18 @@ namespace Super_Cartes_Infinies.Services
             
             _dbContext.Decks.Remove(deck);
             _dbContext.SaveChanges();
+        }
+
+        public async Task<Deck> MakeDeckCurrent(int deckId, string playerId)
+        {
+            Deck currentDeck = GetCurrentDeck(playerId);
+            Deck futureCurrentDeck = GetDeckFromDeckId(deckId);
+
+            currentDeck.Current = false;
+            futureCurrentDeck.Current = true;
+            await _dbContext.SaveChangesAsync();
+
+            return futureCurrentDeck;
         }
 
         public Deck GetCurrentDeck(string playerId)
