@@ -19,11 +19,17 @@ namespace Super_Cartes_Infinies.Services
 
 		public IEnumerable<Card> GetPlayersCards(string playerId)
 		{
-			Player player = _playersService.GetPlayerFromPlayerId(playerId);
+            Player player = _playersService.GetPlayerFromPlayerId(playerId);
 
-			List<Card> playerCards = player.OwnedCards.Select(c => c.Card).ToList();
+            var playerCards = _dbContext.OwnedCards
+                .Where(oc => oc.Player.Id == player.Id)
+                .Select(oc => oc.Card)
+                .Distinct()
+                .Include(c => c.CardPowers)
+                    .ThenInclude(cp => cp.Power)
+                .ToList();
 
-			return playerCards;
+            return playerCards;
 		}
 
 		public async Task<IEnumerable<Card>> GetAllCards()
