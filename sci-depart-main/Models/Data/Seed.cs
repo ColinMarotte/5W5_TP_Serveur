@@ -260,18 +260,19 @@ namespace Super_Cartes_Infinies.Data
                     Name = "First Strike",
                     Description = "Attaque l'adversaire.",
                     Icone = "fa-bolt",
+                    PowerValue = false
 
                 },
                 new Power
                 {
-                    Id = Power.THORNS_ID,
+                    Id = 2,
                     Name = "Thorns",
                     Description = "Inflige des dégâts au moment où la carte reçoit des dégâts.",
                     Icone = "fa-spikes"
                 },
                 new Power
                 {
-                    Id = Power.HEAL_ID,
+                    Id = 3,
                     Name = "Heal",
                     Description = "Rend des points de vie à une carte.",
                     Icone = "fa-heart"
@@ -289,37 +290,12 @@ namespace Super_Cartes_Infinies.Data
         public static IEnumerable<CardPower> SeedCardPowers()
         {
             return new List<CardPower>
-            {
-                new CardPower
-                {
-                    //Id = 1,
-                    CardId = 1,
-                    PowerId = Power.FIRST_STRIKE_ID,
-                    Value = 2,
-
-                    },
-                    new CardPower
-                    {
-                        //Id = 2,
-                        CardId = 2,
-                        PowerId = Power.THORNS_ID,
-                        Value = 1
-                    },
-                    new CardPower
-                    {
-                        //Id = 3,
-                        CardId = 3,
-                        PowerId = Power.HEAL_ID,
-                        Value = 5
-                    },
-                    new CardPower
-                    {
-                        //Id = 4,
-                        CardId = 4,
-                        PowerId = 4,
-                        Value = 3
-
-                } };
+    {
+        new CardPower {CardPowerId=1, CardId = 1, PowerId = 1, Value = 0 },
+        new CardPower {CardPowerId=2,  CardId = 2, PowerId = 2, Value = 1 },
+        new CardPower {CardPowerId=3,  CardId = 3, PowerId = 3, Value = 5 },
+        new CardPower { CardPowerId=4, CardId = 4, PowerId = 4, Value = 3 }
+    };
         }
 
     }

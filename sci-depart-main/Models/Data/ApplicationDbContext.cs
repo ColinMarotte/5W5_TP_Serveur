@@ -30,20 +30,25 @@ public class ApplicationDbContext : IdentityDbContext
         builder.Entity<IdentityUser>().HasData(Seed.SeedTestUsers());
         builder.Entity<Player>().HasData(Seed.SeedTestPlayers());
 
-        builder.Entity<CardPower>().HasKey(cp => new { cp.CardId, cp.PowerId });
+
+        builder.Entity<CardPower>()
+    .HasKey(cp => new { cp.CardPowerId });
 
         builder.Entity<CardPower>()
             .HasOne(cp => cp.Card)
             .WithMany(c => c.CardPowers)
-            .HasForeignKey(cp => cp.CardId).OnDelete(DeleteBehavior.NoAction); ;
+            .HasForeignKey(cp => cp.CardId)
+            .OnDelete(DeleteBehavior.NoAction);
 
-        builder.Entity<CardPower>()
-            .HasOne(cp => cp.Power)
-            .WithMany()
-            .HasForeignKey(cp => cp.PowerId).OnDelete(DeleteBehavior.NoAction); ;
+        //builder.Entity<CardPower>()
+        //    .HasOne(cp => cp.Power)
+        //    .WithMany() 
+        //    .HasForeignKey(cp => cp.PowerId)
+        //    .OnDelete(DeleteBehavior.NoAction);
 
 
         builder.Entity<Power>().HasData(Seed.SeedPowers());
+
         builder.Entity<CardPower>().HasData(Seed.SeedCardPowers());
 
 

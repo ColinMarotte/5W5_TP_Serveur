@@ -254,15 +254,15 @@ namespace Models.Migrations
                 name: "CardPowers",
                 columns: table => new
                 {
+                    CardPowerId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CardId = table.Column<int>(type: "int", nullable: false),
                     PowerId = table.Column<int>(type: "int", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    Value = table.Column<int>(type: "int", nullable: false),
-                    PowerId1 = table.Column<int>(type: "int", nullable: true)
+                    Value = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CardPowers", x => new { x.CardId, x.PowerId });
+                    table.PrimaryKey("PK_CardPowers", x => x.CardPowerId);
                     table.ForeignKey(
                         name: "FK_CardPowers_Cards_CardId",
                         column: x => x.CardId,
@@ -272,12 +272,8 @@ namespace Models.Migrations
                         name: "FK_CardPowers_Powers_PowerId",
                         column: x => x.PowerId,
                         principalTable: "Powers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_CardPowers_Powers_PowerId1",
-                        column: x => x.PowerId1,
-                        principalTable: "Powers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -468,9 +464,9 @@ namespace Models.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "11111111-1111-1111-1111-111111111111", 0, "02c6d625-fb4d-4ed8-b2b5-298bbfc350d9", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAELpcUPu7CGy5TcHg+AzE5ppMb5b5zcmKppw+7/oHXFlFiWUFXqn4GEnwek8g5d4GOQ==", null, false, "4e74ffe5-de9a-46bb-9aa8-d77b2808e9c0", false, "admin@admin.com" },
-                    { "User1Id", 0, "aef6ee5d-1829-4647-a006-5d11b6f9b9d1", null, false, false, null, null, null, null, null, false, "f5645fe1-c038-4793-ad96-b1bbf9b265bc", false, null },
-                    { "User2Id", 0, "883870e2-af91-4bd6-a5a5-81cb8022f59a", null, false, false, null, null, null, null, null, false, "5109ffec-1e05-45c2-8e86-a9e8d08adfc5", false, null }
+                    { "11111111-1111-1111-1111-111111111111", 0, "fa5d2bfb-2174-4afd-8897-5f1859a7461e", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEMfcb3lpC5oW3AxOSNwgXnG0v8krDSJzGfIXfRtX8Uqz6KALT7Vj4WStTiC0jYC4nA==", null, false, "45eb05e0-c834-4bc9-937b-754333c60eb9", false, "admin@admin.com" },
+                    { "User1Id", 0, "adb246d1-6e1d-4b83-8832-5a05d73abfbd", null, false, false, null, null, null, null, null, false, "6283292d-5422-42dc-a52a-bcef714172f7", false, null },
+                    { "User2Id", 0, "b516f958-e935-4757-a068-d32b26e1f2a4", null, false, false, null, null, null, null, null, false, "3d5e8ae2-32fd-48e9-bcad-0935a30b02e2", false, null }
                 });
 
             migrationBuilder.InsertData(
@@ -515,13 +511,13 @@ namespace Models.Migrations
 
             migrationBuilder.InsertData(
                 table: "CardPowers",
-                columns: new[] { "CardId", "PowerId", "Id", "PowerId1", "Value" },
+                columns: new[] { "CardPowerId", "CardId", "PowerId", "Value" },
                 values: new object[,]
                 {
-                    { 1, 1, 0, null, 2 },
-                    { 2, 2, 0, null, 1 },
-                    { 3, 3, 0, null, 5 },
-                    { 4, 4, 0, null, 3 }
+                    { 1, 1, 1, 0 },
+                    { 2, 2, 2, 1 },
+                    { 3, 3, 3, 5 },
+                    { 4, 4, 4, 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -590,14 +586,14 @@ namespace Models.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CardPowers_CardId",
+                table: "CardPowers",
+                column: "CardId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CardPowers_PowerId",
                 table: "CardPowers",
                 column: "PowerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CardPowers_PowerId1",
-                table: "CardPowers",
-                column: "PowerId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DeckOwnedCards_DeckId",
