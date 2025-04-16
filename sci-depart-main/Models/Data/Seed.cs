@@ -292,7 +292,7 @@ namespace Super_Cartes_Infinies.Data
             {
                 new CardPower
                 {
-                    Id = 1,
+                    //Id = 1,
                     CardId = 1,
                     PowerId = Power.FIRST_STRIKE_ID,
                     Value = 2,
@@ -300,21 +300,21 @@ namespace Super_Cartes_Infinies.Data
                     },
                     new CardPower
                     {
-                        Id = 2,
+                        //Id = 2,
                         CardId = 2,
                         PowerId = Power.THORNS_ID,
                         Value = 1
                     },
                     new CardPower
                     {
-                        Id = 3,
+                        //Id = 3,
                         CardId = 3,
                         PowerId = Power.HEAL_ID,
                         Value = 5
                     },
                     new CardPower
                     {
-                        Id = 4,
+                        //Id = 4,
                         CardId = 4,
                         PowerId = 4,
                         Value = 3
