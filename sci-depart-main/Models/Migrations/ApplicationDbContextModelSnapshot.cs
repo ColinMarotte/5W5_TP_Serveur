@@ -17,7 +17,7 @@ namespace Models.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.11")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
@@ -154,15 +154,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "073d829d-611a-4cef-a7f5-105367d227ca",
+                            ConcurrencyStamp = "22fb3263-6c50-448f-b9d3-2b86918d8cfb",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEF7VcjnHpvf29WkJd3AAzX1WXCK5qDTx25vz3ahXbpSKca/Q6a2khrPvUnw1L4bLLA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEElXnI0JX+++7cZxG64W2+SGy5myL2K1GJTHRxDPnaScdSyHKEHQLu3DEUHnj38IfQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ef1f6e33-5036-4826-8eb1-bd14402a3711",
+                            SecurityStamp = "3f97d0fd-5acd-4a6a-800b-9a50a83129e0",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -170,22 +170,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "33f8f190-23a0-49ee-97d6-edfefb6fbd50",
+                            ConcurrencyStamp = "5ec9c6f3-01d3-4b46-864f-8a590f7f01d6",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "20d05fc8-8ad5-455c-9fc6-620922402dfe",
+                            SecurityStamp = "56a567b5-5d17-458f-858e-38525cd26235",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d355af63-a6c1-40eb-bc88-4300ccad344b",
+                            ConcurrencyStamp = "734b48d2-b5cb-4e54-a953-d0d9f6848799",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2e6e2c6e-c8a7-4b14-bf41-52bddef174f3",
+                            SecurityStamp = "0ade55ee-83df-4241-a9fd-7ea262a51288",
                             TwoFactorEnabled = false
                         });
                 });
@@ -757,9 +757,6 @@ namespace Models.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("PowerValue")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.ToTable("Powers");
@@ -769,33 +766,29 @@ namespace Models.Migrations
                         {
                             Id = 1,
                             Description = "Attaque l'adversaire.",
-                            Icone = "fa-bolt",
-                            Name = "First Strike",
-                            PowerValue = false
+                            Icone = "🏅",
+                            Name = "First Strike"
                         },
                         new
                         {
                             Id = 2,
                             Description = "Inflige des dégâts au moment où la carte reçoit des dégâts.",
-                            Icone = "fa-spikes",
-                            Name = "Thorns",
-                            PowerValue = false
+                            Icone = "🌹",
+                            Name = "Thorns"
                         },
                         new
                         {
                             Id = 3,
                             Description = "Rend des points de vie à une carte.",
-                            Icone = "fa-heart",
-                            Name = "Heal",
-                            PowerValue = false
+                            Icone = "❤️",
+                            Name = "Heal"
                         },
                         new
                         {
                             Id = 4,
                             Description = "Absorbe les dégâts.",
-                            Icone = "fa-shield",
-                            Name = "Shield",
-                            PowerValue = false
+                            Icone = "🛡️",
+                            Name = "Shield"
                         });
                 });
 

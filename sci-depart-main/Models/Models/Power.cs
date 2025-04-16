@@ -22,7 +22,7 @@ namespace Super_Cartes_Infinies.Models
 
         public string Icone { get; set; } = "";
 
-        public bool PowerValue { get; set; }
+        //public bool PowerValue { get; set; }
 
         [JsonIgnore]
         [ValidateNever]

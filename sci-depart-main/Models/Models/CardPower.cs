@@ -24,7 +24,8 @@ namespace Super_Cartes_Infinies.Models
 
         [ForeignKey("Power")]
         public int PowerId { get; set; }
-        public virtual Power Power { get; set; }
+		
+		public virtual Power Power { get; set; }
 
         public int Value { get; set; }
     }

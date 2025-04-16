@@ -259,8 +259,8 @@ namespace Super_Cartes_Infinies.Data
                     Id = 1,
                     Name = "First Strike",
                     Description = "Attaque l'adversaire.",
-                    Icone = "fa-bolt",
-                    PowerValue = false
+                    Icone = "🏅",
+                    //PowerValue = false
 
                 },
                 new Power
@@ -268,22 +268,22 @@ namespace Super_Cartes_Infinies.Data
                     Id = 2,
                     Name = "Thorns",
                     Description = "Inflige des dégâts au moment où la carte reçoit des dégâts.",
-                    Icone = "fa-spikes"
-                },
+                    Icone = "🌹"
+				},
                 new Power
                 {
                     Id = 3,
                     Name = "Heal",
                     Description = "Rend des points de vie à une carte.",
-                    Icone = "fa-heart"
-                },
+                    Icone = "❤️"
+				},
                 new Power
                 {
                     Id = 4,
                     Name = "Shield",
                     Description = "Absorbe les dégâts.",
-                    Icone = "fa-shield"
-                }
+                    Icone = "🛡️"
+				}
             };
         }
 

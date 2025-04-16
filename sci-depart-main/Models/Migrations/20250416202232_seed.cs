@@ -91,8 +91,7 @@ namespace Models.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Icone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PowerValue = table.Column<bool>(type: "bit", nullable: false)
+                    Icone = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -465,9 +464,9 @@ namespace Models.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "11111111-1111-1111-1111-111111111111", 0, "073d829d-611a-4cef-a7f5-105367d227ca", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEF7VcjnHpvf29WkJd3AAzX1WXCK5qDTx25vz3ahXbpSKca/Q6a2khrPvUnw1L4bLLA==", null, false, "ef1f6e33-5036-4826-8eb1-bd14402a3711", false, "admin@admin.com" },
-                    { "User1Id", 0, "33f8f190-23a0-49ee-97d6-edfefb6fbd50", null, false, false, null, null, null, null, null, false, "20d05fc8-8ad5-455c-9fc6-620922402dfe", false, null },
-                    { "User2Id", 0, "d355af63-a6c1-40eb-bc88-4300ccad344b", null, false, false, null, null, null, null, null, false, "2e6e2c6e-c8a7-4b14-bf41-52bddef174f3", false, null }
+                    { "11111111-1111-1111-1111-111111111111", 0, "22fb3263-6c50-448f-b9d3-2b86918d8cfb", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEElXnI0JX+++7cZxG64W2+SGy5myL2K1GJTHRxDPnaScdSyHKEHQLu3DEUHnj38IfQ==", null, false, "3f97d0fd-5acd-4a6a-800b-9a50a83129e0", false, "admin@admin.com" },
+                    { "User1Id", 0, "5ec9c6f3-01d3-4b46-864f-8a590f7f01d6", null, false, false, null, null, null, null, null, false, "56a567b5-5d17-458f-858e-38525cd26235", false, null },
+                    { "User2Id", 0, "734b48d2-b5cb-4e54-a953-d0d9f6848799", null, false, false, null, null, null, null, null, false, "0ade55ee-83df-4241-a9fd-7ea262a51288", false, null }
                 });
 
             migrationBuilder.InsertData(
@@ -496,13 +495,13 @@ namespace Models.Migrations
 
             migrationBuilder.InsertData(
                 table: "Powers",
-                columns: new[] { "Id", "Description", "Icone", "Name", "PowerValue" },
+                columns: new[] { "Id", "Description", "Icone", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Attaque l'adversaire.", "fa-bolt", "First Strike", false },
-                    { 2, "Inflige des dégâts au moment où la carte reçoit des dégâts.", "fa-spikes", "Thorns", false },
-                    { 3, "Rend des points de vie à une carte.", "fa-heart", "Heal", false },
-                    { 4, "Absorbe les dégâts.", "fa-shield", "Shield", false }
+                    { 1, "Attaque l'adversaire.", "🏅", "First Strike" },
+                    { 2, "Inflige des dégâts au moment où la carte reçoit des dégâts.", "🌹", "Thorns" },
+                    { 3, "Rend des points de vie à une carte.", "❤️", "Heal" },
+                    { 4, "Absorbe les dégâts.", "🛡️", "Shield" }
                 });
 
             migrationBuilder.InsertData(
