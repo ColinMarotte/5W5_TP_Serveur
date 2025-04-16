@@ -14,7 +14,7 @@ namespace Super_Cartes_Infinies.Services
             _playersService = playersService;
         }
 
-        public async Task<Deck> CreateDeck(string name, string playerId, List<OwnedCard> cards)
+        public async Task<Deck> CreateDeck(string name, string playerId)
         {
             Deck newDeck = new Deck()
             {
@@ -24,21 +24,6 @@ namespace Super_Cartes_Infinies.Services
                 PlayerId = int.Parse(playerId),
                 Player = _playersService.GetPlayerFromPlayerId(playerId)
             };
-
-            foreach(OwnedCard oc in cards)
-            {
-                DeckOwnedCard newDeckOwnedCard = new DeckOwnedCard()
-                {
-                    Id = 0,
-                    DeckId = newDeck.Id,
-                    Deck = newDeck,
-                    OwnedCardId = oc.Id,
-                    OwnedCard = oc
-                };
-
-                newDeck.DeckOwnedCards.Add(newDeckOwnedCard);
-                oc.DeckOwnedCards.Add(newDeckOwnedCard);
-            }
 
             _dbContext.Add(newDeck);
             await _dbContext.SaveChangesAsync();
@@ -130,7 +115,7 @@ namespace Super_Cartes_Infinies.Services
             return deck;
         }
 
-        public async void DeleteDeck(int deckId, int playerId)
+        public void DeleteDeck(int deckId, int playerId)
         {
             Deck deck = GetDeckFromDeckId(deckId);
 
@@ -156,7 +141,7 @@ namespace Super_Cartes_Infinies.Services
 
             
             _dbContext.Decks.Remove(deck);
-            await _dbContext.SaveChangesAsync();
+            _dbContext.SaveChanges();
         }
 
         public Deck GetCurrentDeck(string playerId)
