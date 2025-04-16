@@ -146,8 +146,15 @@ namespace Super_Cartes_Infinies.Services
             List<DeckOwnedCard> deckOwnedCards = deck.DeckOwnedCards;
 
             // À TESTER (en checkant la BD)
-            // À AMELIORER (Non fonctionnel pour l'instant)
-            _dbContext.DeckOwnedCards.Remove(deckOwnedCards[0]);
+
+            foreach (DeckOwnedCard deckOwnedCard in deckOwnedCards)
+            {
+                deck.DeckOwnedCards.Remove(deckOwnedCard);
+                deckOwnedCard.OwnedCard.DeckOwnedCards.Remove(deckOwnedCard);
+                _dbContext.DeckOwnedCards.Remove(deckOwnedCard);
+            }
+
+            
             _dbContext.Decks.Remove(deck);
             await _dbContext.SaveChangesAsync();
         }
@@ -171,6 +178,29 @@ namespace Super_Cartes_Infinies.Services
         {
             Deck deck = _dbContext.Decks.Single(d => d.Id == deckId);
             return deck;
+        }
+
+        public List<OwnedCard> GetCardsNotInDeck(int deckId)
+        {
+            Deck deck = GetDeckFromDeckId(deckId);
+            Player player = deck.Player;
+
+            List<OwnedCard> decksOwnedCards = deck.DeckOwnedCards.Select(d => d.OwnedCard).ToList();
+            List<OwnedCard> playersOwnedCards = player.OwnedCards;
+            List<OwnedCard> cardsNotInDeck = playersOwnedCards;
+
+            foreach (OwnedCard pOwnedCard in playersOwnedCards)
+            {
+                foreach (OwnedCard dOwnedCard in decksOwnedCards)
+                {
+                    if (pOwnedCard == dOwnedCard)
+                    {
+                        cardsNotInDeck.Remove(pOwnedCard);
+                    }
+                }
+            }
+
+            return cardsNotInDeck;
         }
     }
 }
