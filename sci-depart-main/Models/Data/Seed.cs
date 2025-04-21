@@ -294,7 +294,8 @@ namespace Super_Cartes_Infinies.Data
         new CardPower {CardPowerId=1, CardId = 1, PowerId = 1, Value = 0 },
         new CardPower {CardPowerId=2,  CardId = 2, PowerId = 2, Value = 1 },
         new CardPower {CardPowerId=3,  CardId = 3, PowerId = 3, Value = 5 },
-        new CardPower { CardPowerId=4, CardId = 4, PowerId = 4, Value = 3 }
+        new CardPower { CardPowerId=4, CardId = 4, PowerId = 4, Value = 3 },
+        new CardPower { CardPowerId=5, CardId = 4, PowerId = 3, Value = 3 }
     };
         }
 
