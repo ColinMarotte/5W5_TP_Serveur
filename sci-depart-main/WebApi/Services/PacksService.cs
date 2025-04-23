@@ -70,7 +70,7 @@ namespace WebApi.Services
                 
                 int skipper = rand.Next(0, await _dbContext.Cards.Where(c=>c.Rarity == rarity).CountAsync());
 
-                newCards.Add(_dbContext.Cards.Skip(skipper).First());
+                newCards.Add(_dbContext.Cards.Where(c => c.Rarity == rarity).Skip(skipper).First());
             }
 
             List<OwnedCard> newOwnedCards = new List<OwnedCard>();
@@ -90,6 +90,13 @@ namespace WebApi.Services
             return newCards;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="nbCards">Nombre de cartes à générer</param>
+        /// <param name="defaultRarity">Rareté minimum</param>
+        /// <param name="probabilities">Probabilités de piger chaque probabilité</param>
+        /// <returns></returns>
         private List<Rarity> GenerateRarities(int nbCards, Rarity defaultRarity, List<Probability> probabilities)
         {
             List<Rarity> rarities = new List<Rarity>();
@@ -128,7 +135,7 @@ namespace WebApi.Services
 
             foreach (Probability probability in probabilities)
             {
-                if (probability.Value < valeurPigée)
+                if (probability.Value > valeurPigée)
                 {
                     return probability.Rarity;
                 }

@@ -300,7 +300,7 @@ namespace Tests.Packs
         }
 
         [TestMethod]
-        public async Task AucuneCarteCommune()
+        public async Task AucuneCarteCommuneDansPaquetSuper()
         {
             using ApplicationDbContext db = new ApplicationDbContext(_options);
 
