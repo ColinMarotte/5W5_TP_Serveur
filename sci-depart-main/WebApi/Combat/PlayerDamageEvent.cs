@@ -17,6 +17,7 @@ namespace Super_Cartes_Infinies.Combat
             {
                 Events = new List<MatchEvent>();
                 //PlayerDeathEvent
+                defendingPlayer.Health = 0;
                 Events.Add(new PlayerDeathEvent(match, attackingPlayer, defendingPlayer));
             }
             else

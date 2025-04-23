@@ -14,16 +14,27 @@ namespace Super_Cartes_Infinies.Combat
             PlayerId = currentPlayer.PlayerId;
 
             Events = new List<MatchEvent>();
-            if(oppositePlayerCard == null)
+            if (oppositePlayerCard == null)
             {
                 Events.Add(new PlayerDamageEvent(match, currentPlayer, defendingPlayer, currentPlayerCard.Attack));
             }
             else
             {
-                //AttackDamageEvent
-                Events.Add(new CardDamageEvent(match, currentPlayer, defendingPlayer, oppositePlayerCard, currentPlayerCard.Attack,false));
-                Events.Add(new CardDamageEvent(match, defendingPlayer, currentPlayer, currentPlayerCard, oppositePlayerCard.Attack,true));
+                if (currentPlayerCard.HasPower(Power.FIRST_STRIKE_ID) && currentPlayerCard.Attack > oppositePlayerCard.Health)
+                {
+                    Events.Add(new FirstStrikeEvent(currentPlayer, currentPlayerCard));
+
+
+                    Events.Add(new CardDamageEvent(match, defendingPlayer, currentPlayer, currentPlayerCard, oppositePlayerCard.Attack, true));
+
+                }
+                else
+                {
+                    Events.Add(new CardDamageEvent(match, defendingPlayer, currentPlayer, currentPlayerCard, oppositePlayerCard.Attack, true));
+                    Events.Add(new CardDamageEvent(match, currentPlayer, defendingPlayer, oppositePlayerCard, currentPlayerCard.Attack, false));
+                }
             }
+            
         }
     }
 }
