@@ -55,23 +55,13 @@
 				<td>
 					@Html.DisplayFor(modelItem => item.Rarity)
 				</td>
-				<td>
-					<img src="@Html.DisplayFor(modelItem => item.ImageUrl)" height="100" alt="Image de la carte" />
+				<td>					
 					@if (item.CardPowers != null && item.CardPowers.Any())
 					{
 							foreach (var power in item.CardPowers)
 							{
 								<div>@power.Power.Icone @power.Power.Name @power.Value</div>
-							}
-
-						  @* <ul>
-							@foreach (var power in cardPowers[item.Id])
-							{
-								<li>
-									<i class="@power.Icone"></i> <span>@power.Name  @power.value </span>
-								</li>
-							}
-						</ul> *@ 
+							}						 
 					}
 				</td>
 				<td>
