@@ -9,7 +9,7 @@ namespace Super_Cartes_Infinies.Combat
         public int PlayerId { get; set; }
 
 
-        public AttackEvent(Match match, MatchPlayerData currentPlayer, MatchPlayerData defendingPlayer, PlayableCard currentPlayerCard, PlayableCard? oppositePlayerCard)
+        public AttackEvent(Match match, MatchPlayerData currentPlayer, MatchPlayerData defendingPlayer, PlayableCard currentPlayerCard, PlayableCard? oppositePlayerCard, int index)
         {
             PlayerId = currentPlayer.PlayerId;
 
@@ -25,13 +25,13 @@ namespace Super_Cartes_Infinies.Combat
                     Events.Add(new FirstStrikeEvent(currentPlayer, currentPlayerCard));
 
 
-                    Events.Add(new CardDamageEvent(match, defendingPlayer, currentPlayer, currentPlayerCard, oppositePlayerCard.Attack, true));
+                    Events.Add(new CardDamageEvent(match, defendingPlayer, currentPlayer, currentPlayerCard, oppositePlayerCard.Attack, true, index));
 
                 }
                 else
                 {
-                    Events.Add(new CardDamageEvent(match, defendingPlayer, currentPlayer, currentPlayerCard, oppositePlayerCard.Attack, true));
-                    Events.Add(new CardDamageEvent(match, currentPlayer, defendingPlayer, oppositePlayerCard, currentPlayerCard.Attack, false));
+                    Events.Add(new CardDamageEvent(match, defendingPlayer, currentPlayer, currentPlayerCard, oppositePlayerCard.Attack, true, index));
+                    Events.Add(new CardDamageEvent(match, currentPlayer, defendingPlayer, oppositePlayerCard, currentPlayerCard.Attack, false, index));
                 }
             }
             

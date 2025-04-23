@@ -10,19 +10,18 @@ namespace Super_Cartes_Infinies.Combat
         public int BattlefieldIndex { get; set; }
         public int Value { get; set; }
 
-        public CardDamageEvent(Match match, MatchPlayerData currentPlayer, MatchPlayerData defendingPlayer, PlayableCard playerCard, int value, bool isCurrentPlayer)
+        public CardDamageEvent(Match match, MatchPlayerData currentPlayer, MatchPlayerData defendingPlayer, PlayableCard playerCard, int value, bool isCurrentPlayer, int index)
         {
             Value = value;
             PlayerId = defendingPlayer.PlayerId;
             CardId = playerCard.Id;
-            BattlefieldIndex = playerCard.Index;
+            BattlefieldIndex = index;
             int damage = value - playerCard.Health;
             playerCard.Health -= value;
-            bool isCurrentPlayerTurn = match.IsPlayerATurn;
-                Events = new List<MatchEvent>();
+            Events = new List<MatchEvent>();
             if(playerCard.Health <= 0)
             {
-                Events.Add(new CardDeathEvent(match, defendingPlayer, playerCard));
+                Events.Add(new CardDeathEvent(match, defendingPlayer, playerCard, index));
             if (!isCurrentPlayer)
             {
                 Events.Add(new PlayerDamageEvent(match, currentPlayer, defendingPlayer, damage));

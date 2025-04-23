@@ -14,6 +14,7 @@ namespace Super_Cartes_Infinies.Models
 			Card = c;
             Health = c.Health;
             Attack = c.Attack;
+            Index = -1;
         }
 
         public int Id { get; set; }

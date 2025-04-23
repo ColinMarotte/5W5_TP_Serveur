@@ -9,11 +9,11 @@ namespace Super_Cartes_Infinies.Combat
         public int CardId { get; set; }
         public int BattlefieldIndex { get; set; }
 
-        public CardDeathEvent(Match match, MatchPlayerData player, PlayableCard playerCard)
+        public CardDeathEvent(Match match, MatchPlayerData player, PlayableCard playerCard, int index)
         {
             PlayerId = player.PlayerId;
             CardId = playerCard.Id;
-            BattlefieldIndex = playerCard.Index;
+            BattlefieldIndex = index;
             //playerCard.Index = -1;
             player.RemoveCardFromBattleField(playerCard);
 

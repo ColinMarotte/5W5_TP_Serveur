@@ -27,27 +27,20 @@ namespace Super_Cartes_Infinies.Combat
                 {
                     oppositePlayerCard = oppositePlayerBattleField.ElementAt(i);
                 }
-                if (playerCard.HasPower(Power.HEAL_ID))
-                {
-                    //CardActivationEvent
-                }
 
-                if (oppositePlayerCard == null)
-                {
-                    //CardAttackEvent
-                    Events.Add(new AttackEvent(match, currentPlayerData, oppositePlayerData, playerCard, null));
 
-                }
-                else if (playerCard.HasPower(Power.FIRST_STRIKE_ID))
-                {
-                    //CardActivationEvent
-                }
-                else
-                {
-                    //attackEvent
-                    Events.Add(new AttackEvent(match, currentPlayerData, oppositePlayerData, playerCard, oppositePlayerCard));
+                    Events.Add(new AttackEvent(match, currentPlayerData, oppositePlayerData, playerCard, oppositePlayerCard, i));
+                //if (oppositePlayerCard == null)
+                //{
+                //    //CardAttackEvent
 
-                }
+                //}
+                //else
+                //{
+                //    //attackEvent
+                //    Events.Add(new AttackEvent(match, currentPlayerData, oppositePlayerData, playerCard, oppositePlayerCard));
+
+                //}
             }
         }
     }
