@@ -100,7 +100,6 @@ namespace Super_Cartes_Infinies.Services
                 deck.DeckOwnedCards.Add(newDeckOwnedCard);
                 ownedCard.DeckOwnedCards.Add(newDeckOwnedCard);
             }
-            // À TESTER (en checkant la BD) (est-ce que la deckOwnedCard s'est correctement ajoutée?)
             await _dbContext.SaveChangesAsync();
             return deck;
         }
@@ -136,16 +135,15 @@ namespace Super_Cartes_Infinies.Services
             }
 
             List<DeckOwnedCard> deckOwnedCards = deck.DeckOwnedCards;
+            int nbCartes = deckOwnedCards.Count;
 
-            // À TESTER (en checkant la BD)
-
-            foreach (DeckOwnedCard deckOwnedCard in deckOwnedCards)
+            for (int i = nbCartes - 1; i >= 0; i--)
             {
+                DeckOwnedCard deckOwnedCard = deckOwnedCards[i];
                 deck.DeckOwnedCards.Remove(deckOwnedCard);
                 deckOwnedCard.OwnedCard.DeckOwnedCards.Remove(deckOwnedCard);
                 _dbContext.DeckOwnedCards.Remove(deckOwnedCard);
             }
-
             
             _dbContext.Decks.Remove(deck);
             _dbContext.SaveChanges();

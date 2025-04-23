@@ -63,7 +63,7 @@ namespace WebApi.Controllers
         }
 
         [Authorize]
-        [HttpPost("{deckId}")]
+        [HttpGet("{deckId}")]
         public ActionResult DeleteDeck(int deckId)
         {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
