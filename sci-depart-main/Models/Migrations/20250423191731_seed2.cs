@@ -5,7 +5,7 @@
 namespace Models.Migrations
 {
     /// <inheritdoc />
-    public partial class seedAdmin : Migration
+    public partial class seed2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,56 +15,56 @@ namespace Models.Migrations
                 keyColumn: "Id",
                 keyValue: "11111111-1111-1111-1111-111111111111",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "47420f64-29ff-45c4-89aa-6b4315f8d04d", "AQAAAAIAAYagAAAAEN5Jn5Kw8rBommqStWRYcZHINL+0pkeq82xjo/97/kSBN5/prcZ0jpS/i9N99d+j8Q==", "106db322-c072-442c-879c-ffd1ee538c03" });
+                values: new object[] { "3318b2f0-e913-4b02-9cb9-22d00de1ff0a", "AQAAAAIAAYagAAAAEDd088OmRt3Rq9v1YY+RrB3D76Vp4nf03plskzNpMSwHSWQ+VBanQybXcTSS4bqMAw==", "71f919c0-aaa8-4354-9de5-70ba98a27909" });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "User1Id",
                 columns: new[] { "ConcurrencyStamp", "SecurityStamp" },
-                values: new object[] { "c00e2762-0c78-4f51-a959-f45489eec23e", "e0e6f7c0-e8b3-4be2-8487-a4b9d8f143dc" });
+                values: new object[] { "2a98c82c-5187-4e9d-ba21-f03b0a03c232", "d1a93588-c321-4e96-a613-c058c3a299d2" });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "User2Id",
                 columns: new[] { "ConcurrencyStamp", "SecurityStamp" },
-                values: new object[] { "e558fa23-21f1-4dd7-ad7b-b2eacddcb9d7", "13bc4761-6595-491b-b7a9-42d96f17d0ad" });
+                values: new object[] { "45b590a2-a9c4-427d-b024-3b7e24e8f077", "4b70ce9c-8c43-469a-a380-3ca6f5e3d376" });
 
             migrationBuilder.InsertData(
-                table: "Players",
-                columns: new[] { "Id", "Name", "UserId" },
-                values: new object[] { 3, "Admin", "11111111-1111-1111-1111-111111111111" });
+                table: "CardPowers",
+                columns: new[] { "CardPowerId", "CardId", "PowerId", "Value" },
+                values: new object[] { 6, 1, 3, 3 });
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DeleteData(
-                table: "Players",
-                keyColumn: "Id",
-                keyValue: 3);
+                table: "CardPowers",
+                keyColumn: "CardPowerId",
+                keyValue: 6);
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "11111111-1111-1111-1111-111111111111",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "9cd94229-3d67-4fd1-8662-0a31920cbbb4", "AQAAAAIAAYagAAAAELadEcuykd0JP2F1zAQQNlZktYrOptygt4L7C9e0szKN1FmKtrG3iNBecLH3IOvMDA==", "c4ffbb74-8dc5-4f8d-8305-80fb666629a3" });
+                values: new object[] { "c2b64f39-1e27-4c8b-ac73-20a0220a7ab2", "AQAAAAIAAYagAAAAEPOh/jnp3nVyp3QYYuj8tvJ3O9surdL9FHXRMA2u19rqG05JMB7RIaL2+KJ+b+JAag==", "4f67aefd-7610-400e-9105-3474d436ee87" });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "User1Id",
                 columns: new[] { "ConcurrencyStamp", "SecurityStamp" },
-                values: new object[] { "01d698e2-ed71-4d38-bd97-e91de3b778e2", "182bbd21-afe4-491c-8246-a377d24e5bca" });
+                values: new object[] { "46130907-20f8-4ad4-ab13-115eeadad1f0", "38f281ae-f6f7-4f6c-b62c-0b7415ac7d2c" });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "User2Id",
                 columns: new[] { "ConcurrencyStamp", "SecurityStamp" },
-                values: new object[] { "0567b1f5-aaeb-472e-88a9-c7b9e2961bf7", "ed036e38-e601-4d3d-87ae-21ef8552885e" });
+                values: new object[] { "c33b2a56-f26d-4597-8511-1faf01b1e1b9", "8e2f1759-a8ae-44fb-b177-a4df2e56b258" });
         }
     }
 }

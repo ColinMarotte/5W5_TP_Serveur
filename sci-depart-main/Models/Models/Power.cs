@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Super_Cartes_Infinies.Models
@@ -14,12 +16,14 @@ namespace Super_Cartes_Infinies.Models
 
         public int Id { get; set; }
 
-        // TODO: À compléter
-
         public string Name { get; set; } = "";
 
         public string Description { get; set; } = "";
 
         public string Icone { get; set; } = "";
+
+        [JsonIgnore]
+        [ValidateNever]
+        public virtual List<CardPower> CardPowers { get; set; } = new List<CardPower>();
     }
 }

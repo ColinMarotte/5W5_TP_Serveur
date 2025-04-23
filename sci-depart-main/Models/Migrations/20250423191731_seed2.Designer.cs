@@ -12,8 +12,8 @@ using Super_Cartes_Infinies.Data;
 namespace Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250303145939_Init")]
-    partial class Init
+    [Migration("20250423191731_seed2")]
+    partial class seed2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,15 +157,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9cd94229-3d67-4fd1-8662-0a31920cbbb4",
+                            ConcurrencyStamp = "3318b2f0-e913-4b02-9cb9-22d00de1ff0a",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAELadEcuykd0JP2F1zAQQNlZktYrOptygt4L7C9e0szKN1FmKtrG3iNBecLH3IOvMDA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDd088OmRt3Rq9v1YY+RrB3D76Vp4nf03plskzNpMSwHSWQ+VBanQybXcTSS4bqMAw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c4ffbb74-8dc5-4f8d-8305-80fb666629a3",
+                            SecurityStamp = "71f919c0-aaa8-4354-9de5-70ba98a27909",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -173,22 +173,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "01d698e2-ed71-4d38-bd97-e91de3b778e2",
+                            ConcurrencyStamp = "2a98c82c-5187-4e9d-ba21-f03b0a03c232",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "182bbd21-afe4-491c-8246-a377d24e5bca",
+                            SecurityStamp = "d1a93588-c321-4e96-a613-c058c3a299d2",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0567b1f5-aaeb-472e-88a9-c7b9e2961bf7",
+                            ConcurrencyStamp = "45b590a2-a9c4-427d-b024-3b7e24e8f077",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ed036e38-e601-4d3d-87ae-21ef8552885e",
+                            SecurityStamp = "4b70ce9c-8c43-469a-a380-3ca6f5e3d376",
                             TwoFactorEnabled = false
                         });
                 });
@@ -425,6 +425,134 @@ namespace Models.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Super_Cartes_Infinies.Models.CardPower", b =>
+                {
+                    b.Property<int>("CardPowerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CardPowerId"));
+
+                    b.Property<int>("CardId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PowerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Value")
+                        .HasColumnType("int");
+
+                    b.HasKey("CardPowerId");
+
+                    b.HasIndex("CardId");
+
+                    b.HasIndex("PowerId");
+
+                    b.ToTable("CardPowers");
+
+                    b.HasData(
+                        new
+                        {
+                            CardPowerId = 1,
+                            CardId = 1,
+                            PowerId = 1,
+                            Value = 0
+                        },
+                        new
+                        {
+                            CardPowerId = 2,
+                            CardId = 2,
+                            PowerId = 2,
+                            Value = 1
+                        },
+                        new
+                        {
+                            CardPowerId = 3,
+                            CardId = 3,
+                            PowerId = 3,
+                            Value = 5
+                        },
+                        new
+                        {
+                            CardPowerId = 4,
+                            CardId = 4,
+                            PowerId = 4,
+                            Value = 3
+                        },
+                        new
+                        {
+                            CardPowerId = 5,
+                            CardId = 4,
+                            PowerId = 3,
+                            Value = 3
+                        },
+                        new
+                        {
+                            CardPowerId = 6,
+                            CardId = 1,
+                            PowerId = 3,
+                            Value = 3
+                        });
+                });
+
+            modelBuilder.Entity("Super_Cartes_Infinies.Models.Deck", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Current")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PlayerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlayerId");
+
+                    b.ToTable("Decks");
+                });
+
+            modelBuilder.Entity("Super_Cartes_Infinies.Models.DeckOwnedCard", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DeckId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DeckId1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OwnedCardId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OwnedCardId1")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeckId");
+
+                    b.HasIndex("DeckId1");
+
+                    b.HasIndex("OwnedCardId");
+
+                    b.HasIndex("OwnedCardId1");
+
+                    b.ToTable("DeckOwnedCards");
+                });
+
             modelBuilder.Entity("Super_Cartes_Infinies.Models.GameConfig", b =>
                 {
                     b.Property<int>("Id")
@@ -617,6 +745,67 @@ namespace Models.Migrations
                             Id = 2,
                             Name = "Test player 2",
                             UserId = "User2Id"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Admin",
+                            UserId = "11111111-1111-1111-1111-111111111111"
+                        });
+                });
+
+            modelBuilder.Entity("Super_Cartes_Infinies.Models.Power", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Icone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Powers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Attaque l'adversaire.",
+                            Icone = "🏅",
+                            Name = "First Strike"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Inflige des dégâts au moment où la carte reçoit des dégâts.",
+                            Icone = "🌹",
+                            Name = "Thorns"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Rend des points de vie à une carte.",
+                            Icone = "❤️",
+                            Name = "Heal"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Absorbe les dégâts.",
+                            Icone = "🛡️",
+                            Name = "Shield"
                         });
                 });
 
@@ -741,6 +930,63 @@ namespace Models.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Super_Cartes_Infinies.Models.CardPower", b =>
+                {
+                    b.HasOne("Super_Cartes_Infinies.Models.Card", "Card")
+                        .WithMany("CardPowers")
+                        .HasForeignKey("CardId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Super_Cartes_Infinies.Models.Power", "Power")
+                        .WithMany("CardPowers")
+                        .HasForeignKey("PowerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Card");
+
+                    b.Navigation("Power");
+                });
+
+            modelBuilder.Entity("Super_Cartes_Infinies.Models.Deck", b =>
+                {
+                    b.HasOne("Super_Cartes_Infinies.Models.Player", "Player")
+                        .WithMany("Decks")
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Player");
+                });
+
+            modelBuilder.Entity("Super_Cartes_Infinies.Models.DeckOwnedCard", b =>
+                {
+                    b.HasOne("Super_Cartes_Infinies.Models.Deck", "Deck")
+                        .WithMany()
+                        .HasForeignKey("DeckId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Super_Cartes_Infinies.Models.Deck", null)
+                        .WithMany("DeckOwnedCards")
+                        .HasForeignKey("DeckId1");
+
+                    b.HasOne("Super_Cartes_Infinies.Models.OwnedCard", "OwnedCard")
+                        .WithMany()
+                        .HasForeignKey("OwnedCardId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Super_Cartes_Infinies.Models.OwnedCard", null)
+                        .WithMany("DeckOwnedCards")
+                        .HasForeignKey("OwnedCardId1");
+
+                    b.Navigation("Deck");
+
+                    b.Navigation("OwnedCard");
+                });
+
             modelBuilder.Entity("Super_Cartes_Infinies.Models.Match", b =>
                 {
                     b.HasOne("Super_Cartes_Infinies.Models.MatchPlayerData", "PlayerDataA")
@@ -845,9 +1091,16 @@ namespace Models.Migrations
 
             modelBuilder.Entity("Super_Cartes_Infinies.Models.Card", b =>
                 {
+                    b.Navigation("CardPowers");
+
                     b.Navigation("OwnedCards");
 
                     b.Navigation("StartingCards");
+                });
+
+            modelBuilder.Entity("Super_Cartes_Infinies.Models.Deck", b =>
+                {
+                    b.Navigation("DeckOwnedCards");
                 });
 
             modelBuilder.Entity("Super_Cartes_Infinies.Models.MatchPlayerData", b =>
@@ -861,9 +1114,21 @@ namespace Models.Migrations
                     b.Navigation("Hand");
                 });
 
+            modelBuilder.Entity("Super_Cartes_Infinies.Models.OwnedCard", b =>
+                {
+                    b.Navigation("DeckOwnedCards");
+                });
+
             modelBuilder.Entity("Super_Cartes_Infinies.Models.Player", b =>
                 {
+                    b.Navigation("Decks");
+
                     b.Navigation("OwnedCards");
+                });
+
+            modelBuilder.Entity("Super_Cartes_Infinies.Models.Power", b =>
+                {
+                    b.Navigation("CardPowers");
                 });
 #pragma warning restore 612, 618
         }

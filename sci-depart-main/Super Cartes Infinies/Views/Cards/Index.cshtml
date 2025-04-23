@@ -2,6 +2,7 @@
 
 @{
 	ViewData["Title"] = "Index";
+	var cardPowers = ViewBag.CardPowers as Dictionary<int, List<Super_Cartes_Infinies.Models.Power>>;
 }
 
 <h1>Cartes</h1>
@@ -28,11 +29,11 @@
 				@Html.DisplayNameFor(model => model.Rarity)
 			</th>
 			<th>
+				@Html.DisplayNameFor(model => model.CardPowers)
+			</th>
+			<th>
 				@Html.DisplayNameFor(model => model.ImageUrl)
 			</th>
-			
-
-			<th></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -53,6 +54,25 @@
 				</td>
 				<td>
 					@Html.DisplayFor(modelItem => item.Rarity)
+				</td>
+				<td>
+					<img src="@Html.DisplayFor(modelItem => item.ImageUrl)" height="100" alt="Image de la carte" />
+					@if (item.CardPowers != null && item.CardPowers.Any())
+					{
+							foreach (var power in item.CardPowers)
+							{
+								<div>@power.Power.Icone @power.Power.Name @power.Value</div>
+							}
+
+						  @* <ul>
+							@foreach (var power in cardPowers[item.Id])
+							{
+								<li>
+									<i class="@power.Icone"></i> <span>@power.Name  @power.value </span>
+								</li>
+							}
+						</ul> *@ 
+					}
 				</td>
 				<td>
 					<img src="@Html.DisplayFor(modelItem => item.ImageUrl)" height="100" alt="Image de la carte" />
