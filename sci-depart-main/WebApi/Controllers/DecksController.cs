@@ -51,14 +51,14 @@ namespace WebApi.Controllers
 
         [Authorize]
         [HttpPost("{deckId}")]
-        public async Task<ActionResult> RemoveCardFromDeck(int deckId, DeckOwnedCard card)
+        public async Task<ActionResult> RemoveCardFromDeck(int deckId, [FromBody] int deckOwnedCardId)
         {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             var userId = claim.Value;
             Player player = _playersService.GetPlayerFromUserId(userId);
 
-            await _decksService.RemoveCardFromDeck(deckId, card, player.Id);
+            await _decksService.RemoveCardFromDeck(deckId, deckOwnedCardId, player.Id);
             return Ok(new { Message = "La carte a été retitée du deck!" });
         }
 

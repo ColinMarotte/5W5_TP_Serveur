@@ -104,9 +104,10 @@ namespace Super_Cartes_Infinies.Services
             return deck;
         }
 
-        public async Task<Deck> RemoveCardFromDeck(int deckId, DeckOwnedCard card, int playerId)
+        public async Task<Deck> RemoveCardFromDeck(int deckId, int deckOwnedCardId, int playerId)
         {
             Deck deck = GetDeckFromDeckId(deckId);
+            DeckOwnedCard card = _dbContext.DeckOwnedCards.Where(d => d.Id == deckOwnedCardId).First();
 
             if (deck.PlayerId != playerId)
             {
