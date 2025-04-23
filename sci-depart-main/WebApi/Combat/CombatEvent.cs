@@ -19,7 +19,7 @@ namespace Super_Cartes_Infinies.Combat
             {
                 return;
             }
-            for (int i = 0; i < currentPlayerBattleField.Count(); i++)
+            for (int i = currentPlayerBattleField.Count()-1; i >= 0; i--)
             {
                 PlayableCard playerCard = currentPlayerBattleField.ElementAt(i);
                 PlayableCard? oppositePlayerCard = null;

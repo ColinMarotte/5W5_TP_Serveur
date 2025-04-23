@@ -76,7 +76,7 @@ namespace Super_Cartes_Infinies.Models
             {
                 lstPlayableCards.ElementAt(i).Index = i-1;
             }
-            playableCard.Index = 0;
+            playableCard.Index = -1;
             BattleField.Remove(playableCard);
             Graveyard.Add(playableCard);
         }

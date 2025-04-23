@@ -9,20 +9,20 @@ namespace Super_Cartes_Infinies.Combat
         public int PlayerId { get; set; }
 
 
-        public AttackEvent(Match match, MatchPlayerData attackingPlayer, MatchPlayerData defendingPlayer, PlayableCard currentPlayerCard, PlayableCard? oppositePlayerCard)
+        public AttackEvent(Match match, MatchPlayerData currentPlayer, MatchPlayerData defendingPlayer, PlayableCard currentPlayerCard, PlayableCard? oppositePlayerCard)
         {
-            PlayerId = attackingPlayer.PlayerId;
+            PlayerId = currentPlayer.PlayerId;
 
             Events = new List<MatchEvent>();
             if(oppositePlayerCard == null)
             {
-                Events.Add(new PlayerDamageEvent(match, attackingPlayer, defendingPlayer, currentPlayerCard.Attack));
+                Events.Add(new PlayerDamageEvent(match, currentPlayer, defendingPlayer, currentPlayerCard.Attack));
             }
             else
             {
                 //AttackDamageEvent
-                Events.Add(new CardDamageEvent(match, attackingPlayer, defendingPlayer, currentPlayerCard, oppositePlayerCard.Attack));
-                Events.Add(new CardDamageEvent(match, defendingPlayer, attackingPlayer, oppositePlayerCard, currentPlayerCard.Attack));
+                Events.Add(new CardDamageEvent(match, currentPlayer, defendingPlayer, oppositePlayerCard, currentPlayerCard.Attack,false));
+                Events.Add(new CardDamageEvent(match, defendingPlayer, currentPlayer, currentPlayerCard, oppositePlayerCard.Attack,true));
             }
         }
     }
