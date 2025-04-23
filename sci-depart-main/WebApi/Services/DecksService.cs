@@ -65,9 +65,16 @@ namespace Super_Cartes_Infinies.Services
             return newDeck;
         }
 
-        public async Task<Deck> AddCardsToDeck(int deckId, List<OwnedCard> cards, int playerId)
+        public async Task<Deck> AddCardsToDeck(int deckId, List<int> ownedCardsIds, int playerId)
         {
             Deck deck = GetDeckFromDeckId(deckId);
+            List<OwnedCard> cards = new List<OwnedCard>();
+
+            foreach (int id in ownedCardsIds)
+            {
+                OwnedCard card = _dbContext.OwnedCards.Where(o => o.Id == id).First();
+                cards.Add(card);
+            }
 
             if (deck.PlayerId != playerId)
             {
