@@ -21,6 +21,8 @@ namespace Super_Cartes_Infinies.Combat
             else
             {
                 //AttackDamageEvent
+                Events.Add(new CardDamageEvent(match, attackingPlayer, defendingPlayer, currentPlayerCard, oppositePlayerCard.Attack));
+                Events.Add(new CardDamageEvent(match, defendingPlayer, attackingPlayer, oppositePlayerCard, currentPlayerCard.Attack));
             }
         }
     }

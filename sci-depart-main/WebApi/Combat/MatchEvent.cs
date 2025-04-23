@@ -13,6 +13,8 @@ namespace Super_Cartes_Infinies.Combat
     [JsonDerivedType(typeof(PlayCardEvent))]
     [JsonDerivedType(typeof(CombatEvent))]
     [JsonDerivedType(typeof(AttackEvent))]
+    [JsonDerivedType(typeof(CardDamageEvent))]
+    [JsonDerivedType(typeof(CardDeathEvent))]
     [JsonDerivedType(typeof(PlayerDamageEvent))]
     [JsonDerivedType(typeof(PlayerDeathEvent))]
     [JsonDerivedType(typeof(HealEvent))]
