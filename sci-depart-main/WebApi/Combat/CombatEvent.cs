@@ -2,7 +2,7 @@
 using Super_Cartes_Infinies.Combat;
 using Super_Cartes_Infinies.Models;
 
-namespace WebApi.Combat
+namespace Super_Cartes_Infinies.Combat
 {
     public class CombatEvent : MatchEvent
     {

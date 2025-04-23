@@ -4,7 +4,7 @@ namespace Super_Cartes_Infinies.Models
 {
 	public class MatchPlayerData : IModel
     {
-		private const int STARTING_HEALTH = 20;
+		const int STARTING_HEALTH = 20;
 
         public MatchPlayerData()
         {

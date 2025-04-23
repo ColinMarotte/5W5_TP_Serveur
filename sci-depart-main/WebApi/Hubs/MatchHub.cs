@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using Super_Cartes_Infinies.Combat;
 using Super_Cartes_Infinies.Services;
-using WebApi.Combat;
 
 namespace Super_Cartes_Infinies.Hubs;
 
