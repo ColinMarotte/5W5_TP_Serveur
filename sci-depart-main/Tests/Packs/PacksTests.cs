@@ -173,6 +173,7 @@ namespace Tests.Packs
             db.Players.RemoveRange(db.Players.Where(p => p.UserId == USERID));
             db.SaveChanges();
         }
+
         #region Bon nombre de cartes tests 
         [TestMethod]
         public async Task BonNombreDeCartesPackBasic()
@@ -287,16 +288,20 @@ namespace Tests.Packs
 
             Player player = await db.Players.Where(p => p.UserId == USERID).FirstAsync();
 
-            foreach(OwnedCard ownedCard in player.OwnedCards)
+            bool hasEpicCard = false;
+            int i = 0;
+            while(i <  player.OwnedCards.Count && !hasEpicCard)
             {
-                if(ownedCard.Card.Rarity == Rarity.Epic)
+                OwnedCard ownedCard = player.OwnedCards[i];
+                if (ownedCard.Card.Rarity == Rarity.Epic)
                 {
                     // Retourner quand au moins un carte est épique fait réussir le test
-                    return;
+                    hasEpicCard = true;
                 }
+                i++;
             }
 
-            Assert.Fail();
+            Assert.IsTrue(hasEpicCard);
         }
 
         [TestMethod]
@@ -307,22 +312,10 @@ namespace Tests.Packs
             PacksService packsService = new PacksService(db, new Super_Cartes_Infinies.Services.PlayersService(db, new Super_Cartes_Infinies.Services.StartingCardsService(db)));
 
             List<Card>? cards = await packsService.AcheterPaquet(2, USERID);
-            foreach (Card card in cards)
-            {
-                if(card.Rarity == Rarity.Common)
-                {
-                    Assert.Fail();
-                }
-            }
 
-            Player player = await db.Players.Where(p => p.UserId == USERID).FirstAsync();
-            foreach (OwnedCard ownedCard in player.OwnedCards)
-            {
-                if (ownedCard.Card.Rarity == Rarity.Common)
-                {
-                    Assert.Fail();
-                }
-            }
+            Card? card = cards!.FirstOrDefault(x => x.Rarity == Rarity.Common);
+
+            Assert.IsNull(card);
         }
 
         #endregion
