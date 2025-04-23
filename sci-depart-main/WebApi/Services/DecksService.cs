@@ -149,7 +149,12 @@ namespace Super_Cartes_Infinies.Services
             Deck currentDeck = GetCurrentDeck(playerId);
             Deck futureCurrentDeck = GetDeckFromDeckId(deckId);
 
+            Player player = _playersService.GetPlayerFromPlayerId(playerId);
+
+            player.Decks.Where(d => d.Current = true).First().Current = false;
             currentDeck.Current = false;
+
+            player.Decks.Where(d => d.Id == deckId).First().Current = true;
             futureCurrentDeck.Current = true;
             await _dbContext.SaveChangesAsync();
 
@@ -159,8 +164,8 @@ namespace Super_Cartes_Infinies.Services
         public Deck GetCurrentDeck(string playerId)
         {
             Player player = _playersService.GetPlayerFromPlayerId(playerId);
-
-            Deck currentDeck = player.Decks.Where(d => d.Current = true).First();
+            
+            Deck currentDeck = player.Decks.Where(d => d.Current == true).First();
             return currentDeck;
         }
 
@@ -184,16 +189,13 @@ namespace Super_Cartes_Infinies.Services
 
             List<OwnedCard> decksOwnedCards = deck.DeckOwnedCards.Select(d => d.OwnedCard).ToList();
             List<OwnedCard> playersOwnedCards = player.OwnedCards;
-            List<OwnedCard> cardsNotInDeck = playersOwnedCards;
+            List<OwnedCard> cardsNotInDeck = new List<OwnedCard>();
 
             foreach (OwnedCard pOwnedCard in playersOwnedCards)
             {
-                foreach (OwnedCard dOwnedCard in decksOwnedCards)
+                if (!decksOwnedCards.Contains(pOwnedCard))
                 {
-                    if (pOwnedCard == dOwnedCard)
-                    {
-                        cardsNotInDeck.Remove(pOwnedCard);
-                    }
+                    cardsNotInDeck.Add(pOwnedCard);
                 }
             }
 
