@@ -14,7 +14,6 @@ namespace Super_Cartes_Infinies.Combat
             PlayerId = player.PlayerId;
             CardId = playerCard.Id;
             BattlefieldIndex = index;
-            //playerCard.Index = -1;
             player.RemoveCardFromBattleField(playerCard);
 
         }

@@ -60,6 +60,7 @@ namespace Super_Cartes_Infinies.Models
             // Ajouter la carte au BattleField et lui donner le bon index (En fonction du nombre de cartes déjà sur le BattleField)
             playableCard.Index = BattleField.Count;
             BattleField.Add(playableCard);
+            BattleField = GetOrderedBattleField();
         }
 
         public void RemoveCardFromBattleField(PlayableCard playableCard)
@@ -75,6 +76,8 @@ namespace Super_Cartes_Infinies.Models
             BattleField.RemoveAt(playableCard.Index);
             playableCard.Index = -1;
             Graveyard.Add(playableCard);
+            BattleField = GetOrderedBattleField();
+
         }
     }
 }

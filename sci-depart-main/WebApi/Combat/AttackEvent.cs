@@ -9,29 +9,35 @@ namespace Super_Cartes_Infinies.Combat
         public int PlayerId { get; set; }
 
 
-        public AttackEvent(Match match, MatchPlayerData currentPlayer, MatchPlayerData defendingPlayer, PlayableCard currentPlayerCard, PlayableCard? oppositePlayerCard, int index)
+        public AttackEvent(Match match, MatchPlayerData attackingPlayer, MatchPlayerData defendingPlayer, int index)
         {
-            PlayerId = currentPlayer.PlayerId;
+            PlayerId = attackingPlayer.PlayerId;
+            PlayableCard playerCard = attackingPlayer.BattleField.ElementAt(index);
+            PlayableCard? oppositePlayerCard = null;
 
+            if (index < defendingPlayer.BattleField.Count())
+            {
+                oppositePlayerCard = defendingPlayer.BattleField.ElementAt(index);
+            }
             Events = new List<MatchEvent>();
             if (oppositePlayerCard == null)
             {
-                Events.Add(new PlayerDamageEvent(match, currentPlayer, defendingPlayer, currentPlayerCard.Attack));
+                Events.Add(new PlayerDamageEvent(match, defendingPlayer, attackingPlayer, playerCard.Attack));
             }
             else
             {
-                if (currentPlayerCard.HasPower(Power.FIRST_STRIKE_ID) && currentPlayerCard.Attack > oppositePlayerCard.Health)
+                if (playerCard.HasPower(Power.FIRST_STRIKE_ID) && playerCard.Attack >= oppositePlayerCard.Health)
                 {
-                    Events.Add(new FirstStrikeEvent(currentPlayer, currentPlayerCard));
+                    Events.Add(new FirstStrikeEvent(attackingPlayer, playerCard));
 
 
-                    Events.Add(new CardDamageEvent(match, defendingPlayer, currentPlayer, currentPlayerCard, oppositePlayerCard.Attack, true, index));
+                    Events.Add(new CardDamageEvent(match, defendingPlayer, attackingPlayer, oppositePlayerCard.Attack, true, index));
 
                 }
                 else
                 {
-                    Events.Add(new CardDamageEvent(match, defendingPlayer, currentPlayer, currentPlayerCard, oppositePlayerCard.Attack, true, index));
-                    Events.Add(new CardDamageEvent(match, currentPlayer, defendingPlayer, oppositePlayerCard, currentPlayerCard.Attack, false, index));
+                    Events.Add(new CardDamageEvent(match, defendingPlayer, attackingPlayer, playerCard.Attack, true, index));
+                    Events.Add(new CardDamageEvent(match, attackingPlayer, defendingPlayer, oppositePlayerCard.Attack, false, index));
                 }
             }
             

@@ -12,35 +12,13 @@ namespace Super_Cartes_Infinies.Combat
         public CombatEvent(Match match, MatchPlayerData currentPlayerData, MatchPlayerData oppositePlayerData)
         {
             Events = new List<MatchEvent>();
-            IEnumerable<PlayableCard> currentPlayerBattleField = currentPlayerData.GetOrderedBattleField();
-            IEnumerable<PlayableCard> oppositePlayerBattleField = oppositePlayerData.GetOrderedBattleField();
+            currentPlayerData.BattleField = currentPlayerData.GetOrderedBattleField();
+            oppositePlayerData.BattleField = oppositePlayerData.GetOrderedBattleField();
             PlayerId = currentPlayerData.PlayerId;
-            if(currentPlayerBattleField.Count() <= 0)
+
+            for (int i = currentPlayerData.BattleField.Count()-1; i >= 0; i--)
             {
-                return;
-            }
-            for (int i = currentPlayerBattleField.Count()-1; i >= 0; i--)
-            {
-                PlayableCard playerCard = currentPlayerBattleField.ElementAt(i);
-                PlayableCard? oppositePlayerCard = null;
-                if (i < oppositePlayerBattleField.Count())
-                {
-                    oppositePlayerCard = oppositePlayerBattleField.ElementAt(i);
-                }
-
-
-                    Events.Add(new AttackEvent(match, currentPlayerData, oppositePlayerData, playerCard, oppositePlayerCard, i));
-                //if (oppositePlayerCard == null)
-                //{
-                //    //CardAttackEvent
-
-                //}
-                //else
-                //{
-                //    //attackEvent
-                //    Events.Add(new AttackEvent(match, currentPlayerData, oppositePlayerData, playerCard, oppositePlayerCard));
-
-                //}
+                Events.Add(new CardActivationEvent(match, currentPlayerData, oppositePlayerData, i));
             }
         }
     }

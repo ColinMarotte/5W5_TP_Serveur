@@ -9,7 +9,7 @@ namespace Super_Cartes_Infinies.Combat
         public int PlayerId { get; set; }
         public int Value { get; set; }
 
-        public PlayerDamageEvent(Match match, MatchPlayerData attackingPlayer, MatchPlayerData defendingPlayer, int value)
+        public PlayerDamageEvent(Match match, MatchPlayerData defendingPlayer, MatchPlayerData attackingPlayer, int value)
         {
             PlayerId = defendingPlayer.PlayerId;
             Value = value;
