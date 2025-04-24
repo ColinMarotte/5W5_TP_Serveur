@@ -31,7 +31,7 @@ namespace Super_Cartes_Infinies.Combat
                     Events.Add(new FirstStrikeEvent(attackingPlayer, playerCard));
 
 
-                    Events.Add(new CardDamageEvent(match, defendingPlayer, attackingPlayer, oppositePlayerCard.Attack, true, index));
+                    Events.Add(new CardDamageEvent(match, defendingPlayer, attackingPlayer, playerCard.Attack, true, index));
 
                 }
                 else
