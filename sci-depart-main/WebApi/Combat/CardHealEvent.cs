@@ -10,12 +10,14 @@ namespace Super_Cartes_Infinies.Combat
         public int PlayerId { get; set; }
         public int PlayableCardId { get; set; }
         public int Value { get; set; }
+        public int BattlefieldIndex { get; set; }
 
-        public CardHealEvent(MatchPlayerData playerData, PlayableCard playableCard, int value)
+        public CardHealEvent(MatchPlayerData playerData, PlayableCard playableCard, int value, int index)
         {
             this.PlayerId = playerData.PlayerId;
             PlayableCardId = playableCard.Id;
             Value = value;
+            BattlefieldIndex = index;
             playableCard.Health += value;
         }
     }
