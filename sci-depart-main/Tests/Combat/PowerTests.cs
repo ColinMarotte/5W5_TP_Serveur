@@ -265,7 +265,7 @@ namespace Tests.Services
 
             CardPower cardPower = new CardPower()
             {
-                Id = 1,
+                CardPowerId = 1,
                 PowerId = power.Id,
                 CardId = _cardA.Id
             };
@@ -286,7 +286,7 @@ namespace Tests.Services
 
             CardPower cardPower = new CardPower()
             {
-                Id = 1,
+                CardPowerId = 1,
                 PowerId = power.Id,
                 CardId = _cardA.Id
             };
@@ -307,7 +307,7 @@ namespace Tests.Services
 
             CardPower cardPower = new CardPower()
             {
-                Id = 1,
+                CardPowerId = 1,
                 PowerId = power.Id,
                 CardId = _cardA.Id,
                 Value = 5
@@ -330,7 +330,7 @@ namespace Tests.Services
 
             CardPower cardPower = new CardPower()
             {
-                Id = 1,
+                CardPowerId = 1,
                 PowerId = power.Id,
                 CardId = _cardA.Id,
                 Value = 5

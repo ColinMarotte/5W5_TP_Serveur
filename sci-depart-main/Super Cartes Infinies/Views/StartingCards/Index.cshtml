@@ -23,6 +23,9 @@
                 @Html.DisplayNameFor(model => model.Card.Cost)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Card.Rarity)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Card.ImageUrl)
             </th>
             <th></th>
@@ -43,6 +46,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Card.Cost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Card.Rarity)
                 </td>
                 <td>
                     <img src="@Html.DisplayFor(modelItem => item.Card.ImageUrl)" height="100" alt="Image de la carte" />

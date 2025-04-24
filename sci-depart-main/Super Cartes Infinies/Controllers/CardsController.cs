@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using Super_Cartes_Infinies.Data;
 using Super_Cartes_Infinies.Models;
 using Super_Cartes_Infinies.Services;
@@ -27,7 +29,6 @@ namespace Super_Cartes_Infinies.Controllers
         {
             return View(await _cardsService.GetAllCards());
         }
-
         // GET: Cards/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -38,14 +39,20 @@ namespace Super_Cartes_Infinies.Controllers
             try
             {
                 Card card = await _cardsService.GetCard(id);
+                var cards = await _cardsService.GetAllCards();
+
+                var cardPowers = cards.ToDictionary(
+                    card => card.Id,
+                    card => card.CardPowers.Select(cp => cp.Power).ToList() //list // 
+                );
+                ViewBag.CardPowers = cardPowers;
+
                 return View(card);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return NotFound();
             }
-
-
         }
 
         // GET: Cards/Create
@@ -53,13 +60,12 @@ namespace Super_Cartes_Infinies.Controllers
         {
             return View();
         }
-
         // POST: Cards/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Attack,Health,Cost,ImageUrl")] Card card)
+        public async Task<IActionResult> Create([Bind("Id,Name,Attack,Health,Cost,Rarity,ImageUrl")] Card card)
         {
             if (ModelState.IsValid)
             {
@@ -79,9 +85,17 @@ namespace Super_Cartes_Infinies.Controllers
             try
             {
                 var card = await _cardsService.GetCard(id);
+                ViewData["cardList"] = new SelectListItem()
+                {
+                    Text = "Rarity",
+                    Value = card.Rarity.ToString()
+                };
+                ViewBag.AllPowers = await _cardsService.GetAllPowers();
+                ViewBag.SelectedPowers = card.CardPowers.Select(cp => cp.PowerId).ToList();
+                ViewBag.CardPowers = await _cardsService.GetPowersById(id.Value);
                 return View(card);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return NotFound();
             }
@@ -92,7 +106,7 @@ namespace Super_Cartes_Infinies.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Attack,Health,Cost,ImageUrl")] Card card)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Attack,Health,Cost,Rarity,ImageUrl")] Card card)
         {
             if (id != card.Id)
             {
@@ -101,32 +115,57 @@ namespace Super_Cartes_Infinies.Controllers
             try
             {
                 var oldCard = await _cardsService.GetCard(id);
-                if(oldCard == null)
+                if (oldCard == null)
                 {
                     return NotFound();
                 }
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        await _cardsService.EditCard(id, card);
+
+                    }
+                    catch (Exception e)
+                    {
+                        return NotFound();
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+                return View();
             }
-            catch (Exception e)
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddPower(int _id, int newPowerId, int newPowerValue)
+        {
+            var card = await _cardsService.GetCard(_id);
+            if (card == null)
             {
                 return NotFound();
             }
 
-
-            if (ModelState.IsValid)
+            bool powerAlreadyExists = await _cardsService.CardHasPower(_id, newPowerId);
+            if (!powerAlreadyExists)
             {
-                Card? newCard = await _cardsService.EditCard(id, card);
-
-                if (newCard == null)
+                var newCardPower = new CardPower
                 {
-                    return StatusCode(StatusCodes.Status500InternalServerError);
-                }
+                    PowerId = newPowerId,
+                    Value = newPowerValue,
+                    CardId = _id
+                };
 
-                return RedirectToAction(nameof(Index));
+                await _cardsService.AddCardPower(newCardPower);
             }
-            return View(card);
+
+            return RedirectToAction(nameof(Edit), new { id = _id });
         }
 
-        // GET: Cards/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -164,13 +203,29 @@ namespace Super_Cartes_Infinies.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            catch(Exception e)
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeletePower(int cardId, int? powerId)
+        {
+            var card = await _cardsService.GetCard(cardId);
+            if (card == null)
             {
                 return NotFound();
             }
 
+            var cardPower = card.CardPowers.FirstOrDefault(cp => cp.PowerId == powerId.Value);
+            if (cardPower != null)
+            {
+                await _cardsService.DeleteCardPower(cardPower);
+            }
+
+            return RedirectToAction(nameof(Edit), new { id = cardId });
         }
-
-
     }
 }
