@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Models.Migrations
 {
     /// <inheritdoc />
-    public partial class seed : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -62,7 +62,9 @@ namespace Models.Migrations
                     Attack = table.Column<int>(type: "int", nullable: false),
                     Health = table.Column<int>(type: "int", nullable: false),
                     Cost = table.Column<int>(type: "int", nullable: false),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rarity = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -211,6 +213,7 @@ namespace Models.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Balance = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -382,6 +385,7 @@ namespace Models.Migrations
                     CardId = table.Column<int>(type: "int", nullable: false),
                     Health = table.Column<int>(type: "int", nullable: false),
                     Attack = table.Column<int>(type: "int", nullable: false),
+                    Index = table.Column<int>(type: "int", nullable: false),
                     MatchPlayerDataId = table.Column<int>(type: "int", nullable: true),
                     MatchPlayerDataId1 = table.Column<int>(type: "int", nullable: true),
                     MatchPlayerDataId2 = table.Column<int>(type: "int", nullable: true),
@@ -464,28 +468,28 @@ namespace Models.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "11111111-1111-1111-1111-111111111111", 0, "22fb3263-6c50-448f-b9d3-2b86918d8cfb", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEElXnI0JX+++7cZxG64W2+SGy5myL2K1GJTHRxDPnaScdSyHKEHQLu3DEUHnj38IfQ==", null, false, "3f97d0fd-5acd-4a6a-800b-9a50a83129e0", false, "admin@admin.com" },
-                    { "User1Id", 0, "5ec9c6f3-01d3-4b46-864f-8a590f7f01d6", null, false, false, null, null, null, null, null, false, "56a567b5-5d17-458f-858e-38525cd26235", false, null },
-                    { "User2Id", 0, "734b48d2-b5cb-4e54-a953-d0d9f6848799", null, false, false, null, null, null, null, null, false, "0ade55ee-83df-4241-a9fd-7ea262a51288", false, null }
+                    { "11111111-1111-1111-1111-111111111111", 0, "949a6f10-fdfa-4339-9bfb-de19dd607015", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEKptjrwhRJtE1qetsI0U22eALfWCpCov5nn0GOJM5L9WPlF2mAv4KwLSYgI1l/5uEQ==", null, false, "ad3c99ae-89ef-444c-bbb1-773ff0c7a455", false, "admin@admin.com" },
+                    { "User1Id", 0, "02bac4e4-54c4-47f0-9a40-b2ffdacfbadc", null, false, false, null, null, null, null, null, false, "c199fed7-03fb-4fa3-8110-4f3f7ab7df6c", false, null },
+                    { "User2Id", 0, "59a05804-6d29-4084-ad67-6c43b2b32063", null, false, false, null, null, null, null, null, false, "613c0efd-88c2-4a96-82c3-bf49d53993d9", false, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Cards",
-                columns: new[] { "Id", "Attack", "Cost", "Health", "ImageUrl", "Name" },
+                columns: new[] { "Id", "Attack", "Cost", "Health", "ImageUrl", "Name", "Price", "Rarity" },
                 values: new object[,]
                 {
-                    { 1, 3, 3, 3, "https://i.pinimg.com/originals/a8/16/49/a81649bd4b0f032ce633161c5a076b87.jpg", "Chat Dragon" },
-                    { 2, 2, 3, 5, "https://i0.wp.com/thediscerningcat.com/wp-content/uploads/2021/02/tabby-cat-wearing-sunglasses.jpg", "Chat Awesome" },
-                    { 3, 2, 1, 1, "https://cdn.wallpapersafari.com/27/53/SZ8PO9.jpg", "Chatton Laser" },
-                    { 4, 8, 4, 4, "https://wallpapers.com/images/hd/epic-cat-poster-baavft05ylgta4j8.jpg", "Chat Spacial" },
-                    { 5, 7, 5, 7, "https://i.etsystatic.com/6230905/r/il/32aa5a/3474618751/il_fullxfull.3474618751_mfvf.jpg", "Chat Guerrier" },
-                    { 6, 4, 2, 2, "https://store.playstation.com/store/api/chihiro/00_09_000/container/AU/en/99/EP2402-CUSA05624_00-ETH0000000002875/0/image?_version=00_09_000&platform=chihiro&bg_color=000000&opacity=100&w=720&h=720", "Chat Laser" },
-                    { 7, 6, 4, 3, "https://images.squarespace-cdn.com/content/51b3dc8ee4b051b96ceb10de/1394662654865-JKOZ7ZFF39247VYDTGG9/hilarious-jedi-cats-fight-video-preview.jpg?content-type=image%2Fjpeg", "Jedi Chat" },
-                    { 8, 1, 2, 9, "https://i.pinimg.com/736x/48/ba/94/48ba9440c4f87e42af99774ec51f53a1.jpg", "Blob Chat" },
-                    { 9, 5, 2, 1, "https://townsquare.media/site/142/files/2011/08/jedicats.jpg?w=980&q=75", "Jedi Chatton" },
-                    { 10, 6, 2, 1, "https://cdn.theatlantic.com/thumbor/fOZjgqHH0RmXA1A5ek-yDz697W4=/133x0:2091x1020/1200x625/media/img/mt/2015/12/RTRD62Q/original.jpg", "Chat Furtif" },
-                    { 11, 6, 4, 6, "https://i.imgur.com/07zax4t.jpeg", "Grosse Minoune" },
-                    { 12, 2, 2, 4, "https://i.imgur.com/QuDe5RH.jpeg", "Petite Minoune" }
+                    { 1, 3, 3, 3, "https://i.pinimg.com/originals/a8/16/49/a81649bd4b0f032ce633161c5a076b87.jpg", "Chat Dragon", 50, 1 },
+                    { 2, 2, 3, 5, "https://i0.wp.com/thediscerningcat.com/wp-content/uploads/2021/02/tabby-cat-wearing-sunglasses.jpg", "Chat Awesome", 10, 0 },
+                    { 3, 2, 1, 1, "https://cdn.wallpapersafari.com/27/53/SZ8PO9.jpg", "Chatton Laser", 200, 3 },
+                    { 4, 8, 4, 4, "https://wallpapers.com/images/hd/epic-cat-poster-baavft05ylgta4j8.jpg", "Chat Spacial", 200, 3 },
+                    { 5, 7, 5, 7, "https://i.etsystatic.com/6230905/r/il/32aa5a/3474618751/il_fullxfull.3474618751_mfvf.jpg", "Chat Guerrier", 100, 2 },
+                    { 6, 4, 2, 2, "https://store.playstation.com/store/api/chihiro/00_09_000/container/AU/en/99/EP2402-CUSA05624_00-ETH0000000002875/0/image?_version=00_09_000&platform=chihiro&bg_color=000000&opacity=100&w=720&h=720", "Chat Laser", 50, 1 },
+                    { 7, 6, 4, 3, "https://images.squarespace-cdn.com/content/51b3dc8ee4b051b96ceb10de/1394662654865-JKOZ7ZFF39247VYDTGG9/hilarious-jedi-cats-fight-video-preview.jpg?content-type=image%2Fjpeg", "Jedi Chat", 100, 2 },
+                    { 8, 1, 2, 9, "https://i.pinimg.com/736x/48/ba/94/48ba9440c4f87e42af99774ec51f53a1.jpg", "Blob Chat", 10, 0 },
+                    { 9, 5, 2, 1, "https://townsquare.media/site/142/files/2011/08/jedicats.jpg?w=980&q=75", "Jedi Chatton", 50, 1 },
+                    { 10, 6, 2, 1, "https://cdn.theatlantic.com/thumbor/fOZjgqHH0RmXA1A5ek-yDz697W4=/133x0:2091x1020/1200x625/media/img/mt/2015/12/RTRD62Q/original.jpg", "Chat Furtif", 10, 0 },
+                    { 11, 6, 4, 6, "https://i.imgur.com/07zax4t.jpeg", "Grosse Minoune", 10, 0 },
+                    { 12, 2, 2, 4, "https://i.imgur.com/QuDe5RH.jpeg", "Petite Minoune", 10, 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -517,17 +521,19 @@ namespace Models.Migrations
                     { 1, 1, 1, 0 },
                     { 2, 2, 2, 1 },
                     { 3, 3, 3, 5 },
-                    { 4, 4, 4, 3 }
+                    { 4, 4, 4, 3 },
+                    { 5, 4, 3, 3 },
+                    { 6, 1, 3, 3 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Players",
-                columns: new[] { "Id", "Name", "UserId" },
+                columns: new[] { "Id", "Balance", "Name", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "Test player 1", "User1Id" },
-                    { 2, "Test player 2", "User2Id" },
-                    { 3, "Admin", "11111111-1111-1111-1111-111111111111" }
+                    { 1, 0, "Test player 1", "User1Id" },
+                    { 2, 0, "Test player 2", "User2Id" },
+                    { 3, 0, "Admin", "11111111-1111-1111-1111-111111111111" }
                 });
 
             migrationBuilder.InsertData(

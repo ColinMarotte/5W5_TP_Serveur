@@ -12,15 +12,15 @@ using Super_Cartes_Infinies.Data;
 namespace Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250416202232_seed")]
-    partial class seed
+    [Migration("20250424150242_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
@@ -157,15 +157,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "22fb3263-6c50-448f-b9d3-2b86918d8cfb",
+                            ConcurrencyStamp = "949a6f10-fdfa-4339-9bfb-de19dd607015",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEElXnI0JX+++7cZxG64W2+SGy5myL2K1GJTHRxDPnaScdSyHKEHQLu3DEUHnj38IfQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKptjrwhRJtE1qetsI0U22eALfWCpCov5nn0GOJM5L9WPlF2mAv4KwLSYgI1l/5uEQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3f97d0fd-5acd-4a6a-800b-9a50a83129e0",
+                            SecurityStamp = "ad3c99ae-89ef-444c-bbb1-773ff0c7a455",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -173,22 +173,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5ec9c6f3-01d3-4b46-864f-8a590f7f01d6",
+                            ConcurrencyStamp = "02bac4e4-54c4-47f0-9a40-b2ffdacfbadc",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "56a567b5-5d17-458f-858e-38525cd26235",
+                            SecurityStamp = "c199fed7-03fb-4fa3-8110-4f3f7ab7df6c",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "734b48d2-b5cb-4e54-a953-d0d9f6848799",
+                            ConcurrencyStamp = "59a05804-6d29-4084-ad67-6c43b2b32063",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0ade55ee-83df-4241-a9fd-7ea262a51288",
+                            SecurityStamp = "613c0efd-88c2-4a96-82c3-bf49d53993d9",
                             TwoFactorEnabled = false
                         });
                 });
@@ -310,6 +310,12 @@ namespace Models.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Price")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rarity")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.ToTable("Cards");
@@ -322,7 +328,9 @@ namespace Models.Migrations
                             Cost = 3,
                             Health = 3,
                             ImageUrl = "https://i.pinimg.com/originals/a8/16/49/a81649bd4b0f032ce633161c5a076b87.jpg",
-                            Name = "Chat Dragon"
+                            Name = "Chat Dragon",
+                            Price = 50,
+                            Rarity = 1
                         },
                         new
                         {
@@ -331,7 +339,9 @@ namespace Models.Migrations
                             Cost = 3,
                             Health = 5,
                             ImageUrl = "https://i0.wp.com/thediscerningcat.com/wp-content/uploads/2021/02/tabby-cat-wearing-sunglasses.jpg",
-                            Name = "Chat Awesome"
+                            Name = "Chat Awesome",
+                            Price = 10,
+                            Rarity = 0
                         },
                         new
                         {
@@ -340,7 +350,9 @@ namespace Models.Migrations
                             Cost = 1,
                             Health = 1,
                             ImageUrl = "https://cdn.wallpapersafari.com/27/53/SZ8PO9.jpg",
-                            Name = "Chatton Laser"
+                            Name = "Chatton Laser",
+                            Price = 200,
+                            Rarity = 3
                         },
                         new
                         {
@@ -349,7 +361,9 @@ namespace Models.Migrations
                             Cost = 4,
                             Health = 4,
                             ImageUrl = "https://wallpapers.com/images/hd/epic-cat-poster-baavft05ylgta4j8.jpg",
-                            Name = "Chat Spacial"
+                            Name = "Chat Spacial",
+                            Price = 200,
+                            Rarity = 3
                         },
                         new
                         {
@@ -358,7 +372,9 @@ namespace Models.Migrations
                             Cost = 5,
                             Health = 7,
                             ImageUrl = "https://i.etsystatic.com/6230905/r/il/32aa5a/3474618751/il_fullxfull.3474618751_mfvf.jpg",
-                            Name = "Chat Guerrier"
+                            Name = "Chat Guerrier",
+                            Price = 100,
+                            Rarity = 2
                         },
                         new
                         {
@@ -367,7 +383,9 @@ namespace Models.Migrations
                             Cost = 2,
                             Health = 2,
                             ImageUrl = "https://store.playstation.com/store/api/chihiro/00_09_000/container/AU/en/99/EP2402-CUSA05624_00-ETH0000000002875/0/image?_version=00_09_000&platform=chihiro&bg_color=000000&opacity=100&w=720&h=720",
-                            Name = "Chat Laser"
+                            Name = "Chat Laser",
+                            Price = 50,
+                            Rarity = 1
                         },
                         new
                         {
@@ -376,7 +394,9 @@ namespace Models.Migrations
                             Cost = 4,
                             Health = 3,
                             ImageUrl = "https://images.squarespace-cdn.com/content/51b3dc8ee4b051b96ceb10de/1394662654865-JKOZ7ZFF39247VYDTGG9/hilarious-jedi-cats-fight-video-preview.jpg?content-type=image%2Fjpeg",
-                            Name = "Jedi Chat"
+                            Name = "Jedi Chat",
+                            Price = 100,
+                            Rarity = 2
                         },
                         new
                         {
@@ -385,7 +405,9 @@ namespace Models.Migrations
                             Cost = 2,
                             Health = 9,
                             ImageUrl = "https://i.pinimg.com/736x/48/ba/94/48ba9440c4f87e42af99774ec51f53a1.jpg",
-                            Name = "Blob Chat"
+                            Name = "Blob Chat",
+                            Price = 10,
+                            Rarity = 0
                         },
                         new
                         {
@@ -394,7 +416,9 @@ namespace Models.Migrations
                             Cost = 2,
                             Health = 1,
                             ImageUrl = "https://townsquare.media/site/142/files/2011/08/jedicats.jpg?w=980&q=75",
-                            Name = "Jedi Chatton"
+                            Name = "Jedi Chatton",
+                            Price = 50,
+                            Rarity = 1
                         },
                         new
                         {
@@ -403,7 +427,9 @@ namespace Models.Migrations
                             Cost = 2,
                             Health = 1,
                             ImageUrl = "https://cdn.theatlantic.com/thumbor/fOZjgqHH0RmXA1A5ek-yDz697W4=/133x0:2091x1020/1200x625/media/img/mt/2015/12/RTRD62Q/original.jpg",
-                            Name = "Chat Furtif"
+                            Name = "Chat Furtif",
+                            Price = 10,
+                            Rarity = 0
                         },
                         new
                         {
@@ -412,7 +438,9 @@ namespace Models.Migrations
                             Cost = 4,
                             Health = 6,
                             ImageUrl = "https://i.imgur.com/07zax4t.jpeg",
-                            Name = "Grosse Minoune"
+                            Name = "Grosse Minoune",
+                            Price = 10,
+                            Rarity = 0
                         },
                         new
                         {
@@ -421,7 +449,9 @@ namespace Models.Migrations
                             Cost = 2,
                             Health = 4,
                             ImageUrl = "https://i.imgur.com/QuDe5RH.jpeg",
-                            Name = "Petite Minoune"
+                            Name = "Petite Minoune",
+                            Price = 10,
+                            Rarity = 0
                         });
                 });
 
@@ -477,6 +507,20 @@ namespace Models.Migrations
                             CardPowerId = 4,
                             CardId = 4,
                             PowerId = 4,
+                            Value = 3
+                        },
+                        new
+                        {
+                            CardPowerId = 5,
+                            CardId = 4,
+                            PowerId = 3,
+                            Value = 3
+                        },
+                        new
+                        {
+                            CardPowerId = 6,
+                            CardId = 1,
+                            PowerId = 3,
                             Value = 3
                         });
                 });
@@ -670,6 +714,9 @@ namespace Models.Migrations
                     b.Property<int>("Health")
                         .HasColumnType("int");
 
+                    b.Property<int>("Index")
+                        .HasColumnType("int");
+
                     b.Property<int?>("MatchPlayerDataId")
                         .HasColumnType("int");
 
@@ -705,6 +752,9 @@ namespace Models.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Balance")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -723,18 +773,21 @@ namespace Models.Migrations
                         new
                         {
                             Id = 1,
+                            Balance = 0,
                             Name = "Test player 1",
                             UserId = "User1Id"
                         },
                         new
                         {
                             Id = 2,
+                            Balance = 0,
                             Name = "Test player 2",
                             UserId = "User2Id"
                         },
                         new
                         {
                             Id = 3,
+                            Balance = 0,
                             Name = "Admin",
                             UserId = "11111111-1111-1111-1111-111111111111"
                         });
