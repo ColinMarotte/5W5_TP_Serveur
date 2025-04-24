@@ -10,7 +10,7 @@
 <h4>Cartes Modèle</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="column">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
@@ -49,60 +49,73 @@
                 <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Accepter" class="btn btn-primary" />
+                <input type="submit" value="Accepter" class="btn btn-primary" style="margin-top: 12px" />
+            </div>
+            <div>
+                <a asp-action="Index">Retour à la liste</a>
             </div>
         </form>
+    </div>
+
+    <div class="column">
+	    <ul>
+		    @foreach (var cardpower in Model.CardPowers)
+		    {
+
+			    <li>
+				    <p>
+					    @cardpower.Power.Icone @cardpower.Power.Name @cardpower.Value
+					    <input type="hidden" name="newPowerId" value="@cardpower.PowerId" />
+				    </p>
+				    <form asp-action="DeletePower" method="post">
+					    <input type="hidden" name="cardId" value="@Model.Id" />
+					    <input type="hidden" name="powerId" value="@cardpower.PowerId" />
+					    <button type="submit" class="btn btn-danger">X</button>
+				    </form>
+			    </li>
+
+		    }
+	    </ul>
+
+	    <form asp-action="AddPower" method="post" class="row">
+		    <input type="hidden" name="_id" value="@Model.Id" asp-for="Id" />
+		    <div class="col-md-6">
+			    <div class="form-group">
+				    <select name="newPowerId" class="form-control">
+					    @foreach (var power in allPowers)
+					    {
+						    var dejaUnPouvoir = Model.CardPowers.Any(cp => cp.PowerId == power.Id);
+						    if (!dejaUnPouvoir)
+						    {
+							    <option value="@power.Id"> @power.Icone @power.Name</option>
+						    }
+					    }
+				    </select><br />
+                    @if (Model.CardPowers.Count<=4)
+                    {
+                        <input type="number" name="newPowerValue" placeholder="Valeur" value="0" class="form-control" /> <br />
+				    <button type="submit" class="btn btn-primary">+</button>
+                    }
+                    
+			    </div>
+		    </div>
+	    </form>        
     </div>
 </div>
 
 
-	<div class="col-md-6">
+<style>
+    .column {
+        float: left;
+        width: 50%;
+    }
 
-
-		<ul>
-			@foreach (var cardpower in Model.CardPowers)
-			{
-
-				<li>
-					<p>
-						@cardpower.Power.Icone @cardpower.Power.Name @cardpower.Value
-						<input type="hidden" name="newPowerId" value="@cardpower.PowerId" />
-					</p>
-					<form asp-action="DeletePower" method="post">
-						<input type="hidden" name="cardId" value="@Model.Id" />
-						<input type="hidden" name="powerId" value="@cardpower.PowerId" />
-						<button type="submit" class="btn btn-danger">X</button>
-					</form>
-				</li>
-
-			}
-		</ul>
-
-		<form asp-action="AddPower" method="post" class="row">
-			<input type="hidden" name="_id" value="@Model.Id" asp-for="Id" />
-			<div class="col-md-6">
-				<div class="form-group">
-					<select name="newPowerId" class="form-control">
-						@foreach (var power in allPowers)
-						{
-							var dejaUnPouvoir = Model.CardPowers.Any(cp => cp.PowerId == power.Id);
-							if (!dejaUnPouvoir)
-							{
-								<option value="@power.Id"> @power.Icone @power.Name</option>
-							}
-						}
-					</select><br />
-					<input type="number" name="newPowerValue" placeholder="Valeur" value="0" class="form-control" /> <br />
-					<button type="submit" class="btn btn-primary">+</button>
-				</div>
-			</div>
-		</form>
-	</div>
-
-</div>
-<div>
-	<a asp-action="Index">Retour à la liste</a>
-</div>
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+</style>
 @section Scripts {
 	@{
 		await Html.RenderPartialAsync("_ValidationScriptsPartial");
