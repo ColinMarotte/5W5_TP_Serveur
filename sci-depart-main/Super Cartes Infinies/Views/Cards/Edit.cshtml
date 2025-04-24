@@ -1,8 +1,8 @@
 ﻿@model Super_Cartes_Infinies.Models.Card
 
 @{
-	ViewData["Title"] = "Modifier";
-	var allPowers = ViewBag.AllPowers as List<Super_Cartes_Infinies.Models.Power>;
+    ViewData["Title"] = "Modifier";
+    var allPowers = ViewBag.AllPowers as List<Super_Cartes_Infinies.Models.Power>;
 }
 
 <h1>Modifier</h1>
@@ -58,48 +58,50 @@
     </div>
 
     <div class="column">
-	    <ul>
-		    @foreach (var cardpower in Model.CardPowers)
-		    {
+        <ul>
+            @foreach (var cardpower in Model.CardPowers)
+            {
 
-			    <li>
-				    <p>
-					    @cardpower.Power.Icone @cardpower.Power.Name @cardpower.Value
-					    <input type="hidden" name="newPowerId" value="@cardpower.PowerId" />
-				    </p>
-				    <form asp-action="DeletePower" method="post">
-					    <input type="hidden" name="cardId" value="@Model.Id" />
-					    <input type="hidden" name="powerId" value="@cardpower.PowerId" />
-					    <button type="submit" class="btn btn-danger">X</button>
-				    </form>
-			    </li>
+                <li>
+                    <p>
+                        @cardpower.Power.Icone @cardpower.Power.Name @cardpower.Value
+                        <input type="hidden" name="newPowerId" value="@cardpower.PowerId" />
+                    </p>
+                    <form asp-action="DeletePower" method="post">
+                        <input type="hidden" name="cardId" value="@Model.Id" />
+                        <input type="hidden" name="powerId" value="@cardpower.PowerId" />
+                        <button type="submit" class="btn btn-danger">X</button>
+                    </form>
+                </li>
 
-		    }
-	    </ul>
+            }
+        </ul>
 
-	    <form asp-action="AddPower" method="post" class="row">
-		    <input type="hidden" name="_id" value="@Model.Id" asp-for="Id" />
-		    <div class="col-md-6">
-			    <div class="form-group">
-				    <select name="newPowerId" class="form-control">
-					    @foreach (var power in allPowers)
-					    {
-						    var dejaUnPouvoir = Model.CardPowers.Any(cp => cp.PowerId == power.Id);
-						    if (!dejaUnPouvoir)
-						    {
-							    <option value="@power.Id"> @power.Icone @power.Name</option>
-						    }
-					    }
-				    </select><br />
-                    @if (Model.CardPowers.Count<=4)
+        <form asp-action="AddPower" method="post" class="row">
+            <input type="hidden" name="_id" value="@Model.Id" asp-for="Id" />
+            <div class="col-md-6">
+                <div class="form-group">
+                    @if (Model.CardPowers.Count < 4)
                     {
+                        <select name="newPowerId" class="form-control">
+                            @foreach (var power in allPowers)
+                            {
+                                var dejaUnPouvoir = Model.CardPowers.Any(cp => cp.PowerId == power.Id);
+                                if (!dejaUnPouvoir)
+                                {
+                                    <option value="@power.Id"> @power.Icone @power.Name</option>
+                                }
+                            }
+                        </select>
+
+                        <br />
                         <input type="number" name="newPowerValue" placeholder="Valeur" value="0" class="form-control" /> <br />
-				    <button type="submit" class="btn btn-primary">+</button>
+                        <button type="submit" class="btn btn-primary">+</button>
                     }
-                    
-			    </div>
-		    </div>
-	    </form>        
+
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 
@@ -117,8 +119,8 @@
     }
 </style>
 @section Scripts {
-	@{
-		await Html.RenderPartialAsync("_ValidationScriptsPartial");
-	}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 
 }
