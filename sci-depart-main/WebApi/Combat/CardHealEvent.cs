@@ -12,8 +12,9 @@ namespace Super_Cartes_Infinies.Combat
         public int Value { get; set; }
         public int BattlefieldIndex { get; set; }
 
-        public CardHealEvent(MatchPlayerData playerData, PlayableCard playableCard, int value, int index)
+        public CardHealEvent(MatchPlayerData playerData, int value, int index)
         {
+            PlayableCard playableCard = playerData.BattleField[index];
             this.PlayerId = playerData.PlayerId;
             PlayableCardId = playableCard.Id;
             Value = value;

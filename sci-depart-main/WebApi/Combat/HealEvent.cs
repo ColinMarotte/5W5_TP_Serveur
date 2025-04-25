@@ -18,19 +18,12 @@ namespace Super_Cartes_Infinies.Combat
             for (int i = 0; i < playerData.BattleField.Count; i++)
             {
                 PlayableCard card = playerData.BattleField[i];
-                var healValue = 0;
-                if(card.Health == card.Card.Health) { 
+                if(card.Health < card.Card.Health) { 
+                    var healValue = Math.Min(Value, card.Card.Health- card.Health);
+                    Events.Add(new CardHealEvent(playerData, healValue, i));
                 }
-                else if(card.Health+Value >= card.Card.Health && card.Health != card.Card.Health)
-                {
-                    healValue = card.Card.Health - card.Health;
-                }
-                else
-                {
-                    healValue = Value;
-                }
+                
 
-                Events.Add(new CardHealEvent(playerData, playableCard, healValue, i));
             }
         }
     }

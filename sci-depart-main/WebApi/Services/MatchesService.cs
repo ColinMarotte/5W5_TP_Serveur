@@ -73,6 +73,8 @@ namespace Super_Cartes_Infinies.Services
             }
 
             if(match != null) {
+                match.PlayerDataA.BattleField = match.PlayerDataA.GetOrderedBattleField();
+                match.PlayerDataB.BattleField = match.PlayerDataB.GetOrderedBattleField();
                 return new JoiningMatchData
                 {
                     Match = match,
