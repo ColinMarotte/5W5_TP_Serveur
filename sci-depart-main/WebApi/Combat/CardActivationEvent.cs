@@ -25,7 +25,7 @@ namespace Super_Cartes_Infinies.Combat
             Events = new List<MatchEvent>();
             if (playerCard.HasPower(Power.HEAL_ID))
             {
-                Events.Add(new HealEvent(attackingPlayer, playerCard));
+                Events.Add(new HealEvent(attackingPlayer, playerCard, index));
             }
             if (oppositePlayerCard != null && oppositePlayerCard.HasPower(Power.THORNS_ID))
             {
