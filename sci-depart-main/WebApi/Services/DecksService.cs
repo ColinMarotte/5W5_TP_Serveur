@@ -1,4 +1,5 @@
-﻿using Super_Cartes_Infinies.Data;
+﻿using Models.Models.Dtos;
+using Super_Cartes_Infinies.Data;
 using Super_Cartes_Infinies.Models;
 
 namespace Super_Cartes_Infinies.Services
@@ -7,11 +8,13 @@ namespace Super_Cartes_Infinies.Services
     {
         private ApplicationDbContext _dbContext;
         private PlayersService _playersService;
+        private GameConfigsService _gameConfigsService;
 
-        public DecksService(ApplicationDbContext context, PlayersService playersService)
+        public DecksService(ApplicationDbContext context, PlayersService playersService, GameConfigsService gameConfigsService)
         {
             _dbContext = context;
             _playersService = playersService;
+            _gameConfigsService = gameConfigsService;
         }
 
         public async Task<Deck> CreateDeck(string name, string playerId)
@@ -206,6 +209,20 @@ namespace Super_Cartes_Infinies.Services
             }
 
             return cardsNotInDeck;
+        }
+
+        public async Task<DeckConfigDTO> GetDeckConfig()
+        {
+            IEnumerable<GameConfig> gameConfigs = await _gameConfigsService.GetGameConfigs();
+            GameConfig currentGameConfig = gameConfigs.First();
+
+            DeckConfigDTO deckConfig = new DeckConfigDTO()
+            {
+                NbDecksMax = currentGameConfig.NbDecksMax,
+                NbCardsMaxInDeck = currentGameConfig.NbCardsMaxInDeck
+            };
+
+            return deckConfig;
         }
     }
 }

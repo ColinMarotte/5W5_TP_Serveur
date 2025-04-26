@@ -81,6 +81,7 @@ builder.Services.AddSingleton<WaitingUserService>();
 builder.Services.AddScoped<MatchesService>();
 builder.Services.AddScoped<StartingCardsService>();
 builder.Services.AddScoped<MatchConfigurationService>();
+builder.Services.AddScoped<GameConfigsService>();
 builder.Services.AddScoped<DecksService>();
 
 builder.Services.AddSignalR();

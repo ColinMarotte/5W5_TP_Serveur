@@ -108,5 +108,12 @@ namespace WebApi.Controllers
             await _decksService.MakeDeckCurrent(deckId, playerId);
             return Ok(new { Message = "Le deck spécifié est maintenant courant!" });
         }
+
+        [HttpGet]
+        public async Task<ActionResult<DeckConfigDTO>> GetDeckConfig()
+        {
+            DeckConfigDTO deckConfigDTO = await _decksService.GetDeckConfig();
+            return Ok(deckConfigDTO);
+        }
     }
 }
