@@ -15,5 +15,6 @@ namespace Models.Models.Dtos
         public string UserId { get; set; } = "";
         [Required]
         public string PlayerId { get; set; } = "";
+        public int Solde { get; set; }
     }
 }

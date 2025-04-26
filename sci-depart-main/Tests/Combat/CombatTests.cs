@@ -32,8 +32,8 @@ namespace Tests.Services
         [TestMethod]
         public void TurnWithBasicFightTest()
         {
-            _currentPlayerData.BattleField.Add(_playableCardA);
-            _opposingPlayerData.BattleField.Add(_playableCardB);
+            _currentPlayerData.AddCardToBattleField(_playableCardA);
+            _opposingPlayerData.AddCardToBattleField(_playableCardB);
 
             // L'adversaire n'a pas encore de Mana
             Assert.AreEqual(0, _opposingPlayerData.Mana);
@@ -67,9 +67,9 @@ namespace Tests.Services
                 Id = 3
             };
 
-            _currentPlayerData.BattleField.Add(_playableCardA);
-            _currentPlayerData.BattleField.Add(playableCardA2);
-            _opposingPlayerData.BattleField.Add(_playableCardB);
+            _currentPlayerData.AddCardToBattleField(_playableCardA);
+            _currentPlayerData.AddCardToBattleField(playableCardA2);
+            _opposingPlayerData.AddCardToBattleField(_playableCardB);
 
             new PlayerEndTurnEvent(_match, _currentPlayerData, _opposingPlayerData, NB_MANA_PER_TURN);
 
@@ -100,8 +100,9 @@ namespace Tests.Services
             // On réduit le nombre de health pour que la carte B meurt (exactement l'attaque de la carte A)
             _playableCardB.Health = _playableCardA.Attack;
 
-            _currentPlayerData.BattleField.Add(_playableCardA);
-            _opposingPlayerData.BattleField.Add(_playableCardB);
+
+            _currentPlayerData.AddCardToBattleField(_playableCardA);
+            _opposingPlayerData.AddCardToBattleField(_playableCardB);
 
             new PlayerEndTurnEvent(_match, _currentPlayerData, _opposingPlayerData, NB_MANA_PER_TURN);
 
@@ -122,7 +123,7 @@ namespace Tests.Services
             // On donne assez d'attaque à la carte A pour pouvoir tuer l'adversaire
             _playableCardA.Attack = _opposingPlayerData.Health;
 
-            _currentPlayerData.BattleField.Add(_playableCardA);
+            _currentPlayerData.AddCardToBattleField(_playableCardA);
             // On n'ajoute PAS la carte B sur le BattleField
 
             new PlayerEndTurnEvent(_match, _currentPlayerData, _opposingPlayerData, NB_MANA_PER_TURN);
@@ -151,9 +152,9 @@ namespace Tests.Services
                 Id = 3
             };
 
-            _currentPlayerData.BattleField.Add(_playableCardA);
-            _currentPlayerData.BattleField.Add(playableCardA2);
-            _opposingPlayerData.BattleField.Add(_playableCardB);
+            _currentPlayerData.AddCardToBattleField(_playableCardA);
+            _currentPlayerData.AddCardToBattleField(playableCardA2);
+            _opposingPlayerData.AddCardToBattleField(_playableCardB);
 
             new PlayerEndTurnEvent(_match, _currentPlayerData, _opposingPlayerData, NB_MANA_PER_TURN);
 

@@ -14,6 +14,8 @@ namespace Super_Cartes_Infinies.Combat
 
             match.IsPlayerATurn = !match.IsPlayerATurn;
 
+            Events.Add(new CombatEvent(match, currentPlayerData, opposingPlayerData));
+
             this.Events.Add(new PlayerStartTurnEvent(opposingPlayerData, nbManaPerTurn));
         }
 

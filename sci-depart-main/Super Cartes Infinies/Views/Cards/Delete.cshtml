@@ -35,11 +35,30 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Cost)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Rarity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rarity)
+        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ImageUrl)
         </dt>
         <dd class = "col-sm-10">
             <img src="@Html.DisplayFor(model => model.ImageUrl)" height="100" alt="Image de la carte" />
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CardPowers)
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.CardPowers != null)
+            {
+                @foreach (var cp in Model.CardPowers)
+                {
+                    <div>@cp.Power.Icone @cp.Power.Name @cp.Value</div>
+                }
+
+            }
         </dd>
     </dl>
     

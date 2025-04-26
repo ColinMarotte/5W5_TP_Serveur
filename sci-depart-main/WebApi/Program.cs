@@ -7,6 +7,7 @@ using Super_Cartes_Infinies.Data;
 using Super_Cartes_Infinies.Hubs;
 using Super_Cartes_Infinies.Services;
 using System.Text;
+using WebApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -74,7 +75,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Injection de dépendance
+// Injection de dï¿½pendance
 builder.Services.AddScoped<PlayersService>();
 builder.Services.AddScoped<CardsService>();
 builder.Services.AddSingleton<WaitingUserService>();
@@ -83,6 +84,7 @@ builder.Services.AddScoped<StartingCardsService>();
 builder.Services.AddScoped<MatchConfigurationService>();
 builder.Services.AddScoped<GameConfigsService>();
 builder.Services.AddScoped<DecksService>();
+builder.Services.AddScoped<PacksService>();
 
 builder.Services.AddSignalR();
 
