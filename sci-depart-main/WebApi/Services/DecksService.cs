@@ -50,21 +50,43 @@ namespace Super_Cartes_Infinies.Services
             DeckConfigDTO deckConfig = await GetDeckConfig();
             int nbCardMax = deckConfig.NbCardsMaxInDeck;
 
-            for (int i = 0; i < player.OwnedCards.Count; i++)
+            if (player.OwnedCards.Count > nbCardMax)
             {
-                OwnedCard ownedCard = player.OwnedCards[i];
-
-                DeckOwnedCard newDeckOwnedCard = new DeckOwnedCard()
+                for (int i = 0; i < nbCardMax; i++)
                 {
-                    Id = 0,
-                    DeckId = newDeck.Id,
-                    Deck = newDeck,
-                    OwnedCardId = ownedCard.Id,
-                    OwnedCard = ownedCard
-                };
+                    OwnedCard ownedCard = player.OwnedCards[i];
 
-                newDeck.DeckOwnedCards.Add(newDeckOwnedCard);
-                ownedCard.DeckOwnedCards.Add(newDeckOwnedCard);
+                    DeckOwnedCard newDeckOwnedCard = new DeckOwnedCard()
+                    {
+                        Id = 0,
+                        DeckId = newDeck.Id,
+                        Deck = newDeck,
+                        OwnedCardId = ownedCard.Id,
+                        OwnedCard = ownedCard
+                    };
+
+                    newDeck.DeckOwnedCards.Add(newDeckOwnedCard);
+                    ownedCard.DeckOwnedCards.Add(newDeckOwnedCard);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < player.OwnedCards.Count; i++)
+                {
+                    OwnedCard ownedCard = player.OwnedCards[i];
+
+                    DeckOwnedCard newDeckOwnedCard = new DeckOwnedCard()
+                    {
+                        Id = 0,
+                        DeckId = newDeck.Id,
+                        Deck = newDeck,
+                        OwnedCardId = ownedCard.Id,
+                        OwnedCard = ownedCard
+                    };
+
+                    newDeck.DeckOwnedCards.Add(newDeckOwnedCard);
+                    ownedCard.DeckOwnedCards.Add(newDeckOwnedCard);
+                }
             }
 
             _dbContext.Add(newDeck);
