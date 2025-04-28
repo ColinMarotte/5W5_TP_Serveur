@@ -12,15 +12,15 @@ using Super_Cartes_Infinies.Data;
 namespace Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250426215333_Initiale")]
-    partial class Initiale
+    [Migration("20250428114733_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
@@ -157,15 +157,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c829a7a0-78bf-486e-afa8-fb034ca78832",
+                            ConcurrencyStamp = "6fdf3d76-6dcb-49b0-a205-90f4160d791a",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECqBlQBIMa0dGav4hqC5A4wKQKDS7HtDnpDk66p1WKr3Lo/w+cVdSvolhmDoMPSSFA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBGPHH8yudXnFLVibLc32Foii9Yg1O4IP1vzCKH8q9ykcIaeOBNYijlbDoB97cPmwA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6a5291e4-644f-4ba1-a43c-93047914b27a",
+                            SecurityStamp = "e46b2e6e-7fdb-4eeb-aa90-180b7f152133",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -173,22 +173,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "871c1a70-2a6a-4080-b587-1e2e5aae5796",
+                            ConcurrencyStamp = "f4def830-c0e3-45f0-90b3-dbe002caabef",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "dfc3fdcd-fb08-4023-9971-0ebc55fae923",
+                            SecurityStamp = "fccdbdc3-1f46-4bdb-982b-34f1aa810839",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7d3c612d-fba8-4cd1-b4fb-173e2edb043e",
+                            ConcurrencyStamp = "65f09066-e0c7-4bc6-bd15-3855800a48f0",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d3bcbf6d-c3f2-458e-ba3b-9baf0ca418c8",
+                            SecurityStamp = "6f14752a-03a1-439c-8024-88657d0573e7",
                             TwoFactorEnabled = false
                         });
                 });

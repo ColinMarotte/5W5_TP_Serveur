@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Models.Migrations
 {
     /// <inheritdoc />
-    public partial class Initiale : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -470,9 +470,9 @@ namespace Models.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "11111111-1111-1111-1111-111111111111", 0, "c829a7a0-78bf-486e-afa8-fb034ca78832", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAECqBlQBIMa0dGav4hqC5A4wKQKDS7HtDnpDk66p1WKr3Lo/w+cVdSvolhmDoMPSSFA==", null, false, "6a5291e4-644f-4ba1-a43c-93047914b27a", false, "admin@admin.com" },
-                    { "User1Id", 0, "871c1a70-2a6a-4080-b587-1e2e5aae5796", null, false, false, null, null, null, null, null, false, "dfc3fdcd-fb08-4023-9971-0ebc55fae923", false, null },
-                    { "User2Id", 0, "7d3c612d-fba8-4cd1-b4fb-173e2edb043e", null, false, false, null, null, null, null, null, false, "d3bcbf6d-c3f2-458e-ba3b-9baf0ca418c8", false, null }
+                    { "11111111-1111-1111-1111-111111111111", 0, "6fdf3d76-6dcb-49b0-a205-90f4160d791a", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEBGPHH8yudXnFLVibLc32Foii9Yg1O4IP1vzCKH8q9ykcIaeOBNYijlbDoB97cPmwA==", null, false, "e46b2e6e-7fdb-4eeb-aa90-180b7f152133", false, "admin@admin.com" },
+                    { "User1Id", 0, "f4def830-c0e3-45f0-90b3-dbe002caabef", null, false, false, null, null, null, null, null, false, "fccdbdc3-1f46-4bdb-982b-34f1aa810839", false, null },
+                    { "User2Id", 0, "65f09066-e0c7-4bc6-bd15-3855800a48f0", null, false, false, null, null, null, null, null, false, "6f14752a-03a1-439c-8024-88657d0573e7", false, null }
                 });
 
             migrationBuilder.InsertData(

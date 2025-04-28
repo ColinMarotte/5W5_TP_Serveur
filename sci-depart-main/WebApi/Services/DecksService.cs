@@ -50,7 +50,7 @@ namespace Super_Cartes_Infinies.Services
             DeckConfigDTO deckConfig = await GetDeckConfig();
             int nbCardMax = deckConfig.NbCardsMaxInDeck;
 
-            for (int i = 0; i < nbCardMax; i++)
+            for (int i = 0; i < player.OwnedCards.Count; i++)
             {
                 OwnedCard ownedCard = player.OwnedCards[i];
 
