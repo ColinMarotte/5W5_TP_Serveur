@@ -38,15 +38,15 @@ namespace WebApi.Controllers
 
         [Authorize]
         [HttpPost("{deckId}")]
-        public async Task<ActionResult> AddCardsToDeck(int deckId, List<int> ownedCardsIds)
+        public async Task<ActionResult<List<DeckOwnedCard>>> AddCardsToDeck(int deckId, List<int> ownedCardsIds)
         {
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             var userId = claim.Value;
             Player player = _playersService.GetPlayerFromUserId(userId);
 
-            await _decksService.AddCardsToDeck(deckId, ownedCardsIds, player.Id);
-            return Ok(new { Message = "Les cartes ont été ajoutées au deck!" });
+            List<DeckOwnedCard> newCards = await _decksService.AddCardsToDeck(deckId, ownedCardsIds, player.Id);
+            return Ok(newCards);
         }
 
         [Authorize]

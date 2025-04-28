@@ -25,11 +25,17 @@ namespace Super_Cartes_Infinies.Models
         {
             Deck playersCurrentDeck = p.Decks.Where(d => d.Current == true).First();
             List<Card> deckCardsList = playersCurrentDeck.DeckOwnedCards.Select(d => d.OwnedCard.Card).ToList();
-        
+
+            List<PlayableCard> lstPlayableCards = new List<PlayableCard>();
+            foreach (var card in deckCardsList)
+            {
+                lstPlayableCards.Add(new PlayableCard(card));
+            }
+
             //Pour rendre l'ordre des cartes aléatoire
             var rand = new Random();
 
-            CardsPile = deckCardsList.OrderBy(_ => rand.Next()).ToList();
+            CardsPile = lstPlayableCards.OrderBy(_ => rand.Next()).ToList();
         }
 
         public int Id { get; set; }

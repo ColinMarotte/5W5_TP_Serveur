@@ -47,8 +47,13 @@ namespace Super_Cartes_Infinies.Services
                 Player = player
             };
 
-            foreach (OwnedCard ownedCard in player.OwnedCards)
+            DeckConfigDTO deckConfig = await GetDeckConfig();
+            int nbCardMax = deckConfig.NbCardsMaxInDeck;
+
+            for (int i = 0; i < nbCardMax; i++)
             {
+                OwnedCard ownedCard = player.OwnedCards[i];
+
                 DeckOwnedCard newDeckOwnedCard = new DeckOwnedCard()
                 {
                     Id = 0,
@@ -68,10 +73,11 @@ namespace Super_Cartes_Infinies.Services
             return newDeck;
         }
 
-        public async Task<Deck> AddCardsToDeck(int deckId, List<int> ownedCardsIds, int playerId)
+        public async Task<List<DeckOwnedCard>> AddCardsToDeck(int deckId, List<int> ownedCardsIds, int playerId)
         {
             Deck deck = GetDeckFromDeckId(deckId);
             List<OwnedCard> cards = new List<OwnedCard>();
+            List<DeckOwnedCard> newCards = new List<DeckOwnedCard>();
 
             foreach (int id in ownedCardsIds)
             {
@@ -102,9 +108,10 @@ namespace Super_Cartes_Infinies.Services
 
                 deck.DeckOwnedCards.Add(newDeckOwnedCard);
                 ownedCard.DeckOwnedCards.Add(newDeckOwnedCard);
+                newCards.Add(newDeckOwnedCard);
             }
             await _dbContext.SaveChangesAsync();
-            return deck;
+            return newCards;
         }
 
         public async Task<Deck> RemoveCardFromDeck(int deckId, int deckOwnedCardId, int playerId)
@@ -207,6 +214,8 @@ namespace Super_Cartes_Infinies.Services
                     cardsNotInDeck.Add(pOwnedCard);
                 }
             }
+
+            cardsNotInDeck = cardsNotInDeck.OrderBy(c => c.Card.Name).ToList();
 
             return cardsNotInDeck;
         }

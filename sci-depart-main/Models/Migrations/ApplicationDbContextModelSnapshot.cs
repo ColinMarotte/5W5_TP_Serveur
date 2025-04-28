@@ -17,7 +17,7 @@ namespace Models.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.11")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
@@ -154,15 +154,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "949a6f10-fdfa-4339-9bfb-de19dd607015",
+                            ConcurrencyStamp = "c829a7a0-78bf-486e-afa8-fb034ca78832",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKptjrwhRJtE1qetsI0U22eALfWCpCov5nn0GOJM5L9WPlF2mAv4KwLSYgI1l/5uEQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECqBlQBIMa0dGav4hqC5A4wKQKDS7HtDnpDk66p1WKr3Lo/w+cVdSvolhmDoMPSSFA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ad3c99ae-89ef-444c-bbb1-773ff0c7a455",
+                            SecurityStamp = "6a5291e4-644f-4ba1-a43c-93047914b27a",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -170,22 +170,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "02bac4e4-54c4-47f0-9a40-b2ffdacfbadc",
+                            ConcurrencyStamp = "871c1a70-2a6a-4080-b587-1e2e5aae5796",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c199fed7-03fb-4fa3-8110-4f3f7ab7df6c",
+                            SecurityStamp = "dfc3fdcd-fb08-4023-9971-0ebc55fae923",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "59a05804-6d29-4084-ad67-6c43b2b32063",
+                            ConcurrencyStamp = "7d3c612d-fba8-4cd1-b4fb-173e2edb043e",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "613c0efd-88c2-4a96-82c3-bf49d53993d9",
+                            SecurityStamp = "d3bcbf6d-c3f2-458e-ba3b-9baf0ca418c8",
                             TwoFactorEnabled = false
                         });
                 });
@@ -588,7 +588,13 @@ namespace Models.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("NbCardsMaxInDeck")
+                        .HasColumnType("int");
+
                     b.Property<int>("NbCardsToDraw")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NbDecksMax")
                         .HasColumnType("int");
 
                     b.Property<int>("QtyManaPerTurn")
@@ -602,7 +608,9 @@ namespace Models.Migrations
                         new
                         {
                             Id = 1,
+                            NbCardsMaxInDeck = 10,
                             NbCardsToDraw = 4,
+                            NbDecksMax = 3,
                             QtyManaPerTurn = 3
                         });
                 });
