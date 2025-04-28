@@ -12,7 +12,16 @@ namespace Super_Cartes_Infinies.Combat
 
         public CardDamageEvent(Match match, MatchPlayerData currentPlayer, MatchPlayerData defendingPlayer, int value, bool attackPlayer, int index)
         {
+            Events = new List<MatchEvent>();
+
             PlayableCard playerCard = currentPlayer.BattleField.ElementAt(index);
+            if (playerCard.HasPower(Power.SHIELD_ID))
+            {
+                Events.Add(new ShieldEvent(match, defendingPlayer, index));
+                int defense = playerCard.GetPowerValue(Power.SHIELD_ID);
+                Value = value - defense;
+            }
+            
             if(value < 0)
             {
                 Value = 0;
@@ -25,7 +34,6 @@ namespace Super_Cartes_Infinies.Combat
             CardId = playerCard.Id;
             BattlefieldIndex = index;
             int damage = Value - playerCard.Health;
-            Events = new List<MatchEvent>();
 
             playerCard.Health -= Value;
 
