@@ -48,9 +48,9 @@ namespace Super_Cartes_Infinies.Services
             };
 
             DeckConfigDTO deckConfig = await GetDeckConfig();
-            int nbCardMax = deckConfig.NbCardsMaxInDeck;
-
-            for (int i = 0; i < player.OwnedCards.Count; i++)
+            int nbCardMax = Math.Min(deckConfig.NbCardsMaxInDeck, player.OwnedCards.Count);
+            
+            for (int i = 0; i < nbCardMax; i++)
             {
                 OwnedCard ownedCard = player.OwnedCards[i];
 

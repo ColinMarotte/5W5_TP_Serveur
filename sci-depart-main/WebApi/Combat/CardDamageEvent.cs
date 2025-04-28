@@ -15,9 +15,10 @@ namespace Super_Cartes_Infinies.Combat
             Events = new List<MatchEvent>();
 
             PlayableCard playerCard = currentPlayer.BattleField.ElementAt(index);
+            Value = value;
             if (playerCard.HasPower(Power.SHIELD_ID))
             {
-                Events.Add(new ShieldEvent(match, defendingPlayer, index));
+                Events.Add(new ShieldEvent(match, currentPlayer, index));
                 int defense = playerCard.GetPowerValue(Power.SHIELD_ID);
                 Value = value - defense;
             }
