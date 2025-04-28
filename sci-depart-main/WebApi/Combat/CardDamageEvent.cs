@@ -13,14 +13,22 @@ namespace Super_Cartes_Infinies.Combat
         public CardDamageEvent(Match match, MatchPlayerData currentPlayer, MatchPlayerData defendingPlayer, int value, bool attackPlayer, int index)
         {
             PlayableCard playerCard = currentPlayer.BattleField.ElementAt(index);
-
-            Value = value;
+            if(value < 0)
+            {
+                Value = 0;
+            }
+            else
+            {
+                Value = value;
+            }
             PlayerId = currentPlayer.PlayerId;
             CardId = playerCard.Id;
             BattlefieldIndex = index;
-            int damage = value - playerCard.Health;
-            playerCard.Health -= value;
+            int damage = Value - playerCard.Health;
             Events = new List<MatchEvent>();
+
+            playerCard.Health -= Value;
+
             if(playerCard.Health <= 0)
             {
                 Events.Add(new CardDeathEvent(match, currentPlayer, playerCard, index));
