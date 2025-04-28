@@ -34,6 +34,14 @@ namespace Super_Cartes_Infinies.Combat
                     Events.Add(new CardDamageEvent(match, defendingPlayer, attackingPlayer, playerCard.Attack, true, index));
 
                 }
+                if (oppositePlayerCard.HasPower(Power.SHIELD_ID))
+                {
+                    Events.Add(new ShieldEvent(match, defendingPlayer, index));
+                    int defense = oppositePlayerCard.GetPowerValue(Power.SHIELD_ID);
+                    Events.Add(new CardDamageEvent(match, defendingPlayer, attackingPlayer, playerCard.Attack-defense, true, index));
+                    Events.Add(new CardDamageEvent(match, attackingPlayer, defendingPlayer, oppositePlayerCard.Attack, false, index));
+
+                }
                 else
                 {
                     Events.Add(new CardDamageEvent(match, defendingPlayer, attackingPlayer, playerCard.Attack, true, index));
