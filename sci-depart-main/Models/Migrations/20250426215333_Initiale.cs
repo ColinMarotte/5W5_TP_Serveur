@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Models.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Initiale : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -78,7 +78,9 @@ namespace Models.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NbCardsToDraw = table.Column<int>(type: "int", nullable: false),
-                    QtyManaPerTurn = table.Column<int>(type: "int", nullable: false)
+                    QtyManaPerTurn = table.Column<int>(type: "int", nullable: false),
+                    NbDecksMax = table.Column<int>(type: "int", nullable: false),
+                    NbCardsMaxInDeck = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -468,9 +470,9 @@ namespace Models.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "11111111-1111-1111-1111-111111111111", 0, "949a6f10-fdfa-4339-9bfb-de19dd607015", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEKptjrwhRJtE1qetsI0U22eALfWCpCov5nn0GOJM5L9WPlF2mAv4KwLSYgI1l/5uEQ==", null, false, "ad3c99ae-89ef-444c-bbb1-773ff0c7a455", false, "admin@admin.com" },
-                    { "User1Id", 0, "02bac4e4-54c4-47f0-9a40-b2ffdacfbadc", null, false, false, null, null, null, null, null, false, "c199fed7-03fb-4fa3-8110-4f3f7ab7df6c", false, null },
-                    { "User2Id", 0, "59a05804-6d29-4084-ad67-6c43b2b32063", null, false, false, null, null, null, null, null, false, "613c0efd-88c2-4a96-82c3-bf49d53993d9", false, null }
+                    { "11111111-1111-1111-1111-111111111111", 0, "c829a7a0-78bf-486e-afa8-fb034ca78832", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAECqBlQBIMa0dGav4hqC5A4wKQKDS7HtDnpDk66p1WKr3Lo/w+cVdSvolhmDoMPSSFA==", null, false, "6a5291e4-644f-4ba1-a43c-93047914b27a", false, "admin@admin.com" },
+                    { "User1Id", 0, "871c1a70-2a6a-4080-b587-1e2e5aae5796", null, false, false, null, null, null, null, null, false, "dfc3fdcd-fb08-4023-9971-0ebc55fae923", false, null },
+                    { "User2Id", 0, "7d3c612d-fba8-4cd1-b4fb-173e2edb043e", null, false, false, null, null, null, null, null, false, "d3bcbf6d-c3f2-458e-ba3b-9baf0ca418c8", false, null }
                 });
 
             migrationBuilder.InsertData(
@@ -494,8 +496,8 @@ namespace Models.Migrations
 
             migrationBuilder.InsertData(
                 table: "GameConfigs",
-                columns: new[] { "Id", "NbCardsToDraw", "QtyManaPerTurn" },
-                values: new object[] { 1, 4, 3 });
+                columns: new[] { "Id", "NbCardsMaxInDeck", "NbCardsToDraw", "NbDecksMax", "QtyManaPerTurn" },
+                values: new object[] { 1, 10, 4, 3, 3 });
 
             migrationBuilder.InsertData(
                 table: "Powers",

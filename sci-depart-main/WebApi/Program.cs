@@ -75,13 +75,15 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Injection de dépendance
+// Injection de dï¿½pendance
 builder.Services.AddScoped<PlayersService>();
 builder.Services.AddScoped<CardsService>();
 builder.Services.AddSingleton<WaitingUserService>();
 builder.Services.AddScoped<MatchesService>();
 builder.Services.AddScoped<StartingCardsService>();
 builder.Services.AddScoped<MatchConfigurationService>();
+builder.Services.AddScoped<GameConfigsService>();
+builder.Services.AddScoped<DecksService>();
 builder.Services.AddScoped<PacksService>();
 
 builder.Services.AddSignalR();

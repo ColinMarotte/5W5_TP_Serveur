@@ -23,11 +23,15 @@ namespace Super_Cartes_Infinies.Models
 
         public MatchPlayerData(Player p) : this(p.Id)
         {
-            // TODO: Lors de l'intégration, remplacer par les cartes du joueur, on n'aura plus besoin de la liste de cartes
+            Deck playersCurrentDeck = p.Decks.Where(d => d.Current == true).First();
+            List<Card> deckCardsList = playersCurrentDeck.DeckOwnedCards.Select(d => d.OwnedCard.Card).ToList();
+
             List<PlayableCard> lstPlayableCards = new List<PlayableCard>();
-            foreach (var card in p.OwnedCards) {
-                lstPlayableCards.Add(new PlayableCard(card.Card));
+            foreach (var card in deckCardsList)
+            {
+                lstPlayableCards.Add(new PlayableCard(card));
             }
+
             //Pour rendre l'ordre des cartes aléatoire
             var rand = new Random();
 
