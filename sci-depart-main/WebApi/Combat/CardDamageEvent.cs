@@ -26,10 +26,7 @@ namespace Super_Cartes_Infinies.Combat
             {
                 Value = 0;
             }
-            else
-            {
-                Value = value;
-            }
+
             PlayerId = currentPlayer.PlayerId;
             CardId = playerCard.Id;
             BattlefieldIndex = index;
