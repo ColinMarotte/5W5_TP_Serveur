@@ -23,7 +23,7 @@ namespace Super_Cartes_Infinies.Combat
                 Value = value - defense;
             }
             
-            if(value < 0)
+            if(Value < 0)
             {
                 Value = 0;
             }

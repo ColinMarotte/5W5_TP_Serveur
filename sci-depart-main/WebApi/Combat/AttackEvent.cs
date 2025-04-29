@@ -7,11 +7,13 @@ namespace Super_Cartes_Infinies.Combat
     {
         public override string EventType { get { return "Attack"; } }
         public int PlayerId { get; set; }
+        public int BattlefieldIndex { get; set; }
 
 
         public AttackEvent(Match match, MatchPlayerData attackingPlayer, MatchPlayerData defendingPlayer, int index)
         {
             PlayerId = attackingPlayer.PlayerId;
+            BattlefieldIndex = index;
             PlayableCard playerCard = attackingPlayer.BattleField.ElementAt(index);
             PlayableCard? oppositePlayerCard = null;
 

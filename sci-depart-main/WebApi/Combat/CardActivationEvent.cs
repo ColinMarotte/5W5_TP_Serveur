@@ -8,13 +8,16 @@ namespace Super_Cartes_Infinies.Combat
         public override string EventType { get { return "CardActivation"; } }
         public int PlayerId { get; set; }
         public int PlayableCardId { get; set; }
+        public int BattlefieldIndex { get; set; }
 
         public CardActivationEvent(Match match, MatchPlayerData attackingPlayer, MatchPlayerData defendingPlayer, int index)
         {
             PlayerId = attackingPlayer.PlayerId;
-            PlayableCardId = attackingPlayer.Id;
-
+            BattlefieldIndex = index;
+            attackingPlayer.BattleField = attackingPlayer.GetOrderedBattleField();
+            defendingPlayer.BattleField = defendingPlayer.GetOrderedBattleField();
             PlayableCard playerCard = attackingPlayer.BattleField.ElementAt(index);
+            PlayableCardId = playerCard.Id;
             PlayableCard? oppositePlayerCard = null;
 
             if (index < defendingPlayer.BattleField.Count())
