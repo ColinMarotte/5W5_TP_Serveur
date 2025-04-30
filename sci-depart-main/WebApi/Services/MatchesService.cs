@@ -12,13 +12,16 @@ namespace Super_Cartes_Infinies.Services
         private CardsService _cardsService;
         private MatchConfigurationService _matchConfigurationService;
         private ApplicationDbContext _dbContext;
+        private GameConfigsService _gameConfigsService;
 
-        public MatchesService(ApplicationDbContext context, WaitingUserService waitingUserService, PlayersService playersService, CardsService cardsService, MatchConfigurationService matchConfigurationService)        {
+        public MatchesService(ApplicationDbContext context, WaitingUserService waitingUserService, PlayersService playersService, CardsService cardsService, MatchConfigurationService matchConfigurationService, GameConfigsService gameConfigsService)        
+        {
             _dbContext = context;
             _waitingUserService = waitingUserService;
             _playersService = playersService;
             _cardsService = cardsService;
             _matchConfigurationService = matchConfigurationService;
+            _gameConfigsService = gameConfigsService;
         }
 
         // Cette fonction est assez flexible car elle peut simplement être appeler lorsqu'un user veut jouer un match
@@ -64,7 +67,7 @@ namespace Super_Cartes_Infinies.Services
                     playerB = _playersService.GetPlayerFromUserId(pairOfUsers.UserBId);
 
                     // Création d'un nouveau match
-                    match = new Match(playerA, playerB);
+                    match = new Match(playerA, playerB, await _gameConfigsService.GetArgentRecuGagnant(), await _gameConfigsService.GetArgentRecuPerdant());
                     otherPlayerConnectionId = pairOfUsers.UserAConnectionId;
 
                     _dbContext.Update(match);

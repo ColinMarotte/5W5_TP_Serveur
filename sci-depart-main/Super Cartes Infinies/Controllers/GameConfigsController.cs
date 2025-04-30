@@ -62,7 +62,7 @@ namespace Super_Cartes_Infinies.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NbCardsToDraw,QtyManaPerTurn,NbDecksMax,NbCardsMaxInDeck")] GameConfig gameConfig)
+        public async Task<IActionResult> Create([Bind("Id,NbCardsToDraw,QtyManaPerTurn,NbDecksMax,NbCardsMaxInDeck,ArgentRecuGagnant,ArgentRecuPerdant")] GameConfig gameConfig)
         {
             if (ModelState.IsValid)
             {
@@ -71,7 +71,7 @@ namespace Super_Cartes_Infinies.Controllers
                     await _gamesConfigsService.CreateGameConfig(gameConfig);
                     return RedirectToAction(nameof(Index));
                 }
-                catch(Exception e)
+                catch(Exception)
                 {
                     return View(gameConfig);
                 }
@@ -107,7 +107,7 @@ namespace Super_Cartes_Infinies.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NbCardsToDraw,QtyManaPerTurn,NbDecksMax,NbCardsMaxInDeck")] GameConfig gameConfig)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NbCardsToDraw,QtyManaPerTurn,NbDecksMax,NbCardsMaxInDeck,ArgentRecuGagnant,ArgentRecuPerdant")] GameConfig gameConfig)
         {
             if (id != gameConfig.Id)
             {

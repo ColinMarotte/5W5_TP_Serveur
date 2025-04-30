@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Super_Cartes_Infinies.Models;
+using Super_Cartes_Infinies.Services;
 
 namespace Super_Cartes_Infinies.Combat
 {
@@ -7,8 +8,8 @@ namespace Super_Cartes_Infinies.Combat
     {
         public override string EventType { get { return "EndMatch"; } }
         public int WinningPlayerId { get; set; }
-        public int MoneyReceivedByWinner { get; set; } = 100;
-        public int MoneyReceivedByLoser { get; set; } = 40;
+        public int MoneyReceivedByWinner { get; set; }
+        public int MoneyReceivedByLoser { get; set; }
 
         public EndMatchEvent(Match match, MatchPlayerData winningPlayerData, MatchPlayerData losingPlayerData)
         {
@@ -19,8 +20,10 @@ namespace Super_Cartes_Infinies.Combat
 
             WinningPlayerId = winningPlayerData.PlayerId;
 
-            winningPlayerData.Player.Balance += MoneyReceivedByWinner;
-            losingPlayerData.Player.Balance += MoneyReceivedByLoser;
+            MoneyReceivedByWinner = match.ArgentRecuGagnant;
+            MoneyReceivedByLoser = match.ArgentRecuPerdant;
+            winningPlayerData.Player.Balance += match.ArgentRecuGagnant;
+            losingPlayerData.Player.Balance += match.ArgentRecuPerdant;
 
             match.IsMatchCompleted = true;
 

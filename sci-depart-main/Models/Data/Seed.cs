@@ -191,7 +191,9 @@ namespace Super_Cartes_Infinies.Data
                 NbCardsToDraw = 4,
                 QtyManaPerTurn = 3,
                 NbDecksMax = 3,
-                NbCardsMaxInDeck = 10
+                NbCardsMaxInDeck = 10,
+                ArgentRecuGagnant=40,
+                ArgentRecuPerdant=100
             };
         }
 

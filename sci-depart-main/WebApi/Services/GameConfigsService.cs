@@ -82,5 +82,17 @@ namespace Super_Cartes_Infinies.Services
             await _dbContext.SaveChangesAsync();
             return gameConfig;
         }
+
+        public async Task<int> GetArgentRecuGagnant()
+        {
+            var config = await _dbContext.GameConfigs.FirstAsync();
+            return config.ArgentRecuGagnant;
+        }
+
+        public async Task<int> GetArgentRecuPerdant()
+        {
+            var config = await _dbContext.GameConfigs.FirstAsync();
+            return config.ArgentRecuPerdant;
+        }
     }
 }

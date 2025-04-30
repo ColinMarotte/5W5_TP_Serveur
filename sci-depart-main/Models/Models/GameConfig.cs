@@ -18,5 +18,10 @@ namespace Super_Cartes_Infinies.Models
         public int NbDecksMax { get; set; }
         [DisplayName("Nombre maximum de cartes dans un deck")]
         public int NbCardsMaxInDeck { get; set; }
+        [DisplayName("Argent reçu par le gagnant après un match")]
+        public int ArgentRecuGagnant { get; set; }
+        [DisplayName("Argent reçu par le perdant après un match")]
+        public int ArgentRecuPerdant { get; set; }
+
     }
 }
