@@ -79,4 +79,17 @@ public class MatchHub : Hub
 
     }
 
+    public async Task PlayCard(int matchId, int playableCardId)
+    {
+        var userId = Context.UserIdentifier!;
+
+        PlayCardEvent playCardEvent = await _matchService.PlayCard(userId, matchId, playableCardId);
+
+        if(playCardEvent != null)
+        {
+            await Clients.Group(matchId.ToString()).SendAsync("PlayCardEvent", playCardEvent);
+        }
+    }
+
+
 }

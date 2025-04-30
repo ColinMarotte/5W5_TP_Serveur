@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Models.Models.Dtos;
+using Super_Cartes_Infinies.Models;
 using Super_Cartes_Infinies.Services;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -18,12 +19,14 @@ namespace WebApi.Controllers
         private UserManager<IdentityUser> _userManager;
         private SignInManager<IdentityUser> _signInManager;
         private PlayersService _playersService;
+        private DecksService _deckService;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, PlayersService playersService)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, PlayersService playersService, DecksService decksService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _playersService = playersService;
+            _deckService = decksService;
         }
 
         [HttpPost]
@@ -74,7 +77,9 @@ namespace WebApi.Controllers
                 }
             }
 
-            await _playersService.CreatePlayer(user);
+            Player player = await _playersService.CreatePlayer(user);
+            string playerId = player.Id.ToString();
+            await _deckService.CreateStartingDeck(playerId);
 
             return Ok(new { Message = "L'utilisateur a été créé avec succès!" });
         }
@@ -111,7 +116,7 @@ namespace WebApi.Controllers
                 string tokenString = new JwtSecurityTokenHandler().WriteToken(token);
                 string playerId = _playersService.GetPlayerFromUserId(user.Id).Id.ToString();
 
-                return Ok(new LoginSuccessDTO() { Token = tokenString, UserId = user.Id, PlayerId = playerId });
+                return Ok(new LoginSuccessDTO() { Token = tokenString, UserId = user.Id, PlayerId = playerId, Solde = _playersService.GetBalanceFromPlayerId(playerId) });
             }
 
             return NotFound(new { Error = "L'utilisateur est introuvable ou le mot de passe ne concorde pas." });
@@ -122,6 +127,17 @@ namespace WebApi.Controllers
         public ActionResult<string[]> PrivateData()
         {
             return new string[] { "figue", "banane", "noix" };
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult<int> Solde()
+        {
+            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            var userId = claim.Value;
+            int playerBalance = _playersService.GetBalanceFromUserId(userId);
+            return playerBalance;
         }
     }
 }

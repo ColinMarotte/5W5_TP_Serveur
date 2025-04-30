@@ -15,5 +15,7 @@ namespace Super_Cartes_Infinies.Models
         public virtual Card Card { get; set; }
         [JsonIgnore]
         public virtual Player Player { get; set; }
+        [JsonIgnore]
+        public virtual List<DeckOwnedCard> DeckOwnedCards { get; set; } = new List<DeckOwnedCard>();
     }
 }

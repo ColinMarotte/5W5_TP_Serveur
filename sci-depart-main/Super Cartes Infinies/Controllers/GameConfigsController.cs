@@ -62,7 +62,7 @@ namespace Super_Cartes_Infinies.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NbCardsToDraw,QtyManaPerTurn")] GameConfig gameConfig)
+        public async Task<IActionResult> Create([Bind("Id,NbCardsToDraw,QtyManaPerTurn,NbDecksMax,NbCardsMaxInDeck")] GameConfig gameConfig)
         {
             if (ModelState.IsValid)
             {
@@ -107,7 +107,7 @@ namespace Super_Cartes_Infinies.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NbCardsToDraw,QtyManaPerTurn")] GameConfig gameConfig)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NbCardsToDraw,QtyManaPerTurn,NbDecksMax,NbCardsMaxInDeck")] GameConfig gameConfig)
         {
             if (id != gameConfig.Id)
             {

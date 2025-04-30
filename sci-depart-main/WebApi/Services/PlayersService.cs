@@ -43,7 +43,7 @@ namespace Super_Cartes_Infinies.Services
             }
 
             _dbContext.Add(p);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
 
             return p;
         }
@@ -61,6 +61,16 @@ namespace Super_Cartes_Infinies.Services
         public Player GetPlayerFromUserName(string userName)
         {
             return _dbContext.Players.Single(p => p.User!.UserName == userName);
+        }
+
+        public int GetBalanceFromUserId(string userId)
+        {
+            return GetPlayerFromUserId(userId).Balance;
+        }
+
+        public int GetBalanceFromPlayerId(string playerId)
+        {
+            return GetPlayerFromPlayerId(playerId).Balance;
         }
     }
 }

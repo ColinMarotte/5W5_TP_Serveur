@@ -18,6 +18,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.QtyManaPerTurn)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NbDecksMax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NbCardsMaxInDeck)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -30,6 +36,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.QtyManaPerTurn)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NbDecksMax)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NbCardsMaxInDeck)
+                </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Modifier</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Détails</a> |

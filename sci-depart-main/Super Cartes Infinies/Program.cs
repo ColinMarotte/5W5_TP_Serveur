@@ -18,7 +18,12 @@ builder.Services.AddDefaultIdentity<IdentityUser>()
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+	.AddJsonOptions(options =>
+	{
+		options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+		options.JsonSerializerOptions.WriteIndented = true; // Optionnel, pour un JSON plus lisible
+	}); ;
 builder.Services.AddScoped<CardsService>();
 builder.Services.AddScoped<StartingCardsService>();
 builder.Services.AddScoped<GameConfigsService>();
