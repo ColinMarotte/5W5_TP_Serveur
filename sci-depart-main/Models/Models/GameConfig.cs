@@ -22,6 +22,8 @@ namespace Super_Cartes_Infinies.Models
         public int ArgentRecuGagnant { get; set; }
         [DisplayName("Argent reçu par le perdant après un match")]
         public int ArgentRecuPerdant { get; set; }
+        public int ELONouveauJoueur { get; set; }
+        public int BalanceNouveauJoueur { get; set; }
 
     }
 }

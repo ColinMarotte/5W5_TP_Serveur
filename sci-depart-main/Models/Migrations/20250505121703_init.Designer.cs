@@ -12,8 +12,8 @@ using Super_Cartes_Infinies.Data;
 namespace Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250428114733_Init")]
-    partial class Init
+    [Migration("20250505121703_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,15 +157,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6fdf3d76-6dcb-49b0-a205-90f4160d791a",
+                            ConcurrencyStamp = "2c9c6265-1387-45fb-8d28-082c71b80f76",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBGPHH8yudXnFLVibLc32Foii9Yg1O4IP1vzCKH8q9ykcIaeOBNYijlbDoB97cPmwA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAyw95xNScP7gLwCc+bgxKnA/G1zwvIdSUs6xLoob3tmuEx/JQbmZYjW/9OCf/zEsA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e46b2e6e-7fdb-4eeb-aa90-180b7f152133",
+                            SecurityStamp = "3279b41d-d899-418a-b03c-e5c901f43f85",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -173,22 +173,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f4def830-c0e3-45f0-90b3-dbe002caabef",
+                            ConcurrencyStamp = "65e4220c-30ec-41f5-85f9-630369bd25f4",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fccdbdc3-1f46-4bdb-982b-34f1aa810839",
+                            SecurityStamp = "e99cedca-ee35-44cd-a92b-ede77905a9b3",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "65f09066-e0c7-4bc6-bd15-3855800a48f0",
+                            ConcurrencyStamp = "41f02f91-0072-4b53-8d14-0e32aacb9c00",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6f14752a-03a1-439c-8024-88657d0573e7",
+                            SecurityStamp = "25524df3-6a0b-4581-aed1-8a4d013073a9",
                             TwoFactorEnabled = false
                         });
                 });
@@ -591,6 +591,18 @@ namespace Models.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("ArgentRecuGagnant")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ArgentRecuPerdant")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BalaceNouveauJoueur")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ELONouveauJoueur")
+                        .HasColumnType("int");
+
                     b.Property<int>("NbCardsMaxInDeck")
                         .HasColumnType("int");
 
@@ -611,6 +623,10 @@ namespace Models.Migrations
                         new
                         {
                             Id = 1,
+                            ArgentRecuGagnant = 40,
+                            ArgentRecuPerdant = 100,
+                            BalaceNouveauJoueur = 100,
+                            ELONouveauJoueur = 1000,
                             NbCardsMaxInDeck = 10,
                             NbCardsToDraw = 4,
                             NbDecksMax = 3,
@@ -625,6 +641,12 @@ namespace Models.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ArgentRecuGagnant")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ArgentRecuPerdant")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsMatchCompleted")
                         .HasColumnType("bit");
@@ -763,6 +785,9 @@ namespace Models.Migrations
                     b.Property<int>("Balance")
                         .HasColumnType("int");
 
+                    b.Property<int>("ELO")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -782,6 +807,7 @@ namespace Models.Migrations
                         {
                             Id = 1,
                             Balance = 0,
+                            ELO = 0,
                             Name = "Test player 1",
                             UserId = "User1Id"
                         },
@@ -789,6 +815,7 @@ namespace Models.Migrations
                         {
                             Id = 2,
                             Balance = 0,
+                            ELO = 0,
                             Name = "Test player 2",
                             UserId = "User2Id"
                         },
@@ -796,6 +823,7 @@ namespace Models.Migrations
                         {
                             Id = 3,
                             Balance = 0,
+                            ELO = 0,
                             Name = "Admin",
                             UserId = "11111111-1111-1111-1111-111111111111"
                         });

@@ -17,7 +17,7 @@ namespace Models.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.11")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
@@ -154,15 +154,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f6485689-f000-4e5b-b224-56ec5482a63f",
+                            ConcurrencyStamp = "2c9c6265-1387-45fb-8d28-082c71b80f76",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEM9g1r447VSlU+6Lg3Mp2Q5pLtPTBMiAr95OKt9xwJPAe+Gy5tq2eFR5r2Q80634Ww==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAyw95xNScP7gLwCc+bgxKnA/G1zwvIdSUs6xLoob3tmuEx/JQbmZYjW/9OCf/zEsA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e2c1bb9f-9841-48e0-815b-51fd91b98985",
+                            SecurityStamp = "3279b41d-d899-418a-b03c-e5c901f43f85",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -170,22 +170,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "24ff9cad-bfce-4943-b862-57da3d519597",
+                            ConcurrencyStamp = "65e4220c-30ec-41f5-85f9-630369bd25f4",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1c967199-33da-4c58-bd86-8009afbde80d",
+                            SecurityStamp = "e99cedca-ee35-44cd-a92b-ede77905a9b3",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d23bbd05-ef42-44c7-867c-d9e99b9f9e8e",
+                            ConcurrencyStamp = "41f02f91-0072-4b53-8d14-0e32aacb9c00",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "31c73799-157b-479c-88d1-406fa0f44186",
+                            SecurityStamp = "25524df3-6a0b-4581-aed1-8a4d013073a9",
                             TwoFactorEnabled = false
                         });
                 });
@@ -594,6 +594,12 @@ namespace Models.Migrations
                     b.Property<int>("ArgentRecuPerdant")
                         .HasColumnType("int");
 
+                    b.Property<int>("BalaceNouveauJoueur")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ELONouveauJoueur")
+                        .HasColumnType("int");
+
                     b.Property<int>("NbCardsMaxInDeck")
                         .HasColumnType("int");
 
@@ -616,6 +622,8 @@ namespace Models.Migrations
                             Id = 1,
                             ArgentRecuGagnant = 40,
                             ArgentRecuPerdant = 100,
+                            BalaceNouveauJoueur = 100,
+                            ELONouveauJoueur = 1000,
                             NbCardsMaxInDeck = 10,
                             NbCardsToDraw = 4,
                             NbDecksMax = 3,
@@ -774,6 +782,9 @@ namespace Models.Migrations
                     b.Property<int>("Balance")
                         .HasColumnType("int");
 
+                    b.Property<int>("ELO")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -793,6 +804,7 @@ namespace Models.Migrations
                         {
                             Id = 1,
                             Balance = 0,
+                            ELO = 0,
                             Name = "Test player 1",
                             UserId = "User1Id"
                         },
@@ -800,6 +812,7 @@ namespace Models.Migrations
                         {
                             Id = 2,
                             Balance = 0,
+                            ELO = 0,
                             Name = "Test player 2",
                             UserId = "User2Id"
                         },
@@ -807,6 +820,7 @@ namespace Models.Migrations
                         {
                             Id = 3,
                             Balance = 0,
+                            ELO = 0,
                             Name = "Admin",
                             UserId = "11111111-1111-1111-1111-111111111111"
                         });
