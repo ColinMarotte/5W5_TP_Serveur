@@ -1,5 +1,6 @@
 ﻿using Models.Interfaces;
 using Models.Models;
+using System.Text.Json.Serialization;
 
 namespace Super_Cartes_Infinies.Models
 {
@@ -23,6 +24,8 @@ namespace Super_Cartes_Infinies.Models
 		public int Attack { get; set; }
 
 		public int Index { get; set; }
+		[JsonIgnore]
+		public virtual List<PlayableCardStatus> PlayableCardStatuses { get; set; } = new List<PlayableCardStatus>();
 
 		public bool HasPower(int powerId)
 		{

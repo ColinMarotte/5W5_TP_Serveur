@@ -225,7 +225,6 @@ namespace Super_Cartes_Infinies.Data
                     ImageUrl = "https://media.istockphoto.com/id/1428342232/vector/two-cats-wrapped-in-blankets.jpg?s=612x612&w=0&k=20&c=5N8CiQVBIfnpdHKcJyqGyQ6k8L3T4iKVjqisfPWZI3Q=",
                     Rarity = Rarity.Legendary,
                     Price = RarityInfo.GetPrice(Rarity.Legendary)
-
                 }
                 #endregion
             };
