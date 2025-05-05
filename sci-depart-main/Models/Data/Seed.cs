@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Drawing;
 using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics.X86;
 using Microsoft.AspNetCore.Identity;
 using Models.Models.Enums;
 using Super_Cartes_Infinies.Models;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Super_Cartes_Infinies.Data
 {
@@ -137,6 +139,8 @@ namespace Super_Cartes_Infinies.Data
                     Rarity = Rarity.Common,
                     Price = RarityInfo.GetPrice(Rarity.Common)
                 },
+
+                #region Section Pouvoirs Supplémentaires	
                 // Section Pouvoirs Supplémentaires - 3 nouvelles cartes (pour leur donner les nouveaux pouvoirs)
                 new Card
                 {
@@ -171,11 +175,18 @@ namespace Super_Cartes_Infinies.Data
                     Rarity = Rarity.Legendary,
                     Price = RarityInfo.GetPrice(Rarity.Legendary)
                 },
-                // TODO: Nouvelle card au choix
-                //new Card
-                //{
-                    //Id = 16
-                //}
+                // Section Pouvoirs Supplémentaires - Nouvelle card ayant nouveaux pouvoir au choix
+                new Card
+                {
+                    Id = 16,
+                    Name = "Chat Barbare",
+                    Attack = 6,
+                    Health = 10,
+                    Cost = 4,
+                    ImageUrl = "https://i.etsystatic.com/10964601/r/il/d4ad03/1093449052/il_fullxfull.1093449052_te57.jpg",
+                    Rarity = Rarity.Epic,
+                    Price = RarityInfo.GetPrice(Rarity.Epic)
+                },
                 // Section Pouvoirs Supplémentaires - 2 sorts
                 new Card
                 {
@@ -200,7 +211,23 @@ namespace Super_Cartes_Infinies.Data
                     ImageUrl = "https://www.shutterstock.com/image-vector/cute-cat-injury-sick-bandage-600nw-2415004269.jpg",
                     Rarity = Rarity.Epic,
                     Price = RarityInfo.GetPrice(Rarity.Epic)
+                },
+                // Section Pouvoirs Supplémentaires - 1 sort supplémentaire au choix
+                // Fait que tout les chats alliés reprennent 5 health et les adversaires 3 
+                new Card
+                {
+                    Id = 19,
+                    Name = "Beddy-bye Boost",
+                    IsASpell = true,
+                    Attack = 0,
+                    Health = 0,
+                    Cost = 3,
+                    ImageUrl = "https://media.istockphoto.com/id/1428342232/vector/two-cats-wrapped-in-blankets.jpg?s=612x612&w=0&k=20&c=5N8CiQVBIfnpdHKcJyqGyQ6k8L3T4iKVjqisfPWZI3Q=",
+                    Rarity = Rarity.Legendary,
+                    Price = RarityInfo.GetPrice(Rarity.Legendary)
+
                 }
+                #endregion
             };
         }
 
@@ -244,6 +271,7 @@ namespace Super_Cartes_Infinies.Data
                     Id = 9,
                     CardId = 6
                 },
+                #region Section Pouvoirs Supplémentaires
                 // Section Pouvoirs Supplémentaires - nouvelle starting card ayant un des nouveaux pouvoirs
                 new StartingCard
                 {
@@ -256,6 +284,7 @@ namespace Super_Cartes_Infinies.Data
                     Id = 11,
                     CardId = 18
                 }
+                #endregion
             };
         }
 
@@ -389,6 +418,7 @@ namespace Super_Cartes_Infinies.Data
                     Description = "Absorbe les dégâts.",
                     Icone = "🛡️"
                 },
+                #region Section Pouvoirs Supplémentaires
                 // Section Pouvoirs Supplémentaires - 3 nouveaux pouvoirs
                 new Power
                 {
@@ -401,7 +431,7 @@ namespace Super_Cartes_Infinies.Data
                 {
                     Id = 6,
                     Name = "Poison",
-                    Description = "Cause des au fil du temps à l'adversaire",
+                    Description = "Cause des dommages à l'adversaire au fil du temps",
                     Icone = "☠️"
                 },
                 new Power
@@ -410,7 +440,16 @@ namespace Super_Cartes_Infinies.Data
                     Name = "Stunned",
                     Description = "Empêche une carte d'agir",
                     Icone = "😵‍"
+                },
+                // Section Pouvoirs Supplémentaires - 1 Nouveau pouvoir au choix
+                new Power
+                {
+                    Id = 8,
+                    Name = "Explosif",
+                    Description = "Explose lorsqu'il meurt infligeant 2 de dégats à 2 chats adversaires",
+                    Icone = "💣"
                 }
+                #endregion
             };
         }
 
@@ -460,6 +499,7 @@ namespace Super_Cartes_Infinies.Data
                     PowerId = 3,
                     Value = 3
                 },
+                 #region Section Pouvoirs Supplémentaires
                 // Section Pouvoirs Supplémentaires - 3 nouveaux pouvoirs assignés aux cartes
                 new CardPower
                 {
@@ -481,8 +521,16 @@ namespace Super_Cartes_Infinies.Data
                     CardId = 15,
                     PowerId = 7,
                     Value = 3
+                },
+                // Section Pouvoirs Supplémentaires - 1 nouveau pouvoir au choix assigné à une carte
+                new CardPower {
+                CardPowerId = 10,
+                CardId = 16,
+                PowerId = 8,
+                Value = 0
                 }
-            };
+                #endregion
+            }; 
         }
 
     }
