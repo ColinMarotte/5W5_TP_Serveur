@@ -5,7 +5,7 @@
 namespace Models.Migrations
 {
     /// <inheritdoc />
-    public partial class argentRecuApresMatch : Migration
+    public partial class spellsAndNewSartingCard : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,28 +15,28 @@ namespace Models.Migrations
                 keyColumn: "Id",
                 keyValue: "11111111-1111-1111-1111-111111111111",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "1b7c691e-de8d-4e23-9e6e-c1153d1b7f96", "AQAAAAIAAYagAAAAEJgg+K9uQVssSmrc5UX2XdSygWgxOO7TqeAM/cbcdJeWdjn9OHLQkWeynElUKpv6xQ==", "5cccd917-c9b0-4416-a42b-8c1c97cec115" });
+                values: new object[] { "c8a4108b-2bbb-421e-87cf-9cf84aafc71e", "AQAAAAIAAYagAAAAEMVB9i0k6q9P62Jwme124x17A1XFWpIy9f51gaLKAbeN7+aokBbE48upFuKbqFWaWw==", "2f858dd0-2bda-4bf2-8e8d-02aed457de9e" });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "User1Id",
                 columns: new[] { "ConcurrencyStamp", "SecurityStamp" },
-                values: new object[] { "3ba8b387-d0f4-4e0e-94cc-47cc0741da08", "2b9ba3b6-4fc5-406c-912c-3bff0f967c38" });
+                values: new object[] { "49e6ee74-6cef-4a74-a2fb-587c1993a1b6", "eb95ceed-6125-4f09-82c9-f9e25c040fd6" });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "User2Id",
                 columns: new[] { "ConcurrencyStamp", "SecurityStamp" },
-                values: new object[] { "d40acea8-8e71-401d-850a-014c9d3b133a", "96c036a7-8455-48f6-ac43-567b47fcb370" });
+                values: new object[] { "b2eb677a-8b15-483b-998c-b5ef684a2d18", "419df00a-5921-4fc4-8c69-063df056a5ef" });
 
             migrationBuilder.UpdateData(
-                table: "GameConfigs",
+                table: "Cards",
                 keyColumn: "Id",
-                keyValue: 1,
-                columns: new[] { "ArgentRecuGagnant", "ArgentRecuPerdant" },
-                values: new object[] { 40, 100 });
+                keyValue: 17,
+                column: "Rarity",
+                value: 1);
         }
 
         /// <inheritdoc />
@@ -47,28 +47,28 @@ namespace Models.Migrations
                 keyColumn: "Id",
                 keyValue: "11111111-1111-1111-1111-111111111111",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "0f3bd26f-dd69-40bb-869d-f5dab87156e9", "AQAAAAIAAYagAAAAEG6SuZZr7Piwg+TPpH5TbyrSHlilEDbMI1qzKVW9xuSyw4eKUnYOGgFWKT9CROZ3dA==", "4581c059-c693-4aca-9137-01a281ec17ae" });
+                values: new object[] { "77e737a4-4968-4143-8ce3-7731b8fcc198", "AQAAAAIAAYagAAAAEOdB12AuhgQT+FlKtlTgxYxtJn18xPh+RD08zuGo4HOQjV09B+XCn4A9XPJj4nsXkg==", "6519f3e1-08b0-4eaa-a6a0-6cd9c7b8c509" });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "User1Id",
                 columns: new[] { "ConcurrencyStamp", "SecurityStamp" },
-                values: new object[] { "98010168-54ad-43ab-97d4-0bbe6e65f386", "f94bfb43-4e22-4cfa-8a28-082838826db0" });
+                values: new object[] { "c84c4a7d-217c-4be7-a025-4b9d07eef13b", "2ed78c7b-655a-401b-b6b6-aa8446eef0e7" });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "User2Id",
                 columns: new[] { "ConcurrencyStamp", "SecurityStamp" },
-                values: new object[] { "341c086d-48cb-49e8-8838-1007133f631a", "5207a939-a1db-4ac2-be28-95ab7aa8bf93" });
+                values: new object[] { "27c4b466-bb05-453e-b5f6-352fc9cfcac6", "2433ba0e-2bbd-4de7-ae39-0c1fed3ae0b4" });
 
             migrationBuilder.UpdateData(
-                table: "GameConfigs",
+                table: "Cards",
                 keyColumn: "Id",
-                keyValue: 1,
-                columns: new[] { "ArgentRecuGagnant", "ArgentRecuPerdant" },
-                values: new object[] { 0, 0 });
+                keyValue: 17,
+                column: "Rarity",
+                value: 0);
         }
     }
 }

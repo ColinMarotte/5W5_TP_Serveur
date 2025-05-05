@@ -15,6 +15,8 @@ namespace Super_Cartes_Infinies.Models
 		public int Id { get; set; }
 		[DisplayName("Nom")]
 		public string Name { get; set; } = "";
+        [DisplayName("Est un sort?")]
+        public bool IsASpell { get; set; } = false;
         [DisplayName("Attaque")]
         public int Attack { get; set; }
         [DisplayName("Points de vie")]

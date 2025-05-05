@@ -136,6 +136,70 @@ namespace Super_Cartes_Infinies.Data
                     ImageUrl = "https://i.imgur.com/QuDe5RH.jpeg",
                     Rarity = Rarity.Common,
                     Price = RarityInfo.GetPrice(Rarity.Common)
+                },
+                // Section Pouvoirs Supplémentaires - 3 nouvelles cartes (pour leur donner les nouveaux pouvoirs)
+                new Card
+                {
+                    Id = 13,
+                    Name = "Chat Magicien",
+                    Attack = 8,
+                    Health = 6,
+                    Cost = 4,
+                    ImageUrl = "https://palmaris.ca/cdn/shop/files/IMG_2982.jpg?v=1726299219",
+                    Rarity = Rarity.Epic,
+                    Price = RarityInfo.GetPrice(Rarity.Epic)
+                },
+                new Card
+                {
+                    Id = 14,
+                    Name = "Barber Cat",
+                    Attack = 5,
+                    Health = 3,
+                    Cost = 2,
+                    ImageUrl = "https://numeralpaint.com/wp-content/uploads/2021/06/barber-cat-paint-by-numbers.jpg",
+                    Rarity = Rarity.Rare,
+                    Price = RarityInfo.GetPrice(Rarity.Rare)
+                },
+                new Card
+                {
+                    Id = 15,
+                    Name = "Moewna Lisa",
+                    Attack = 10,
+                    Health = 7,
+                    Cost = 5,
+                    ImageUrl = "https://m.media-amazon.com/images/I/61hnicrIZ2L._AC_UF894,1000_QL80_.jpg",
+                    Rarity = Rarity.Legendary,
+                    Price = RarityInfo.GetPrice(Rarity.Legendary)
+                },
+                // TODO: Nouvelle card au choix
+                //new Card
+                //{
+                    //Id = 16
+                //}
+                // Section Pouvoirs Supplémentaires - 2 sorts
+                new Card
+                {
+                    Id = 17,
+                    Name = "Earthquake",
+                    IsASpell = true,
+                    Attack = 2,
+                    Health = 0,
+                    Cost = 4,
+                    ImageUrl = "https://thumb.ac-illust.com/8e/8ee838398cdb5a3a2d9a7a8b26ad7ae6_t.jpeg",
+                    Rarity = Rarity.Rare,
+                    Price = RarityInfo.GetPrice(Rarity.Rare)
+                },
+                new Card
+                {
+                    Id = 18,
+                    Name = "Random Pain",
+                    IsASpell = true,
+                    Attack = 0,
+                    Health = 0,
+                    Cost = 3,
+                    ImageUrl = "https://www.shutterstock.com/image-vector/cute-cat-injury-sick-bandage-600nw-2415004269.jpg",
+                    Rarity = Rarity.Epic,
+                    Price = RarityInfo.GetPrice(Rarity.Epic)
                 }
             };
         }
@@ -171,7 +235,7 @@ namespace Super_Cartes_Infinies.Data
                 {
                     Id = 7,
                     CardId = 5
-                },new StartingCard
+                },new StartingCard               
                 {
                     Id = 8,
                     CardId = 6
@@ -180,6 +244,18 @@ namespace Super_Cartes_Infinies.Data
                     Id = 9,
                     CardId = 6
                 },
+                // Section Pouvoirs Supplémentaires - nouvelle starting card ayant un des nouveaux pouvoirs
+                new StartingCard
+                {
+                    Id = 10,
+                    CardId = 13
+                },
+                // Section Pouvoirs Supplémentaires - nouvelle starting card ayant un des nouveaux sorts
+                new StartingCard
+                {
+                    Id = 11,
+                    CardId = 18
+                }
             };
         }
 
@@ -291,7 +367,6 @@ namespace Super_Cartes_Infinies.Data
                     Name = "First Strike",
                     Description = "Attaque l'adversaire.",
                     Icone = "🏅"
-
                 },
                 new Power
                 {
@@ -313,6 +388,28 @@ namespace Super_Cartes_Infinies.Data
                     Name = "Shield",
                     Description = "Absorbe les dégâts.",
                     Icone = "🛡️"
+                },
+                // Section Pouvoirs Supplémentaires - 3 nouveaux pouvoirs
+                new Power
+                {
+                    Id = 5,
+                    Name = "Chaos",
+                    Description = "Cause des dégats à toutes les cartes",
+                    Icone = "🌀"
+                },
+                new Power
+                {
+                    Id = 6,
+                    Name = "Poison",
+                    Description = "Cause des au fil du temps à l'adversaire",
+                    Icone = "☠️"
+                },
+                new Power
+                {
+                    Id = 7,
+                    Name = "Stunned",
+                    Description = "Empêche une carte d'agir",
+                    Icone = "😵‍"
                 }
             };
         }
@@ -361,6 +458,28 @@ namespace Super_Cartes_Infinies.Data
                     CardPowerId=6,
                     CardId = 1,
                     PowerId = 3,
+                    Value = 3
+                },
+                // Section Pouvoirs Supplémentaires - 3 nouveaux pouvoirs assignés aux cartes
+                new CardPower
+                {
+                    CardPowerId=7,
+                    CardId = 13,
+                    PowerId = 5,
+                    Value = 0
+                },
+                new CardPower
+                {
+                    CardPowerId = 8,
+                    CardId = 14,
+                    PowerId = 6,
+                    Value = 2
+                },
+                new CardPower
+                {
+                    CardPowerId = 9,
+                    CardId = 15,
+                    PowerId = 7,
                     Value = 3
                 }
             };

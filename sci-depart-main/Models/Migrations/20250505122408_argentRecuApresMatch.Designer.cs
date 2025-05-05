@@ -12,7 +12,7 @@ using Super_Cartes_Infinies.Data;
 namespace Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250430201141_argentRecuApresMatch")]
+    [Migration("20250505122408_argentRecuApresMatch")]
     partial class argentRecuApresMatch
     {
         /// <inheritdoc />
@@ -157,15 +157,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1b7c691e-de8d-4e23-9e6e-c1153d1b7f96",
+                            ConcurrencyStamp = "cd3d8377-bc12-402d-836b-b15633a55933",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJgg+K9uQVssSmrc5UX2XdSygWgxOO7TqeAM/cbcdJeWdjn9OHLQkWeynElUKpv6xQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEA/ahZlEDdPyrZolyi4vPyW9stP8J5gHsWJyfjOH2CeJZd8Vmi1ZPUjpbHERMenrTQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5cccd917-c9b0-4416-a42b-8c1c97cec115",
+                            SecurityStamp = "8b3ee40a-a42b-43c4-aa9e-371068875d68",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -173,22 +173,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3ba8b387-d0f4-4e0e-94cc-47cc0741da08",
+                            ConcurrencyStamp = "bacaef84-3f7d-4076-83a2-9d337981742d",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2b9ba3b6-4fc5-406c-912c-3bff0f967c38",
+                            SecurityStamp = "10cb490d-9cee-46a1-a99b-724733a956c4",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d40acea8-8e71-401d-850a-014c9d3b133a",
+                            ConcurrencyStamp = "6475da35-c94b-49c4-a15c-3e742b81f422",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "96c036a7-8455-48f6-ac43-567b47fcb370",
+                            SecurityStamp = "b548093e-cdac-48f6-a481-2422fdfac5d0",
                             TwoFactorEnabled = false
                         });
                 });
@@ -633,6 +633,12 @@ namespace Models.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ArgentRecuGagnant")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ArgentRecuPerdant")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsMatchCompleted")
                         .HasColumnType("bit");

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Super_Cartes_Infinies.Data;
 
@@ -11,9 +12,11 @@ using Super_Cartes_Infinies.Data;
 namespace Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250505130808_morePowersAndCards")]
+    partial class morePowersAndCards
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -154,15 +157,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c8a4108b-2bbb-421e-87cf-9cf84aafc71e",
+                            ConcurrencyStamp = "171952c2-eb44-4a3c-ad53-2399caa9cf0f",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMVB9i0k6q9P62Jwme124x17A1XFWpIy9f51gaLKAbeN7+aokBbE48upFuKbqFWaWw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEF9Is98QKtsfu5vvvhFBCYgXUi9pHyrx5wANe3xPq9JiTuzGzMn5Q0Wq1e3YfIYRBg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2f858dd0-2bda-4bf2-8e8d-02aed457de9e",
+                            SecurityStamp = "0a2d91b0-198e-4d69-828e-77f26ae5f8c1",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -170,22 +173,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "49e6ee74-6cef-4a74-a2fb-587c1993a1b6",
+                            ConcurrencyStamp = "caadc9e8-2500-4576-ac92-2dbe88a9fed0",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "eb95ceed-6125-4f09-82c9-f9e25c040fd6",
+                            SecurityStamp = "cd2efcc2-6408-4b3a-aec1-f15de19ab33a",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b2eb677a-8b15-483b-998c-b5ef684a2d18",
+                            ConcurrencyStamp = "ef882c8e-9c3d-4aba-a473-e5027e82224e",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "419df00a-5921-4fc4-8c69-063df056a5ef",
+                            SecurityStamp = "261155c8-be56-46b8-822e-fbaf4ef0e802",
                             TwoFactorEnabled = false
                         });
                 });
@@ -303,9 +306,6 @@ namespace Models.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsASpell")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -328,7 +328,6 @@ namespace Models.Migrations
                             Cost = 3,
                             Health = 3,
                             ImageUrl = "https://i.pinimg.com/originals/a8/16/49/a81649bd4b0f032ce633161c5a076b87.jpg",
-                            IsASpell = false,
                             Name = "Chat Dragon",
                             Price = 50,
                             Rarity = 1
@@ -340,7 +339,6 @@ namespace Models.Migrations
                             Cost = 3,
                             Health = 5,
                             ImageUrl = "https://i0.wp.com/thediscerningcat.com/wp-content/uploads/2021/02/tabby-cat-wearing-sunglasses.jpg",
-                            IsASpell = false,
                             Name = "Chat Awesome",
                             Price = 10,
                             Rarity = 0
@@ -352,7 +350,6 @@ namespace Models.Migrations
                             Cost = 1,
                             Health = 1,
                             ImageUrl = "https://cdn.wallpapersafari.com/27/53/SZ8PO9.jpg",
-                            IsASpell = false,
                             Name = "Chatton Laser",
                             Price = 200,
                             Rarity = 3
@@ -364,7 +361,6 @@ namespace Models.Migrations
                             Cost = 4,
                             Health = 4,
                             ImageUrl = "https://wallpapers.com/images/hd/epic-cat-poster-baavft05ylgta4j8.jpg",
-                            IsASpell = false,
                             Name = "Chat Spacial",
                             Price = 200,
                             Rarity = 3
@@ -376,7 +372,6 @@ namespace Models.Migrations
                             Cost = 5,
                             Health = 7,
                             ImageUrl = "https://i.etsystatic.com/6230905/r/il/32aa5a/3474618751/il_fullxfull.3474618751_mfvf.jpg",
-                            IsASpell = false,
                             Name = "Chat Guerrier",
                             Price = 100,
                             Rarity = 2
@@ -388,7 +383,6 @@ namespace Models.Migrations
                             Cost = 2,
                             Health = 2,
                             ImageUrl = "https://store.playstation.com/store/api/chihiro/00_09_000/container/AU/en/99/EP2402-CUSA05624_00-ETH0000000002875/0/image?_version=00_09_000&platform=chihiro&bg_color=000000&opacity=100&w=720&h=720",
-                            IsASpell = false,
                             Name = "Chat Laser",
                             Price = 50,
                             Rarity = 1
@@ -400,7 +394,6 @@ namespace Models.Migrations
                             Cost = 4,
                             Health = 3,
                             ImageUrl = "https://images.squarespace-cdn.com/content/51b3dc8ee4b051b96ceb10de/1394662654865-JKOZ7ZFF39247VYDTGG9/hilarious-jedi-cats-fight-video-preview.jpg?content-type=image%2Fjpeg",
-                            IsASpell = false,
                             Name = "Jedi Chat",
                             Price = 100,
                             Rarity = 2
@@ -412,7 +405,6 @@ namespace Models.Migrations
                             Cost = 2,
                             Health = 9,
                             ImageUrl = "https://i.pinimg.com/736x/48/ba/94/48ba9440c4f87e42af99774ec51f53a1.jpg",
-                            IsASpell = false,
                             Name = "Blob Chat",
                             Price = 10,
                             Rarity = 0
@@ -424,7 +416,6 @@ namespace Models.Migrations
                             Cost = 2,
                             Health = 1,
                             ImageUrl = "https://townsquare.media/site/142/files/2011/08/jedicats.jpg?w=980&q=75",
-                            IsASpell = false,
                             Name = "Jedi Chatton",
                             Price = 50,
                             Rarity = 1
@@ -436,7 +427,6 @@ namespace Models.Migrations
                             Cost = 2,
                             Health = 1,
                             ImageUrl = "https://cdn.theatlantic.com/thumbor/fOZjgqHH0RmXA1A5ek-yDz697W4=/133x0:2091x1020/1200x625/media/img/mt/2015/12/RTRD62Q/original.jpg",
-                            IsASpell = false,
                             Name = "Chat Furtif",
                             Price = 10,
                             Rarity = 0
@@ -448,7 +438,6 @@ namespace Models.Migrations
                             Cost = 4,
                             Health = 6,
                             ImageUrl = "https://i.imgur.com/07zax4t.jpeg",
-                            IsASpell = false,
                             Name = "Grosse Minoune",
                             Price = 10,
                             Rarity = 0
@@ -460,7 +449,6 @@ namespace Models.Migrations
                             Cost = 2,
                             Health = 4,
                             ImageUrl = "https://i.imgur.com/QuDe5RH.jpeg",
-                            IsASpell = false,
                             Name = "Petite Minoune",
                             Price = 10,
                             Rarity = 0
@@ -472,7 +460,6 @@ namespace Models.Migrations
                             Cost = 4,
                             Health = 6,
                             ImageUrl = "https://palmaris.ca/cdn/shop/files/IMG_2982.jpg?v=1726299219",
-                            IsASpell = false,
                             Name = "Chat Magicien",
                             Price = 100,
                             Rarity = 2
@@ -484,7 +471,6 @@ namespace Models.Migrations
                             Cost = 2,
                             Health = 3,
                             ImageUrl = "https://numeralpaint.com/wp-content/uploads/2021/06/barber-cat-paint-by-numbers.jpg",
-                            IsASpell = false,
                             Name = "Barber Cat",
                             Price = 50,
                             Rarity = 1
@@ -496,34 +482,9 @@ namespace Models.Migrations
                             Cost = 5,
                             Health = 7,
                             ImageUrl = "https://m.media-amazon.com/images/I/61hnicrIZ2L._AC_UF894,1000_QL80_.jpg",
-                            IsASpell = false,
                             Name = "Moewna Lisa",
                             Price = 200,
                             Rarity = 3
-                        },
-                        new
-                        {
-                            Id = 17,
-                            Attack = 2,
-                            Cost = 4,
-                            Health = 0,
-                            ImageUrl = "https://thumb.ac-illust.com/8e/8ee838398cdb5a3a2d9a7a8b26ad7ae6_t.jpeg",
-                            IsASpell = true,
-                            Name = "Earthquake",
-                            Price = 50,
-                            Rarity = 1
-                        },
-                        new
-                        {
-                            Id = 18,
-                            Attack = 0,
-                            Cost = 3,
-                            Health = 0,
-                            ImageUrl = "https://www.shutterstock.com/image-vector/cute-cat-injury-sick-bandage-600nw-2415004269.jpg",
-                            IsASpell = true,
-                            Name = "Random Pain",
-                            Price = 100,
-                            Rarity = 2
                         });
                 });
 
@@ -1056,11 +1017,6 @@ namespace Models.Migrations
                         {
                             Id = 10,
                             CardId = 13
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CardId = 18
                         });
                 });
 
