@@ -1,5 +1,4 @@
 ﻿using Models.Interfaces;
-using Models.Migrations;
 
 namespace Super_Cartes_Infinies.Models
 {

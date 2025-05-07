@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Models.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class Initiale : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -80,7 +80,9 @@ namespace Models.Migrations
                     NbCardsToDraw = table.Column<int>(type: "int", nullable: false),
                     QtyManaPerTurn = table.Column<int>(type: "int", nullable: false),
                     NbDecksMax = table.Column<int>(type: "int", nullable: false),
-                    NbCardsMaxInDeck = table.Column<int>(type: "int", nullable: false)
+                    NbCardsMaxInDeck = table.Column<int>(type: "int", nullable: false),
+                    ArgentRecuGagnant = table.Column<int>(type: "int", nullable: false),
+                    ArgentRecuPerdant = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -355,6 +357,8 @@ namespace Models.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ArgentRecuGagnant = table.Column<int>(type: "int", nullable: false),
+                    ArgentRecuPerdant = table.Column<int>(type: "int", nullable: false),
                     IsPlayerATurn = table.Column<bool>(type: "bit", nullable: false),
                     IsMatchCompleted = table.Column<bool>(type: "bit", nullable: false),
                     WinnerUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -470,9 +474,9 @@ namespace Models.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "11111111-1111-1111-1111-111111111111", 0, "6fdf3d76-6dcb-49b0-a205-90f4160d791a", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEBGPHH8yudXnFLVibLc32Foii9Yg1O4IP1vzCKH8q9ykcIaeOBNYijlbDoB97cPmwA==", null, false, "e46b2e6e-7fdb-4eeb-aa90-180b7f152133", false, "admin@admin.com" },
-                    { "User1Id", 0, "f4def830-c0e3-45f0-90b3-dbe002caabef", null, false, false, null, null, null, null, null, false, "fccdbdc3-1f46-4bdb-982b-34f1aa810839", false, null },
-                    { "User2Id", 0, "65f09066-e0c7-4bc6-bd15-3855800a48f0", null, false, false, null, null, null, null, null, false, "6f14752a-03a1-439c-8024-88657d0573e7", false, null }
+                    { "11111111-1111-1111-1111-111111111111", 0, "e3b20dc1-1791-4163-9f16-e524dd39cc84", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEHF27XfitbOxNuLL//nu/tvziUvBvNYWJCc6KXX7PQ3eeEYjQfscyPVKKJBR2LXzZw==", null, false, "f2935100-00d3-418b-a206-fffe954ce456", false, "admin@admin.com" },
+                    { "User1Id", 0, "f66c77c7-680d-4ad4-89d2-8d1459fe24ad", null, false, false, null, null, null, null, null, false, "582620af-faea-4e8a-8a77-8a46612521a7", false, null },
+                    { "User2Id", 0, "5ccabd11-49b7-4c8b-99ff-7fecdb6a5e6c", null, false, false, null, null, null, null, null, false, "3a84f0e0-350c-4ef0-9a30-17ec98df6417", false, null }
                 });
 
             migrationBuilder.InsertData(
@@ -496,8 +500,8 @@ namespace Models.Migrations
 
             migrationBuilder.InsertData(
                 table: "GameConfigs",
-                columns: new[] { "Id", "NbCardsMaxInDeck", "NbCardsToDraw", "NbDecksMax", "QtyManaPerTurn" },
-                values: new object[] { 1, 10, 4, 3, 3 });
+                columns: new[] { "Id", "ArgentRecuGagnant", "ArgentRecuPerdant", "NbCardsMaxInDeck", "NbCardsToDraw", "NbDecksMax", "QtyManaPerTurn" },
+                values: new object[] { 1, 40, 100, 10, 4, 3, 3 });
 
             migrationBuilder.InsertData(
                 table: "Powers",

@@ -12,15 +12,15 @@ using Super_Cartes_Infinies.Data;
 namespace Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250428114733_Init")]
-    partial class Init
+    [Migration("20250507200352_Initiale")]
+    partial class Initiale
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.11")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
@@ -157,15 +157,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6fdf3d76-6dcb-49b0-a205-90f4160d791a",
+                            ConcurrencyStamp = "e3b20dc1-1791-4163-9f16-e524dd39cc84",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBGPHH8yudXnFLVibLc32Foii9Yg1O4IP1vzCKH8q9ykcIaeOBNYijlbDoB97cPmwA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHF27XfitbOxNuLL//nu/tvziUvBvNYWJCc6KXX7PQ3eeEYjQfscyPVKKJBR2LXzZw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e46b2e6e-7fdb-4eeb-aa90-180b7f152133",
+                            SecurityStamp = "f2935100-00d3-418b-a206-fffe954ce456",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -173,22 +173,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f4def830-c0e3-45f0-90b3-dbe002caabef",
+                            ConcurrencyStamp = "f66c77c7-680d-4ad4-89d2-8d1459fe24ad",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fccdbdc3-1f46-4bdb-982b-34f1aa810839",
+                            SecurityStamp = "582620af-faea-4e8a-8a77-8a46612521a7",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "65f09066-e0c7-4bc6-bd15-3855800a48f0",
+                            ConcurrencyStamp = "5ccabd11-49b7-4c8b-99ff-7fecdb6a5e6c",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "6f14752a-03a1-439c-8024-88657d0573e7",
+                            SecurityStamp = "3a84f0e0-350c-4ef0-9a30-17ec98df6417",
                             TwoFactorEnabled = false
                         });
                 });
@@ -591,6 +591,12 @@ namespace Models.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("ArgentRecuGagnant")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ArgentRecuPerdant")
+                        .HasColumnType("int");
+
                     b.Property<int>("NbCardsMaxInDeck")
                         .HasColumnType("int");
 
@@ -611,6 +617,8 @@ namespace Models.Migrations
                         new
                         {
                             Id = 1,
+                            ArgentRecuGagnant = 40,
+                            ArgentRecuPerdant = 100,
                             NbCardsMaxInDeck = 10,
                             NbCardsToDraw = 4,
                             NbDecksMax = 3,
@@ -625,6 +633,12 @@ namespace Models.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ArgentRecuGagnant")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ArgentRecuPerdant")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsMatchCompleted")
                         .HasColumnType("bit");
