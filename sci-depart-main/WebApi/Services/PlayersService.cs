@@ -74,6 +74,11 @@ namespace Super_Cartes_Infinies.Services
         {
             return GetPlayerFromPlayerId(playerId).Balance;
         }
+
+        public int GetELOFromUserId(string userId)
+        {
+            return GetPlayerFromUserId(userId).ELO;
+        }
     }
 }
 

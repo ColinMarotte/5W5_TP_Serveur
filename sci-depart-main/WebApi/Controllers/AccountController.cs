@@ -114,9 +114,8 @@ namespace WebApi.Controllers
                 );
 
                 string tokenString = new JwtSecurityTokenHandler().WriteToken(token);
-                string playerId = _playersService.GetPlayerFromUserId(user.Id).Id.ToString();
-
-                return Ok(new LoginSuccessDTO() { Token = tokenString, UserId = user.Id, PlayerId = playerId, Solde = _playersService.GetBalanceFromPlayerId(playerId) });
+                Player player = _playersService.GetPlayerFromUserId(user.Id);
+                return Ok(new LoginSuccessDTO() { Token = tokenString, UserId = user.Id, PlayerId = player.Id.ToString(), Solde = player.Balance });
             }
 
             return NotFound(new { Error = "L'utilisateur est introuvable ou le mot de passe ne concorde pas." });
@@ -138,6 +137,16 @@ namespace WebApi.Controllers
             var userId = claim.Value;
             int playerBalance = _playersService.GetBalanceFromUserId(userId);
             return playerBalance;
+        }
+        [Authorize]
+        [HttpGet]
+        public ActionResult<int> ELO()
+        {
+            var claimsIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            var userId = claim.Value;
+            int elo = _playersService.GetELOFromUserId(userId);
+            return elo;
         }
     }
 }
