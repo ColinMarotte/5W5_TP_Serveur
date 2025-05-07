@@ -193,9 +193,7 @@ namespace Super_Cartes_Infinies.Data
                 NbDecksMax = 3,
                 NbCardsMaxInDeck = 10,
                 ArgentRecuGagnant=40,
-                ArgentRecuPerdant=100,
-                ELONouveauJoueur = 1000,
-                BalanceNouveauJoueur = 100
+                ArgentRecuPerdant=100
             };
         }
 

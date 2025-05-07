@@ -12,8 +12,8 @@ using Super_Cartes_Infinies.Data;
 namespace Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250505121703_init")]
-    partial class init
+    [Migration("20250507185159_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,15 +157,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2c9c6265-1387-45fb-8d28-082c71b80f76",
+                            ConcurrencyStamp = "206945b7-5e37-4e13-86b3-2409054f0078",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAyw95xNScP7gLwCc+bgxKnA/G1zwvIdSUs6xLoob3tmuEx/JQbmZYjW/9OCf/zEsA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELkE00X1CAqXzCcM+f4FrZOLeDdxq5HiAIMnZYxYrJprP9sDkHQ47Uj5cjWDaUl69g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3279b41d-d899-418a-b03c-e5c901f43f85",
+                            SecurityStamp = "8bc89b5f-22b1-44b3-9993-ef6c132c2fd6",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -173,22 +173,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "65e4220c-30ec-41f5-85f9-630369bd25f4",
+                            ConcurrencyStamp = "032e39eb-6bf5-43a6-aa14-98d275f896db",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e99cedca-ee35-44cd-a92b-ede77905a9b3",
+                            SecurityStamp = "d5583414-0576-4f1a-b15d-51b45f8bb501",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "41f02f91-0072-4b53-8d14-0e32aacb9c00",
+                            ConcurrencyStamp = "6835d374-dd9a-4e9c-b3d1-252d25cbd350",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "25524df3-6a0b-4581-aed1-8a4d013073a9",
+                            SecurityStamp = "2d9e3a53-7613-4a62-b06c-9dffbd18822d",
                             TwoFactorEnabled = false
                         });
                 });
@@ -597,12 +597,6 @@ namespace Models.Migrations
                     b.Property<int>("ArgentRecuPerdant")
                         .HasColumnType("int");
 
-                    b.Property<int>("BalaceNouveauJoueur")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ELONouveauJoueur")
-                        .HasColumnType("int");
-
                     b.Property<int>("NbCardsMaxInDeck")
                         .HasColumnType("int");
 
@@ -625,8 +619,6 @@ namespace Models.Migrations
                             Id = 1,
                             ArgentRecuGagnant = 40,
                             ArgentRecuPerdant = 100,
-                            BalaceNouveauJoueur = 100,
-                            ELONouveauJoueur = 1000,
                             NbCardsMaxInDeck = 10,
                             NbCardsToDraw = 4,
                             NbDecksMax = 3,

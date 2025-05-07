@@ -10,15 +10,12 @@ namespace Super_Cartes_Infinies.Services
     {
         private ApplicationDbContext _dbContext;
         private StartingCardsService _startingCardsService;
-        private GameConfigsService _gameConfigsService;
 
-        public PlayersService(ApplicationDbContext context, StartingCardsService startingCardsService, GameConfigsService gameConfigsService)
+        public PlayersService(ApplicationDbContext context, StartingCardsService startingCardsService)
         {
             _dbContext = context;
             _startingCardsService = startingCardsService;
-            _gameConfigsService = gameConfigsService;
         }
-
         public async Task<Player> CreatePlayer(IdentityUser user)
         {
             Player p = new Player()
@@ -27,8 +24,8 @@ namespace Super_Cartes_Infinies.Services
                 UserId = user.Id,
                 Name = user.Email!,
                 User = user,
-                ELO = await _gameConfigsService.GetStartingELO(),
-                Balance = await _gameConfigsService.GetStartingMoney()
+                ELO = 1000,
+                Balance = 100
 
             };
 

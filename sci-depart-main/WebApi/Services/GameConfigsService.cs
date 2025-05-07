@@ -94,16 +94,5 @@ namespace Super_Cartes_Infinies.Services
             var config = await _dbContext.GameConfigs.FirstAsync();
             return config.ArgentRecuPerdant;
         }
-
-        public async Task<int> GetStartingELO()
-        {
-            var config = await _dbContext.GameConfigs.FirstAsync();
-            return config.ELONouveauJoueur;
-        }
-        public async Task<int> GetStartingMoney()
-        {
-            var config = await _dbContext.GameConfigs.FirstAsync();
-            return config.BalanceNouveauJoueur;
-        }
     }
 }
