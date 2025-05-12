@@ -77,7 +77,8 @@ namespace Super_Cartes_Infinies.Services
 
         public int GetELOFromUserId(string userId)
         {
-            return GetPlayerFromUserId(userId).ELO;
+            Player player = GetPlayerFromUserId(userId);
+            return player.ELO;
         }
     }
 }
