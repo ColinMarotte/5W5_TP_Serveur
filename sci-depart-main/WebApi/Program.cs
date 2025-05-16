@@ -86,6 +86,9 @@ builder.Services.AddScoped<GameConfigsService>();
 builder.Services.AddScoped<DecksService>();
 builder.Services.AddScoped<PacksService>();
 
+builder.Services.AddSingleton<MatchmakingBackgroundService>();
+builder.Services.AddHostedService<MatchmakingBackgroundService>(p => p.GetService<MatchmakingBackgroundService>());
+
 builder.Services.AddSignalR();
 
 builder.Services.AddControllers();
