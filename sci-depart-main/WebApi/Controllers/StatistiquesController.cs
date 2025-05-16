@@ -24,7 +24,7 @@ namespace WebApi.Controllers
 
         [Authorize]
         [HttpGet("{playerId}")]
-        public IActionResult GetPlayerStats(string playerId)
+        public IActionResult GetPlayerStatistiques(string playerId)
         {
             Player player = _playersService.GetPlayerFromPlayerId(playerId);
 
@@ -42,7 +42,7 @@ namespace WebApi.Controllers
 
         [Authorize]
         [HttpGet("{playerId}")]
-        public IActionResult GetDeckStats(int deckid)
+        public IActionResult GetDeckStatistiques(int deckid)
         {
             Deck deck = _decksService.GetDeckFromDeckId(deckid);
 
