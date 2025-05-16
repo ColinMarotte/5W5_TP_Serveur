@@ -24,9 +24,6 @@ namespace Super_Cartes_Infinies.Services
                 UserId = user.Id,
                 Name = user.Email!,
                 User = user,
-                ELO = 1000,
-                Balance = 100
-
             };
 
             List<StartingCard> startingCards = await _startingCardsService.GetStartingCards();
