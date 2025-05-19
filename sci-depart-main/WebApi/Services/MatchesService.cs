@@ -14,6 +14,7 @@ namespace Super_Cartes_Infinies.Services
         private ApplicationDbContext _dbContext;
         private GameConfigsService _gameConfigsService;
         private MatchmakingBackgroundService _backgroundService;
+        private List<UserData> lstUserDatas;
 
 
         public MatchesService(ApplicationDbContext context, WaitingUserService waitingUserService, PlayersService playersService, CardsService cardsService, MatchConfigurationService matchConfigurationService, GameConfigsService gameConfigsService, MatchmakingBackgroundService backgroundService)        

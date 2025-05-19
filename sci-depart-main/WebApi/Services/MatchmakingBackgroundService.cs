@@ -26,7 +26,7 @@ namespace Super_Cartes_Infinies.Services
         private IServiceScopeFactory _serviceScopeFactory;
         private IHubContext<MatchHub> _matchHub;
         private Dictionary<string, UserData> _data = new();
-        private List<UserData> userDatas;
+        private List<UserData> lstUserDatas;
         public MatchmakingBackgroundService(IHubContext<MatchHub> matchHub, IServiceScopeFactory serviceScopeFactory) {
             _serviceScopeFactory = serviceScopeFactory;
             _matchHub = matchHub;
@@ -37,36 +37,32 @@ namespace Super_Cartes_Infinies.Services
             using (IServiceScope scope = _serviceScopeFactory.CreateScope())
             {
                 ApplicationDbContext dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
                 // On peut maintenant utiliser le dbContext normalement
                 // On peut également faire un SaveChanges
                 // Passer une COPIE de l'information sur les players (Car on va retirer les éléments de la liste, même si le player n'est pas mis dans une paire)
-
+                var copy = new List<UserData>(lstUserDatas);
+                GeneratePairs(copy);
             }
         }
 
         public void AddUser(string userId, int elo, string connectionId)
         {
             //Player player = 
-            _data[userId] = new UserData()
+            UserData user = new UserData()
             {
                 UserId = userId,
                 ELO = elo,
                 UserAConnectionId = connectionId
             };
-
+            lstUserDatas.Add(user);
 
         }
         public void RemoveUser(string userId)
         {
-            _data.Remove(userId);
+            lstUserDatas.RemoveAll(u => u.UserId == userId);
         }
 
-        public void Increment(string userId)
-        {
-            UserData userData = _data[userId];
-            userData.WaitingTime++;
-        }
+
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
@@ -78,7 +74,7 @@ namespace Super_Cartes_Infinies.Services
         }
 
 
-        public void GeneratePairs(List<UserData> playersInfos)
+        public List<PairOfPlayers> GeneratePairs(List<UserData> playersInfos)
         {
 
             List<PairOfPlayers> pairs = new List<PairOfPlayers>();
@@ -99,6 +95,7 @@ namespace Super_Cartes_Infinies.Services
                         smallestELODifference = difference;
                         index = i;
                     }
+                    pi.WaitingTime++;
                 }
 
                 if(index >= 0)
@@ -114,6 +111,7 @@ namespace Super_Cartes_Infinies.Services
                 }
 
             }
+            return pairs;
         }
     }
 }
