@@ -29,7 +29,7 @@ public class ApplicationDbContext : IdentityDbContext
 
         builder.Entity<IdentityUser>().HasData(Seed.SeedTestUsers());
         builder.Entity<Player>().HasData(Seed.SeedTestPlayers());
-
+        builder.Entity<OwnedCard>().HasData(Seed.SeedOwnedCards());
 
         builder.Entity<CardPower>()
     .HasKey(cp => new { cp.CardPowerId });

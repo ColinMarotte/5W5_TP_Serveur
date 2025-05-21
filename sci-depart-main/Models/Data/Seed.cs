@@ -370,24 +370,21 @@ namespace Super_Cartes_Infinies.Data
         {
             return new OwnedCard[]
             {
-        new OwnedCard { Id = 1, Player = 1, CardId = 1 },
-        new OwnedCard { Id = 2, PlayerId = 1, CardId = 2 },
-        new OwnedCard { Id = 3, PlayerId = 1, CardId = 3 },
-        new OwnedCard { Id = 4, PlayerId = 1, CardId = 4 },
-        new OwnedCard { Id = 5, PlayerId = 1, CardId = 5 },
-        new OwnedCard { Id = 6, PlayerId = 1, CardId = 6 },
-        new OwnedCard { Id = 7, PlayerId = 1, CardId = 7 },
-        new OwnedCard { Id = 8, PlayerId = 1, CardId = 8 },
-        new OwnedCard { Id = 9, PlayerId = 1, CardId = 9 },
-        new OwnedCard { Id = 10, PlayerId = 1, CardId = 10 },
-        new OwnedCard { Id = 11, PlayerId = 1, CardId = 11 },
-        new OwnedCard { Id = 12, PlayerId = 1, CardId = 12 },
-        new OwnedCard { Id = 13, PlayerId = 1, CardId = 1 },
-        new OwnedCard { Id = 14, PlayerId = 1, CardId = 4 },
-        new OwnedCard { Id = 15, PlayerId = 1, CardId = 6 },
-        new OwnedCard { Id = 16, PlayerId = 1, CardId = 8 },
+                new OwnedCard { Id = 1, CardId = 1, PlayerId = 1 },
+                new OwnedCard { Id = 2, CardId = 2, PlayerId = 1 },
+                new OwnedCard { Id = 3, CardId = 3, PlayerId = 1 },
+                new OwnedCard { Id = 4, CardId = 4, PlayerId = 1 },
+                new OwnedCard { Id = 5, CardId = 5, PlayerId = 1 },
+                new OwnedCard { Id = 6, CardId = 6, PlayerId = 1 },
+                new OwnedCard { Id = 7, CardId = 7, PlayerId = 1 },
+                new OwnedCard { Id = 8, CardId = 8, PlayerId = 1 },
+                new OwnedCard { Id = 9, CardId = 9, PlayerId = 1 },
+                new OwnedCard { Id = 10, CardId = 10, PlayerId = 1 },
+                new OwnedCard { Id = 11, CardId = 11, PlayerId = 1 },
+                new OwnedCard { Id = 12, CardId = 12, PlayerId = 1 },
             };
         }
+
 
 
     }

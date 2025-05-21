@@ -41,7 +41,7 @@ namespace WebApi.Controllers
         }
 
         [Authorize]
-        [HttpGet("{playerId}")]
+        [HttpGet("{deckid}")]
         public IActionResult GetDeckStatistiques(int deckid)
         {
             Deck deck = _decksService.GetDeckFromDeckId(deckid);
