@@ -1,4 +1,5 @@
-﻿using Models.Models.Dtos;
+﻿using Microsoft.EntityFrameworkCore;
+using Models.Models.Dtos;
 using Super_Cartes_Infinies.Data;
 using Super_Cartes_Infinies.Models;
 
@@ -190,6 +191,23 @@ namespace Super_Cartes_Infinies.Services
             Player player = _playersService.GetPlayerFromPlayerId(playerId);
 
             return player.Decks;
+        }
+
+        public IEnumerable<object> GetPlayersDecksStatistiques(int userId)
+        {
+            Player? player = _dbContext.Players.Include(p => p.Decks).Where(p => p.Id == userId).FirstOrDefault();
+
+            var decks = player.Decks.Select(d => new 
+            {
+                d.Id,
+                d.Name,
+                d.Wins,
+                d.Losses,
+                Cards = _dbContext.DeckOwnedCards.Where(doc => doc.DeckId == d.Id).Select(doc => new { doc.OwnedCard.Card.Id, doc.OwnedCard.Card.Name, doc.OwnedCard.Card.Attack, doc.OwnedCard.Card.Rarity, doc.OwnedCard.Card.Cost, doc.OwnedCard.Card.Health, doc.OwnedCard.Card.ImageUrl }).ToList()
+            }).ToList();
+
+            return decks;
+
         }
 
         public Deck GetDeckFromDeckId(int deckId)
