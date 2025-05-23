@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using Super_Cartes_Infinies.Combat;
+using Super_Cartes_Infinies.Models;
 using Super_Cartes_Infinies.Services;
 
 namespace Super_Cartes_Infinies.Hubs;
@@ -10,10 +11,12 @@ public class MatchHub : Hub
 {
 
     private MatchesService _matchService;
+    private PlayersService _playersService;
 
-    public MatchHub(MatchesService matchesService)
+    public MatchHub(MatchesService matchesService, PlayersService playersService)
     {
         _matchService = matchesService;
+        _playersService = playersService;
     }
 
     public async Task StopJoiningMatch()
@@ -91,5 +94,12 @@ public class MatchHub : Hub
         }
     }
 
+    public async Task SendMessage(int matchId, string message)
+    {
+        var userId = Context.UserIdentifier!;
+        Player player = _playersService.GetPlayerFromUserId(userId);
 
+        string messageWithName = "[" + player.Name + "]: " + message;
+        await Clients.Group(matchId.ToString()).SendAsync("NewMessage", messageWithName);
+    }
 }
