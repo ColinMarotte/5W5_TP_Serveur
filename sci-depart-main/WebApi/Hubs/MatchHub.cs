@@ -109,4 +109,28 @@ public class MatchHub : Hub
         List<MatchInfoDTO> matchesInfos = await _matchService.GetCurrentMatches();
         await Clients.Caller.SendAsync("CurrentMatches", matchesInfos);
     }
+
+    public async Task SpectateMatch(int matchId)
+    {
+        var userId = Context.UserIdentifier!;
+
+        var matchData = await _matchService.JoinMatch(userId, Context.ConnectionId, matchId);
+
+        if (matchData != null)
+        {
+            string matchGroup = matchData.Match.Id.ToString();
+
+            await Groups.AddToGroupAsync(Context.ConnectionId, matchGroup);
+
+            await Clients.Client(Context.ConnectionId).SendAsync("SpectatingMatchData", matchData);
+        }
+    }
+
+    public async Task IsPlayerSpecator(int matchId)
+    {
+        var userId = Context.UserIdentifier!;
+
+        bool spectator = await _matchService.IsPlayerSpectator(userId, matchId);
+        await Clients.Caller.SendAsync("Spectator", spectator);
+    }
 }

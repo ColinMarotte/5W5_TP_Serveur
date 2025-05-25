@@ -58,7 +58,13 @@ namespace Super_Cartes_Infinies.Services
                     playerB = _playersService.GetPlayerFromUserId(match.UserBId);
                 }
             }
-            // Si on veut rejoindre un match en particulier, on ne se met pas en file
+            // Si on veut rejoindre un match en particulier, on ne se met pas en file (spectateur)
+            else if (specificMatchId != null)
+            {
+                match = _dbContext.Matches.Where(m => m.Id == specificMatchId).Single();
+                playerA = _playersService.GetPlayerFromUserId(match.UserAId);
+                playerB = _playersService.GetPlayerFromUserId(match.UserBId);
+            }
             else if(specificMatchId == null)
             {
                 UsersReadyForAMatch? pairOfUsers = await _waitingUserService.LookForWaitingUser(userId, connectionId);
@@ -261,6 +267,20 @@ namespace Super_Cartes_Infinies.Services
             }
 
             return matchesInfos;
+        }
+
+        public async Task<bool> IsPlayerSpectator(string userId, int matchId)
+        {
+            List<Match> userMatches = await _dbContext.Matches.Where(m => m.IsMatchCompleted == false && (m.UserAId == userId || m.UserBId == userId)).ToListAsync();
+
+            foreach (Match match in userMatches)
+            {
+                if (match.Id == matchId)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }
