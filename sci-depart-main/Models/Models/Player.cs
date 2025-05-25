@@ -19,6 +19,10 @@ namespace Super_Cartes_Infinies.Models
 		public virtual IdentityUser User { get; set; }
         public virtual List<OwnedCard> OwnedCards { get; set; } = new List<OwnedCard>();
 		public virtual List<Deck> Decks { get; set; } = new List<Deck>();
+
+		public int TotalWins { get; set; }
+		public int TotalLosses { get; set; }
+		
     }
 }
 

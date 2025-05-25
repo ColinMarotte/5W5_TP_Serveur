@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Models.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -80,7 +80,9 @@ namespace Models.Migrations
                     NbCardsToDraw = table.Column<int>(type: "int", nullable: false),
                     QtyManaPerTurn = table.Column<int>(type: "int", nullable: false),
                     NbDecksMax = table.Column<int>(type: "int", nullable: false),
-                    NbCardsMaxInDeck = table.Column<int>(type: "int", nullable: false)
+                    NbCardsMaxInDeck = table.Column<int>(type: "int", nullable: false),
+                    ArgentRecuGagnant = table.Column<int>(type: "int", nullable: false),
+                    ArgentRecuPerdant = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -216,7 +218,9 @@ namespace Models.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Balance = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TotalWins = table.Column<int>(type: "int", nullable: false),
+                    TotalLosses = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -289,34 +293,15 @@ namespace Models.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Current = table.Column<bool>(type: "bit", nullable: false),
-                    PlayerId = table.Column<int>(type: "int", nullable: false)
+                    PlayerId = table.Column<int>(type: "int", nullable: false),
+                    Wins = table.Column<int>(type: "int", nullable: false),
+                    Losses = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Decks", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Decks_Players_PlayerId",
-                        column: x => x.PlayerId,
-                        principalTable: "Players",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "MatchPlayersData",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Health = table.Column<int>(type: "int", nullable: false),
-                    Mana = table.Column<int>(type: "int", nullable: false),
-                    PlayerId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MatchPlayersData", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_MatchPlayersData_Players_PlayerId",
                         column: x => x.PlayerId,
                         principalTable: "Players",
                         principalColumn: "Id",
@@ -350,11 +335,76 @@ namespace Models.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MatchPlayersData",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Health = table.Column<int>(type: "int", nullable: false),
+                    Mana = table.Column<int>(type: "int", nullable: false),
+                    PlayerId = table.Column<int>(type: "int", nullable: false),
+                    DeckId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MatchPlayersData", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MatchPlayersData_Decks_DeckId",
+                        column: x => x.DeckId,
+                        principalTable: "Decks",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_MatchPlayersData_Players_PlayerId",
+                        column: x => x.PlayerId,
+                        principalTable: "Players",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DeckOwnedCards",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DeckId = table.Column<int>(type: "int", nullable: false),
+                    OwnedCardId = table.Column<int>(type: "int", nullable: false),
+                    DeckId1 = table.Column<int>(type: "int", nullable: true),
+                    OwnedCardId1 = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DeckOwnedCards", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DeckOwnedCards_Decks_DeckId",
+                        column: x => x.DeckId,
+                        principalTable: "Decks",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_DeckOwnedCards_Decks_DeckId1",
+                        column: x => x.DeckId1,
+                        principalTable: "Decks",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_DeckOwnedCards_OwnedCards_OwnedCardId",
+                        column: x => x.OwnedCardId,
+                        principalTable: "OwnedCards",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_DeckOwnedCards_OwnedCards_OwnedCardId1",
+                        column: x => x.OwnedCardId1,
+                        principalTable: "OwnedCards",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Matches",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ArgentRecuGagnant = table.Column<int>(type: "int", nullable: false),
+                    ArgentRecuPerdant = table.Column<int>(type: "int", nullable: false),
                     IsPlayerATurn = table.Column<bool>(type: "bit", nullable: false),
                     IsMatchCompleted = table.Column<bool>(type: "bit", nullable: false),
                     WinnerUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -424,42 +474,6 @@ namespace Models.Migrations
                         principalColumn: "Id");
                 });
 
-            migrationBuilder.CreateTable(
-                name: "DeckOwnedCards",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    DeckId = table.Column<int>(type: "int", nullable: false),
-                    OwnedCardId = table.Column<int>(type: "int", nullable: false),
-                    DeckId1 = table.Column<int>(type: "int", nullable: true),
-                    OwnedCardId1 = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DeckOwnedCards", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_DeckOwnedCards_Decks_DeckId",
-                        column: x => x.DeckId,
-                        principalTable: "Decks",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_DeckOwnedCards_Decks_DeckId1",
-                        column: x => x.DeckId1,
-                        principalTable: "Decks",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_DeckOwnedCards_OwnedCards_OwnedCardId",
-                        column: x => x.OwnedCardId,
-                        principalTable: "OwnedCards",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_DeckOwnedCards_OwnedCards_OwnedCardId1",
-                        column: x => x.OwnedCardId1,
-                        principalTable: "OwnedCards",
-                        principalColumn: "Id");
-                });
-
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
@@ -470,9 +484,9 @@ namespace Models.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "11111111-1111-1111-1111-111111111111", 0, "6fdf3d76-6dcb-49b0-a205-90f4160d791a", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEBGPHH8yudXnFLVibLc32Foii9Yg1O4IP1vzCKH8q9ykcIaeOBNYijlbDoB97cPmwA==", null, false, "e46b2e6e-7fdb-4eeb-aa90-180b7f152133", false, "admin@admin.com" },
-                    { "User1Id", 0, "f4def830-c0e3-45f0-90b3-dbe002caabef", null, false, false, null, null, null, null, null, false, "fccdbdc3-1f46-4bdb-982b-34f1aa810839", false, null },
-                    { "User2Id", 0, "65f09066-e0c7-4bc6-bd15-3855800a48f0", null, false, false, null, null, null, null, null, false, "6f14752a-03a1-439c-8024-88657d0573e7", false, null }
+                    { "11111111-1111-1111-1111-111111111111", 0, "21a646c4-00fe-4f3b-b24f-d5a5ff4f375e", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEKz6xuNyiZt8OoEhC0j/GZFcO/hAI74J4JIUbND4WaIV7BdHGoPOSbEqWpi7I9g1uA==", null, false, "22a3bdc9-3d7f-41ad-84f0-3dff62e52804", false, "admin@admin.com" },
+                    { "User1Id", 0, "79b76e46-2c58-472d-91f5-7dee6e895e13", null, false, false, null, null, null, null, null, false, "f25cf804-3eff-466d-86c3-4aaa06b3aed5", false, null },
+                    { "User2Id", 0, "40063c3a-073b-457a-aa55-acdbad1f1d6d", null, false, false, null, null, null, null, null, false, "3cddab5e-154e-4992-88b7-f8166dc93143", false, null }
                 });
 
             migrationBuilder.InsertData(
@@ -496,8 +510,8 @@ namespace Models.Migrations
 
             migrationBuilder.InsertData(
                 table: "GameConfigs",
-                columns: new[] { "Id", "NbCardsMaxInDeck", "NbCardsToDraw", "NbDecksMax", "QtyManaPerTurn" },
-                values: new object[] { 1, 10, 4, 3, 3 });
+                columns: new[] { "Id", "ArgentRecuGagnant", "ArgentRecuPerdant", "NbCardsMaxInDeck", "NbCardsToDraw", "NbDecksMax", "QtyManaPerTurn" },
+                values: new object[] { 1, 40, 100, 10, 4, 3, 3 });
 
             migrationBuilder.InsertData(
                 table: "Powers",
@@ -530,12 +544,12 @@ namespace Models.Migrations
 
             migrationBuilder.InsertData(
                 table: "Players",
-                columns: new[] { "Id", "Balance", "Name", "UserId" },
+                columns: new[] { "Id", "Balance", "Name", "TotalLosses", "TotalWins", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 0, "Test player 1", "User1Id" },
-                    { 2, 0, "Test player 2", "User2Id" },
-                    { 3, 0, "Admin", "11111111-1111-1111-1111-111111111111" }
+                    { 1, 0, "Test player 1", 0, 0, "User1Id" },
+                    { 2, 0, "Test player 2", 0, 0, "User2Id" },
+                    { 3, 0, "Admin", 0, 0, "11111111-1111-1111-1111-111111111111" }
                 });
 
             migrationBuilder.InsertData(
@@ -639,6 +653,11 @@ namespace Models.Migrations
                 column: "PlayerDataBId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MatchPlayersData_DeckId",
+                table: "MatchPlayersData",
+                column: "DeckId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MatchPlayersData_PlayerId",
                 table: "MatchPlayersData",
                 column: "PlayerId");
@@ -737,9 +756,6 @@ namespace Models.Migrations
                 name: "Powers");
 
             migrationBuilder.DropTable(
-                name: "Decks");
-
-            migrationBuilder.DropTable(
                 name: "OwnedCards");
 
             migrationBuilder.DropTable(
@@ -747,6 +763,9 @@ namespace Models.Migrations
 
             migrationBuilder.DropTable(
                 name: "Cards");
+
+            migrationBuilder.DropTable(
+                name: "Decks");
 
             migrationBuilder.DropTable(
                 name: "Players");
