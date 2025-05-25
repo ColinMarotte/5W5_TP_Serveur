@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
+using Models.Models.Dtos;
 using Super_Cartes_Infinies.Combat;
 using Super_Cartes_Infinies.Models;
 using Super_Cartes_Infinies.Services;
@@ -101,5 +102,11 @@ public class MatchHub : Hub
 
         string messageWithName = "[" + player.Name + "]: " + message;
         await Clients.Group(matchId.ToString()).SendAsync("NewMessage", messageWithName);
+    }
+
+    public async Task GetCurrentMatches()
+    {
+        List<MatchInfoDTO> matchesInfos = await _matchService.GetCurrentMatches();
+        await Clients.Caller.SendAsync("CurrentMatches", matchesInfos);
     }
 }

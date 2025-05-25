@@ -1,4 +1,6 @@
-﻿using Super_Cartes_Infinies.Combat;
+﻿using Microsoft.EntityFrameworkCore;
+using Models.Models.Dtos;
+using Super_Cartes_Infinies.Combat;
 using Super_Cartes_Infinies.Data;
 using Super_Cartes_Infinies.Models;
 using Super_Cartes_Infinies.Models.Dtos;
@@ -241,6 +243,25 @@ namespace Super_Cartes_Infinies.Services
         //{
 
         //}
+
+        public async Task<List<MatchInfoDTO>> GetCurrentMatches()
+        {
+            List<Match> currentMatches = await _dbContext.Matches.Where(m => m.IsMatchCompleted == false).ToListAsync();
+
+            List<MatchInfoDTO> matchesInfos = new List<MatchInfoDTO>();
+
+            foreach (Match match in currentMatches)
+            {
+                MatchInfoDTO matchInfo = new MatchInfoDTO();
+                matchInfo.MatchId = match.Id;
+                matchInfo.PlayerAName = match.PlayerDataA.Player.Name;
+                matchInfo.PlayerBName = match.PlayerDataB.Player.Name;
+
+                matchesInfos.Add(matchInfo);
+            }
+
+            return matchesInfos;
+        }
     }
 }
 
