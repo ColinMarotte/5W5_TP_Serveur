@@ -69,7 +69,8 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.WithOrigins("http://localhost:4200", "https://localhost:4200", "https://localhost:7219", "http://localhost:4401", "https://localhost:4401");
+        policy.WithOrigins("http://localhost:4200", "https://localhost:4200", "https://localhost:7219", "http://localhost:4401", "https://localhost:4401",
+            "https://ambitious-bay-08724ce1e.6.azurestaticapps.net");
         policy.AllowAnyHeader();
         policy.AllowAnyMethod();
         policy.AllowCredentials();
