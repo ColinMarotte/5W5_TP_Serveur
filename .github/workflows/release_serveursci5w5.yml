@@ -24,7 +24,8 @@ jobs:
           dotnet-version: "8.x"
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release WebApi/WebApi.csproj
+        run: dotnet build --configuration Release sci-depart-main/WebApi/WebApi.csproj
+
 
       - name: dotnet publish
         run: dotnet publish -c Release -o "${{env.GITHUB_WORKSPACE}}\sci-depart-main" "WebApi\WebApi.csproj"
