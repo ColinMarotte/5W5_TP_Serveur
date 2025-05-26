@@ -12,7 +12,9 @@ namespace Super_Cartes_Infinies.Models
     {
         public OwnedCard() { }
         public int Id { get; set; }
+        public int CardId { get; set; } 
         public virtual Card Card { get; set; }
+        public int PlayerId { get; set; }  
         [JsonIgnore]
         public virtual Player Player { get; set; }
         [JsonIgnore]
