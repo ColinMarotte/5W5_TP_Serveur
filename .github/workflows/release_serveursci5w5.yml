@@ -28,13 +28,13 @@ jobs:
 
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o "${{env.GITHUB_WORKSPACE}}\sci-depart-main" "WebApi\WebApi.csproj"
+        run: dotnet publish -c Release -o "${{env.GITHUB_WORKSPACE}}/publish" sci-depart-main/WebApi/WebApi.csproj
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ${{env.GITHUB_WORKSPACE}}\sci-depart-main
+          path: ${{env.GITHUB_WORKSPACE}}/publish
 
   deploy:
     runs-on: windows-latest
