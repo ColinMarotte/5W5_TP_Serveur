@@ -56,6 +56,7 @@ namespace Super_Cartes_Infinies.Models
 				return 0;
 			}
 		}
+
 	}
 }
 

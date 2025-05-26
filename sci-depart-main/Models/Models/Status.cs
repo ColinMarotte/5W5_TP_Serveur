@@ -12,5 +12,7 @@ namespace Models.Models
         public string Name { get; set; } = "";
         public string Description { get; set; } = "";
         public string Icone { get; set; } = "�";
+        public int Turn { get; set; }
+        public int value { get; set; }
     }
 }

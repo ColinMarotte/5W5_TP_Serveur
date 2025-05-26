@@ -42,8 +42,15 @@ namespace Super_Cartes_Infinies.Combat
                     Events.Add(new CardDamageEvent(match, defendingPlayer, attackingPlayer, playerCard.Attack, true, index));
                     Events.Add(new CardDamageEvent(match, attackingPlayer, defendingPlayer, oppositePlayerCard.Attack, false, index));
                 }
+
+                if (playerCard.HasPower(Power.POISON_ID))
+                {
+                    int poisonValue = playerCard.GetPowerValue(Power.POISON_ID);
+                    Events.Add(new GainPoisonEffectEvent(match,attackingPlayer, defendingPlayer, playerCard.Index,poisonValue));
+                }
+
             }
-            
+
         }
     }
 }

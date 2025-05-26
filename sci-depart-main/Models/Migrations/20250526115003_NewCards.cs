@@ -2,10 +2,12 @@
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Models.Migrations
 {
     /// <inheritdoc />
-    public partial class playableCardStatus : Migration
+    public partial class NewCards : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +20,9 @@ namespace Models.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Icone = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Icone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Turn = table.Column<int>(type: "int", nullable: false),
+                    value = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -56,21 +60,47 @@ namespace Models.Migrations
                 keyColumn: "Id",
                 keyValue: "11111111-1111-1111-1111-111111111111",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "d942a289-0596-4c54-9a99-056e7ea09260", "AQAAAAIAAYagAAAAEGNv2RAsxdWXyjvFXIBBwH8Z45zuklMNSgkergJl76NjkcUXC2l/37pSCNbEP8UcxA==", "09c09bac-2d86-4be1-8d2e-630b61e79707" });
+                values: new object[] { "bc5332d6-702b-4fe8-aee2-77f695371d94", "AQAAAAIAAYagAAAAEC1mJHg3Hom6v/wWy/CqzTcIz2l3xOA6AsUAGvMj85rvQRmovi6y+ua2zw2hcJV/XQ==", "7a927c43-47da-4379-98c2-570385488b44" });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "User1Id",
                 columns: new[] { "ConcurrencyStamp", "SecurityStamp" },
-                values: new object[] { "2e5ae468-3bf8-41a4-9a54-d8f18d6ef7d2", "e0d06505-de0d-495b-aa3c-e47be176f54e" });
+                values: new object[] { "cf0913ba-c915-4a0d-b5f4-baea8986e48a", "2cf0bda6-dac2-4922-b920-55056308dbae" });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "User2Id",
                 columns: new[] { "ConcurrencyStamp", "SecurityStamp" },
-                values: new object[] { "d8080009-c072-4864-8be3-ccf79d50839d", "b78ac96a-4e7a-4bf3-b106-40942fce1dbc" });
+                values: new object[] { "04ddbaf3-8b19-4308-86f8-220ec7db9130", "9a23f70f-485e-4d1e-bfa7-0c000e6d9d07" });
+
+            migrationBuilder.InsertData(
+                table: "Cards",
+                columns: new[] { "Id", "Attack", "Cost", "Health", "ImageUrl", "IsASpell", "Name", "Price", "Rarity" },
+                values: new object[,]
+                {
+                    { 16, 6, 4, 10, "https://i.etsystatic.com/10964601/r/il/d4ad03/1093449052/il_fullxfull.1093449052_te57.jpg", false, "Chat Barbare", 100, 2 },
+                    { 19, 0, 3, 0, "https://media.istockphoto.com/id/1428342232/vector/two-cats-wrapped-in-blankets.jpg?s=612x612&w=0&k=20&c=5N8CiQVBIfnpdHKcJyqGyQ6k8L3T4iKVjqisfPWZI3Q=", true, "Beddy-bye Boost", 200, 3 }
+                });
+
+            migrationBuilder.UpdateData(
+                table: "Powers",
+                keyColumn: "Id",
+                keyValue: 6,
+                column: "Description",
+                value: "Cause des dommages à l'adversaire au fil du temps");
+
+            migrationBuilder.InsertData(
+                table: "Powers",
+                columns: new[] { "Id", "Description", "Icone", "Name" },
+                values: new object[] { 8, "Explose lorsqu'il meurt infligeant 2 de dégats à 2 chats adversaires", "💣", "Explosif" });
+
+            migrationBuilder.InsertData(
+                table: "CardPowers",
+                columns: new[] { "CardPowerId", "CardId", "PowerId", "Value" },
+                values: new object[] { 10, 16, 8, 0 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_PlayableCardStatus_PlayableCardId",
@@ -92,26 +122,53 @@ namespace Models.Migrations
             migrationBuilder.DropTable(
                 name: "Status");
 
+            migrationBuilder.DeleteData(
+                table: "CardPowers",
+                keyColumn: "CardPowerId",
+                keyValue: 10);
+
+            migrationBuilder.DeleteData(
+                table: "Cards",
+                keyColumn: "Id",
+                keyValue: 19);
+
+            migrationBuilder.DeleteData(
+                table: "Cards",
+                keyColumn: "Id",
+                keyValue: 16);
+
+            migrationBuilder.DeleteData(
+                table: "Powers",
+                keyColumn: "Id",
+                keyValue: 8);
+
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "11111111-1111-1111-1111-111111111111",
                 columns: new[] { "ConcurrencyStamp", "PasswordHash", "SecurityStamp" },
-                values: new object[] { "a0a899d4-0e7d-4475-816a-aab5b8394b18", "AQAAAAIAAYagAAAAEF8dlp7QjDkzybV9+nneUY7WBKyrt3YoZmHWxxwzHj2aygxezCtPb+lzzEda4pdDyQ==", "3d4a5eef-3375-4967-96b9-9027eb27b028" });
+                values: new object[] { "c8a4108b-2bbb-421e-87cf-9cf84aafc71e", "AQAAAAIAAYagAAAAEMVB9i0k6q9P62Jwme124x17A1XFWpIy9f51gaLKAbeN7+aokBbE48upFuKbqFWaWw==", "2f858dd0-2bda-4bf2-8e8d-02aed457de9e" });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "User1Id",
                 columns: new[] { "ConcurrencyStamp", "SecurityStamp" },
-                values: new object[] { "41dfbfa7-538d-4807-836d-f458f595ff99", "6da2d8b0-b76f-4f2e-bb53-314badc6dc0b" });
+                values: new object[] { "49e6ee74-6cef-4a74-a2fb-587c1993a1b6", "eb95ceed-6125-4f09-82c9-f9e25c040fd6" });
 
             migrationBuilder.UpdateData(
                 table: "AspNetUsers",
                 keyColumn: "Id",
                 keyValue: "User2Id",
                 columns: new[] { "ConcurrencyStamp", "SecurityStamp" },
-                values: new object[] { "b843f7ad-7dfe-4c22-9cc9-370839e59511", "951ff88c-88ca-4c7d-be16-b4068d9e3331" });
+                values: new object[] { "b2eb677a-8b15-483b-998c-b5ef684a2d18", "419df00a-5921-4fc4-8c69-063df056a5ef" });
+
+            migrationBuilder.UpdateData(
+                table: "Powers",
+                keyColumn: "Id",
+                keyValue: 6,
+                column: "Description",
+                value: "Cause des au fil du temps à l'adversaire");
         }
     }
 }

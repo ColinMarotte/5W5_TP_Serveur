@@ -12,8 +12,8 @@ using Super_Cartes_Infinies.Data;
 namespace Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250505152815_playableCardStatus")]
-    partial class playableCardStatus
+    [Migration("20250526115003_NewCards")]
+    partial class NewCards
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,15 +157,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d942a289-0596-4c54-9a99-056e7ea09260",
+                            ConcurrencyStamp = "bc5332d6-702b-4fe8-aee2-77f695371d94",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGNv2RAsxdWXyjvFXIBBwH8Z45zuklMNSgkergJl76NjkcUXC2l/37pSCNbEP8UcxA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEC1mJHg3Hom6v/wWy/CqzTcIz2l3xOA6AsUAGvMj85rvQRmovi6y+ua2zw2hcJV/XQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "09c09bac-2d86-4be1-8d2e-630b61e79707",
+                            SecurityStamp = "7a927c43-47da-4379-98c2-570385488b44",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -173,22 +173,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2e5ae468-3bf8-41a4-9a54-d8f18d6ef7d2",
+                            ConcurrencyStamp = "cf0913ba-c915-4a0d-b5f4-baea8986e48a",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e0d06505-de0d-495b-aa3c-e47be176f54e",
+                            SecurityStamp = "2cf0bda6-dac2-4922-b920-55056308dbae",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d8080009-c072-4864-8be3-ccf79d50839d",
+                            ConcurrencyStamp = "04ddbaf3-8b19-4308-86f8-220ec7db9130",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "b78ac96a-4e7a-4bf3-b106-40942fce1dbc",
+                            SecurityStamp = "9a23f70f-485e-4d1e-bfa7-0c000e6d9d07",
                             TwoFactorEnabled = false
                         });
                 });
@@ -327,6 +327,12 @@ namespace Models.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Turn")
+                        .HasColumnType("int");
+
+                    b.Property<int>("value")
+                        .HasColumnType("int");
 
                     b.HasKey("StatusId");
 
