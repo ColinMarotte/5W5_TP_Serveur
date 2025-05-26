@@ -154,15 +154,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4f48b2b4-d55b-49a7-bf65-3173a84ca189",
+                            ConcurrencyStamp = "af2eb697-b35e-4487-8677-5c46a13d293e",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENfm/N4QUVf9fxJw/yy+3rAbNaJWA/WaA4cuUFoVym13qJiGnCA7BPyCTRNyvYv7WA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMCvCWj9g8LKxZavW6dTtGNKs+xaL/zzJNyTsU1UtR+WrnrfNUge9eOUb5k05shKYQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d53d1344-6dde-43c8-a240-5c000e0dd852",
+                            SecurityStamp = "071d65b3-c514-4998-92e6-79583f76fbf0",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -170,22 +170,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9de16b10-509e-46e2-9945-34b7c310c778",
+                            ConcurrencyStamp = "3981b53d-5992-4663-b3ce-bb86ee4343b2",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "78043227-9fcd-4fd3-b9bb-4b0f5a6bb076",
+                            SecurityStamp = "f1c2755d-c47d-42b1-92d4-9133141b32fb",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6a5a1ba5-7c7b-48f5-a1b3-ffdbd7975148",
+                            ConcurrencyStamp = "599bad26-a93f-47d6-9388-511c5dca6f9a",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5e9abcfe-329d-46d7-8b30-546dffed5cee",
+                            SecurityStamp = "68fa7ac4-adf9-4c49-9081-4786ffa44b88",
                             TwoFactorEnabled = false
                         });
                 });
@@ -859,6 +859,9 @@ namespace Models.Migrations
                     b.Property<int>("Balance")
                         .HasColumnType("int");
 
+                    b.Property<int>("ELO")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -883,7 +886,8 @@ namespace Models.Migrations
                         new
                         {
                             Id = 1,
-                            Balance = 0,
+                            Balance = 1000,
+                            ELO = 1000,
                             Name = "Test player 1",
                             TotalLosses = 0,
                             TotalWins = 0,
@@ -892,7 +896,8 @@ namespace Models.Migrations
                         new
                         {
                             Id = 2,
-                            Balance = 0,
+                            Balance = 1000,
+                            ELO = 1000,
                             Name = "Test player 2",
                             TotalLosses = 0,
                             TotalWins = 0,
@@ -901,7 +906,8 @@ namespace Models.Migrations
                         new
                         {
                             Id = 3,
-                            Balance = 0,
+                            Balance = 1000,
+                            ELO = 1000,
                             Name = "Admin",
                             TotalLosses = 0,
                             TotalWins = 0,

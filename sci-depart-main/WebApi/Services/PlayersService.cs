@@ -16,7 +16,6 @@ namespace Super_Cartes_Infinies.Services
             _dbContext = context;
             _startingCardsService = startingCardsService;
         }
-
         public async Task<Player> CreatePlayer(IdentityUser user)
         {
             Player p = new Player()
@@ -24,7 +23,7 @@ namespace Super_Cartes_Infinies.Services
                 Id = 0,
                 UserId = user.Id,
                 Name = user.Email!,
-                User = user
+                User = user,
             };
 
             List<StartingCard> startingCards = await _startingCardsService.GetStartingCards();
@@ -71,6 +70,12 @@ namespace Super_Cartes_Infinies.Services
         public int GetBalanceFromPlayerId(string playerId)
         {
             return GetPlayerFromPlayerId(playerId).Balance;
+        }
+
+        public int GetELOFromUserId(string userId)
+        {
+            Player player = GetPlayerFromUserId(userId);
+            return player.ELO;
         }
     }
 }

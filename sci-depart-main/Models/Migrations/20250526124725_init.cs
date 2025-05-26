@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Models.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -219,6 +219,7 @@ namespace Models.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Balance = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ELO = table.Column<int>(type: "int", nullable: false),
                     TotalWins = table.Column<int>(type: "int", nullable: false),
                     TotalLosses = table.Column<int>(type: "int", nullable: false)
                 },
@@ -484,9 +485,9 @@ namespace Models.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "11111111-1111-1111-1111-111111111111", 0, "4f48b2b4-d55b-49a7-bf65-3173a84ca189", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAENfm/N4QUVf9fxJw/yy+3rAbNaJWA/WaA4cuUFoVym13qJiGnCA7BPyCTRNyvYv7WA==", null, false, "d53d1344-6dde-43c8-a240-5c000e0dd852", false, "admin@admin.com" },
-                    { "User1Id", 0, "9de16b10-509e-46e2-9945-34b7c310c778", null, false, false, null, null, null, null, null, false, "78043227-9fcd-4fd3-b9bb-4b0f5a6bb076", false, null },
-                    { "User2Id", 0, "6a5a1ba5-7c7b-48f5-a1b3-ffdbd7975148", null, false, false, null, null, null, null, null, false, "5e9abcfe-329d-46d7-8b30-546dffed5cee", false, null }
+                    { "11111111-1111-1111-1111-111111111111", 0, "af2eb697-b35e-4487-8677-5c46a13d293e", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEMCvCWj9g8LKxZavW6dTtGNKs+xaL/zzJNyTsU1UtR+WrnrfNUge9eOUb5k05shKYQ==", null, false, "071d65b3-c514-4998-92e6-79583f76fbf0", false, "admin@admin.com" },
+                    { "User1Id", 0, "3981b53d-5992-4663-b3ce-bb86ee4343b2", null, false, false, null, null, null, null, null, false, "f1c2755d-c47d-42b1-92d4-9133141b32fb", false, null },
+                    { "User2Id", 0, "599bad26-a93f-47d6-9388-511c5dca6f9a", null, false, false, null, null, null, null, null, false, "68fa7ac4-adf9-4c49-9081-4786ffa44b88", false, null }
                 });
 
             migrationBuilder.InsertData(
@@ -544,12 +545,12 @@ namespace Models.Migrations
 
             migrationBuilder.InsertData(
                 table: "Players",
-                columns: new[] { "Id", "Balance", "Name", "TotalLosses", "TotalWins", "UserId" },
+                columns: new[] { "Id", "Balance", "ELO", "Name", "TotalLosses", "TotalWins", "UserId" },
                 values: new object[,]
                 {
-                    { 1, 0, "Test player 1", 0, 0, "User1Id" },
-                    { 2, 0, "Test player 2", 0, 0, "User2Id" },
-                    { 3, 0, "Admin", 0, 0, "11111111-1111-1111-1111-111111111111" }
+                    { 1, 1000, 1000, "Test player 1", 0, 0, "User1Id" },
+                    { 2, 1000, 1000, "Test player 2", 0, 0, "User2Id" },
+                    { 3, 1000, 1000, "Admin", 0, 0, "11111111-1111-1111-1111-111111111111" }
                 });
 
             migrationBuilder.InsertData(

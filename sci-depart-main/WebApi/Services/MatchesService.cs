@@ -15,6 +15,8 @@ namespace Super_Cartes_Infinies.Services
         private MatchConfigurationService _matchConfigurationService;
         private ApplicationDbContext _dbContext;
         private GameConfigsService _gameConfigsService;
+        private List<UserData> lstUserDatas;
+
 
         public MatchesService(ApplicationDbContext context, WaitingUserService waitingUserService, PlayersService playersService, CardsService cardsService, MatchConfigurationService matchConfigurationService, GameConfigsService gameConfigsService)        
         {
@@ -25,7 +27,19 @@ namespace Super_Cartes_Infinies.Services
             _matchConfigurationService = matchConfigurationService;
             _gameConfigsService = gameConfigsService;
         }
-
+        public async Task JoinQueue(string userId, string? connectionId, int? specificMatchId)
+        {
+            Player? player = null;
+            try
+            {
+                player = _playersService.GetPlayerFromUserId(userId);
+            }
+            catch
+            {
+                return;
+            }
+            //_backgroundService.AddUser(player.UserId, player.ELO, connectionId);
+        }
         // Cette fonction est assez flexible car elle peut simplement être appeler lorsqu'un user veut jouer un match
         // Si le user a déjà un match en cours (Un match qui n'est pas terminé), on lui retourne l'information pour ce match
         // Sinon on utilise le WaitingUserService pour essayer de trouver un autre user ou nous mettre en attente

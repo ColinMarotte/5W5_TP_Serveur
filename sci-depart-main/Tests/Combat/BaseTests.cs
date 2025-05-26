@@ -1,8 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Super_Cartes_Infinies.Data;
 using Super_Cartes_Infinies.Models;
 
 namespace Tests.Services
 {
+    [TestClass]
     public class BaseTests
 	{
         protected const int STARTING_PLAYER_HEALTH = 1;
@@ -11,18 +15,37 @@ namespace Tests.Services
         protected MatchPlayerData _currentPlayerData, _opposingPlayerData;
         protected Match _match;
         protected Card _cardA, _cardB;
+        protected Player _player1, _player2;
         protected PlayableCard _playableCardA, _playableCardB;
+        private DbContextOptions<ApplicationDbContext> _options;
+        
+        private ApplicationDbContext _db;
 
         public BaseTests()
         {
+            
         }
-
+        [TestInitialize]
         protected void Init()
         {
+            // En utilisant un nom différent à chaque fois, on n'a pas besoin de retirer les données
+            string dbName = "BaseTest" + Guid.NewGuid().ToString();
+            // TODO On initialise les options de la BD, on utilise une InMemoryDatabase
+            DbContextOptions<ApplicationDbContext> options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                // TODO il faut installer la dépendance Microsoft.EntityFrameworkCore.InMemory
+                .UseInMemoryDatabase(databaseName: dbName)
+                .UseLazyLoadingProxies(true) // Active le lazy loading
+                .Options;
+
+            // TODO avoir la durée de vie d'un context la plus petite possible
+            _db = new ApplicationDbContext(options);
+
+
             Player currentPlayer = new Player()
             {
                 UserId = "1"
             };
+            _player1 = currentPlayer;
             _currentPlayerData = new MatchPlayerData(1)
             {
                 Health = STARTING_PLAYER_HEALTH,
@@ -34,6 +57,7 @@ namespace Tests.Services
             {
                 UserId = "2"
             };
+            _player2 = opposingPlayer;
             _opposingPlayerData = new MatchPlayerData(2)
             {
                 Health = STARTING_PLAYER_HEALTH,
@@ -74,7 +98,22 @@ namespace Tests.Services
             {
                 Id = 2
             };
+
+            _db.Add(currentPlayer);
+            _db.Add(opposingPlayer);
+
+            _db.Add(_cardA);
+            _db.Add(_cardB);
+            _db.SaveChanges();
         }
+
+        [TestCleanup]
+        public void Dispose()
+        {
+            //TODO on efface les données de tests pour remettre la BD dans son état initial
+            _db.Dispose();
+        }
+
 
         protected void AssertBothCardsStillOnBattlefield()
         {
