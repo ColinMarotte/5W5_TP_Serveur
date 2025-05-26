@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Identity;
 using Models.Interfaces;
 using Models.Models;
@@ -20,6 +20,10 @@ namespace Super_Cartes_Infinies.Models
         public virtual List<OwnedCard> OwnedCards { get; set; } = new List<OwnedCard>();
 		public virtual List<Deck> Decks { get; set; } = new List<Deck>();
 		public int ELO { get; set; } = 1000;
+
+		public int TotalWins { get; set; }
+		public int TotalLosses { get; set; }
+		
     }
 }
 

@@ -51,6 +51,9 @@ namespace Super_Cartes_Infinies.Models
 
         public virtual List<PlayableCard> BattleField { get; set; }
         public virtual List<PlayableCard> Graveyard { get; set; }
+        public int? DeckId { get; set; }
+        public virtual Deck? Deck { get; set; }
+
 
         // Assurez-vous d'utiliser cette méthode pour votre logique de combat!
         public List<PlayableCard> GetOrderedBattleField()

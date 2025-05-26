@@ -29,6 +29,17 @@ namespace Super_Cartes_Infinies.Combat
             winningPlayerData.Player.Balance += match.ArgentRecuGagnant;
             losingPlayerData.Player.Balance += match.ArgentRecuPerdant;
 
+            // (wins et losses) à jour
+            winningPlayerData.Player.TotalWins++;
+            losingPlayerData.Player.TotalLosses++;
+
+            if (winningPlayerData.Deck != null)
+                winningPlayerData.Deck.Wins++;
+
+            if (losingPlayerData.Deck != null)
+                losingPlayerData.Deck.Losses++;
+
+
             match.IsMatchCompleted = true;
 
             string userId;

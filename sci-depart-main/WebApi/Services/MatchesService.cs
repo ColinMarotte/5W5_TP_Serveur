@@ -1,4 +1,6 @@
-﻿using Super_Cartes_Infinies.Combat;
+﻿using Microsoft.EntityFrameworkCore;
+using Models.Models.Dtos;
+using Super_Cartes_Infinies.Combat;
 using Super_Cartes_Infinies.Data;
 using Super_Cartes_Infinies.Models;
 using Super_Cartes_Infinies.Models.Dtos;
@@ -13,11 +15,10 @@ namespace Super_Cartes_Infinies.Services
         private MatchConfigurationService _matchConfigurationService;
         private ApplicationDbContext _dbContext;
         private GameConfigsService _gameConfigsService;
-        private MatchmakingBackgroundService _backgroundService;
         private List<UserData> lstUserDatas;
 
 
-        public MatchesService(ApplicationDbContext context, WaitingUserService waitingUserService, PlayersService playersService, CardsService cardsService, MatchConfigurationService matchConfigurationService, GameConfigsService gameConfigsService, MatchmakingBackgroundService backgroundService)        
+        public MatchesService(ApplicationDbContext context, WaitingUserService waitingUserService, PlayersService playersService, CardsService cardsService, MatchConfigurationService matchConfigurationService, GameConfigsService gameConfigsService)        
         {
             _dbContext = context;
             _waitingUserService = waitingUserService;
@@ -25,7 +26,6 @@ namespace Super_Cartes_Infinies.Services
             _cardsService = cardsService;
             _matchConfigurationService = matchConfigurationService;
             _gameConfigsService = gameConfigsService;
-            _backgroundService = backgroundService;
         }
         public async Task JoinQueue(string userId, string? connectionId, int? specificMatchId)
         {
@@ -38,7 +38,7 @@ namespace Super_Cartes_Infinies.Services
             {
                 return;
             }
-            _backgroundService.AddUser(player.UserId, player.ELO, connectionId);
+            //_backgroundService.AddUser(player.UserId, player.ELO, connectionId);
         }
         // Cette fonction est assez flexible car elle peut simplement être appeler lorsqu'un user veut jouer un match
         // Si le user a déjà un match en cours (Un match qui n'est pas terminé), on lui retourne l'information pour ce match
@@ -72,7 +72,13 @@ namespace Super_Cartes_Infinies.Services
                     playerB = _playersService.GetPlayerFromUserId(match.UserBId);
                 }
             }
-            // Si on veut rejoindre un match en particulier, on ne se met pas en file
+            // Si on veut rejoindre un match en particulier, on ne se met pas en file (spectateur)
+            else if (specificMatchId != null)
+            {
+                match = _dbContext.Matches.Where(m => m.Id == specificMatchId).Single();
+                playerA = _playersService.GetPlayerFromUserId(match.UserAId);
+                playerB = _playersService.GetPlayerFromUserId(match.UserBId);
+            }
             else if(specificMatchId == null)
             {
                 UsersReadyForAMatch? pairOfUsers = await _waitingUserService.LookForWaitingUser(userId, connectionId);
@@ -257,6 +263,39 @@ namespace Super_Cartes_Infinies.Services
         //{
 
         //}
+
+        public async Task<List<MatchInfoDTO>> GetCurrentMatches()
+        {
+            List<Match> currentMatches = await _dbContext.Matches.Where(m => m.IsMatchCompleted == false).ToListAsync();
+
+            List<MatchInfoDTO> matchesInfos = new List<MatchInfoDTO>();
+
+            foreach (Match match in currentMatches)
+            {
+                MatchInfoDTO matchInfo = new MatchInfoDTO();
+                matchInfo.MatchId = match.Id;
+                matchInfo.PlayerAName = match.PlayerDataA.Player.Name;
+                matchInfo.PlayerBName = match.PlayerDataB.Player.Name;
+
+                matchesInfos.Add(matchInfo);
+            }
+
+            return matchesInfos;
+        }
+
+        public async Task<bool> IsPlayerSpectator(string userId, int matchId)
+        {
+            List<Match> userMatches = await _dbContext.Matches.Where(m => m.IsMatchCompleted == false && (m.UserAId == userId || m.UserBId == userId)).ToListAsync();
+
+            foreach (Match match in userMatches)
+            {
+                if (match.Id == matchId)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }
 

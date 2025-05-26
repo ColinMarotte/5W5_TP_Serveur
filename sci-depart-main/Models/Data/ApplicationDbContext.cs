@@ -29,7 +29,7 @@ public class ApplicationDbContext : IdentityDbContext
 
         builder.Entity<IdentityUser>().HasData(Seed.SeedTestUsers());
         builder.Entity<Player>().HasData(Seed.SeedTestPlayers());
-
+        builder.Entity<OwnedCard>().HasData(Seed.SeedOwnedCards());
 
         builder.Entity<CardPower>()
     .HasKey(cp => new { cp.CardPowerId });
@@ -91,26 +91,28 @@ public class ApplicationDbContext : IdentityDbContext
             .HasForeignKey(d => d.OwnedCardId)
             .OnDelete(DeleteBehavior.NoAction);
 
+        builder.Entity<MatchPlayerData>()
+    .HasOne(mp => mp.Deck)
+    .WithMany()
+    .HasForeignKey(mp => mp.DeckId)
+    .OnDelete(DeleteBehavior.NoAction);
+
         // Fin de Fluent API
-    //    builder.Entity<Power>().HasData(Seed.SeedPowers());
-    //    builder.Entity<CardPower>()
-    //.HasOne(cp => cp.Card)
-    //.WithMany()
-    //.HasForeignKey(cp => cp.CardId)
-    //.OnDelete(DeleteBehavior.NoAction);
+        //    builder.Entity<Power>().HasData(Seed.SeedPowers());
+        //    builder.Entity<CardPower>()
+        //.HasOne(cp => cp.Card)
+        //.WithMany()
+        //.HasForeignKey(cp => cp.CardId)
+        //.OnDelete(DeleteBehavior.NoAction);
 
-    //    builder.Entity<CardPower>()
-    //        .HasOne(cp => cp.Power)
-    //        .WithMany()
-    //        .HasForeignKey(cp => cp.PowerId)
-    //        .OnDelete(DeleteBehavior.NoAction);
+        //    builder.Entity<CardPower>()
+        //        .HasOne(cp => cp.Power)
+        //        .WithMany()
+        //        .HasForeignKey(cp => cp.PowerId)
+        //        .OnDelete(DeleteBehavior.NoAction);
 
-    //    builder.Entity<CardPower>().HasKey(cp => cp.Id);
-    //    builder.Entity<CardPower>().HasData(Seed.SeedCardPowers());
-
-
-
-
+        //    builder.Entity<CardPower>().HasKey(cp => cp.Id);
+        //    builder.Entity<CardPower>().HasData(Seed.SeedCardPowers());
 
 
     }

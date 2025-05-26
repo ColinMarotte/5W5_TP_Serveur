@@ -192,8 +192,8 @@ namespace Super_Cartes_Infinies.Data
                 QtyManaPerTurn = 3,
                 NbDecksMax = 3,
                 NbCardsMaxInDeck = 10,
-                ArgentRecuGagnant=40,
-                ArgentRecuPerdant=100
+                ArgentRecuGagnant = 40,
+                ArgentRecuPerdant = 100
             };
         }
 
@@ -365,6 +365,27 @@ namespace Super_Cartes_Infinies.Data
                 }
             };
         }
+
+        public static OwnedCard[] SeedOwnedCards()
+        {
+            return new OwnedCard[]
+            {
+                new OwnedCard { Id = 1, CardId = 1, PlayerId = 1 },
+                new OwnedCard { Id = 2, CardId = 2, PlayerId = 1 },
+                new OwnedCard { Id = 3, CardId = 3, PlayerId = 1 },
+                new OwnedCard { Id = 4, CardId = 4, PlayerId = 1 },
+                new OwnedCard { Id = 5, CardId = 5, PlayerId = 1 },
+                new OwnedCard { Id = 6, CardId = 6, PlayerId = 1 },
+                new OwnedCard { Id = 7, CardId = 7, PlayerId = 1 },
+                new OwnedCard { Id = 8, CardId = 8, PlayerId = 1 },
+                new OwnedCard { Id = 9, CardId = 9, PlayerId = 1 },
+                new OwnedCard { Id = 10, CardId = 10, PlayerId = 1 },
+                new OwnedCard { Id = 11, CardId = 11, PlayerId = 1 },
+                new OwnedCard { Id = 12, CardId = 12, PlayerId = 1 },
+            };
+        }
+
+
 
     }
 }

@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
+using Models.Models.Dtos;
 using Super_Cartes_Infinies.Combat;
+using Super_Cartes_Infinies.Models;
 using Super_Cartes_Infinies.Services;
 
 namespace Super_Cartes_Infinies.Hubs;
@@ -10,10 +12,12 @@ public class MatchHub : Hub
 {
 
     private MatchesService _matchService;
+    private PlayersService _playersService;
 
-    public MatchHub(MatchesService matchesService)
+    public MatchHub(MatchesService matchesService, PlayersService playersService)
     {
         _matchService = matchesService;
+        _playersService = playersService;
     }
 
     public async Task StopJoiningMatch()
@@ -91,5 +95,42 @@ public class MatchHub : Hub
         }
     }
 
+    public async Task SendMessage(int matchId, string message)
+    {
+        var userId = Context.UserIdentifier!;
+        Player player = _playersService.GetPlayerFromUserId(userId);
 
+        string messageWithName = "[" + player.Name + "]: " + message;
+        await Clients.Group(matchId.ToString()).SendAsync("NewMessage", messageWithName);
+    }
+
+    public async Task GetCurrentMatches()
+    {
+        List<MatchInfoDTO> matchesInfos = await _matchService.GetCurrentMatches();
+        await Clients.Caller.SendAsync("CurrentMatches", matchesInfos);
+    }
+
+    public async Task SpectateMatch(int matchId)
+    {
+        var userId = Context.UserIdentifier!;
+
+        var matchData = await _matchService.JoinMatch(userId, Context.ConnectionId, matchId);
+
+        if (matchData != null)
+        {
+            string matchGroup = matchData.Match.Id.ToString();
+
+            await Groups.AddToGroupAsync(Context.ConnectionId, matchGroup);
+
+            await Clients.Client(Context.ConnectionId).SendAsync("SpectatingMatchData", matchData);
+        }
+    }
+
+    public async Task IsPlayerSpecator(int matchId)
+    {
+        var userId = Context.UserIdentifier!;
+
+        bool spectator = await _matchService.IsPlayerSpectator(userId, matchId);
+        await Clients.Caller.SendAsync("Spectator", spectator);
+    }
 }

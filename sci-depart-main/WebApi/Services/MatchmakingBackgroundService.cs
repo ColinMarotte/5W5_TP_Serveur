@@ -40,8 +40,8 @@ namespace Super_Cartes_Infinies.Services
                 // On peut maintenant utiliser le dbContext normalement
                 // On peut également faire un SaveChanges
                 // Passer une COPIE de l'information sur les players (Car on va retirer les éléments de la liste, même si le player n'est pas mis dans une paire)
-                var copy = new List<UserData>(lstUserDatas);
-                GeneratePairs(copy);
+                //var copy = new List<UserData>(lstUserDatas);
+                //GeneratePairs(copy);
             }
         }
 

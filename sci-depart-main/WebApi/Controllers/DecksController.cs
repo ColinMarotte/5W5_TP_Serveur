@@ -96,6 +96,15 @@ namespace WebApi.Controllers
         }
 
         [Authorize]
+        [HttpGet]
+        [HttpGet("{userId}")]
+        public IEnumerable<object> GetPlayersDecksStatistiques(int userId)
+        {
+            var decksStatistiques = _decksService.GetPlayersDecksStatistiques(userId);
+            return decksStatistiques;
+        }
+
+        [Authorize]
         [HttpGet("{deckId}")]
         public async Task<ActionResult> MakeDeckCurrent(int deckId)
         {
