@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Models.Models.Dtos;
 using Super_Cartes_Infinies.Models;
@@ -27,6 +28,14 @@ namespace WebApi.Controllers
             _signInManager = signInManager;
             _playersService = playersService;
             _deckService = decksService;
+        }
+
+
+        [HttpGet]
+        public IActionResult ApplyMigrations()
+        {
+            _playersService.Migrate();
+            return Ok("La BD est maintenant à jour!");
         }
 
         [HttpPost]

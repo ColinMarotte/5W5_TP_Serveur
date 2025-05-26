@@ -77,6 +77,11 @@ namespace Super_Cartes_Infinies.Services
             Player player = GetPlayerFromUserId(userId);
             return player.ELO;
         }
+
+        public void Migrate()
+        {
+            _dbContext.Database.Migrate();
+        }
     }
 }
 
