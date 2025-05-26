@@ -8,11 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Models.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:sci-depart-main/Models/Migrations/20250507200352_Initiale.cs
-    public partial class Initiale : Migration
-========
-    public partial class init : Migration
->>>>>>>> origin/dev:sci-depart-main/Models/Migrations/20250519150457_init.cs
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -488,15 +484,9 @@ namespace Models.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-<<<<<<<< HEAD:sci-depart-main/Models/Migrations/20250507200352_Initiale.cs
-                    { "11111111-1111-1111-1111-111111111111", 0, "e3b20dc1-1791-4163-9f16-e524dd39cc84", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEHF27XfitbOxNuLL//nu/tvziUvBvNYWJCc6KXX7PQ3eeEYjQfscyPVKKJBR2LXzZw==", null, false, "f2935100-00d3-418b-a206-fffe954ce456", false, "admin@admin.com" },
-                    { "User1Id", 0, "f66c77c7-680d-4ad4-89d2-8d1459fe24ad", null, false, false, null, null, null, null, null, false, "582620af-faea-4e8a-8a77-8a46612521a7", false, null },
-                    { "User2Id", 0, "5ccabd11-49b7-4c8b-99ff-7fecdb6a5e6c", null, false, false, null, null, null, null, null, false, "3a84f0e0-350c-4ef0-9a30-17ec98df6417", false, null }
-========
-                    { "11111111-1111-1111-1111-111111111111", 0, "21a646c4-00fe-4f3b-b24f-d5a5ff4f375e", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAEKz6xuNyiZt8OoEhC0j/GZFcO/hAI74J4JIUbND4WaIV7BdHGoPOSbEqWpi7I9g1uA==", null, false, "22a3bdc9-3d7f-41ad-84f0-3dff62e52804", false, "admin@admin.com" },
-                    { "User1Id", 0, "79b76e46-2c58-472d-91f5-7dee6e895e13", null, false, false, null, null, null, null, null, false, "f25cf804-3eff-466d-86c3-4aaa06b3aed5", false, null },
-                    { "User2Id", 0, "40063c3a-073b-457a-aa55-acdbad1f1d6d", null, false, false, null, null, null, null, null, false, "3cddab5e-154e-4992-88b7-f8166dc93143", false, null }
->>>>>>>> origin/dev:sci-depart-main/Models/Migrations/20250519150457_init.cs
+                    { "11111111-1111-1111-1111-111111111111", 0, "4f48b2b4-d55b-49a7-bf65-3173a84ca189", "admin@admin.com", true, true, null, "ADMIN@ADMIN.COM", "ADMIN@ADMIN.COM", "AQAAAAIAAYagAAAAENfm/N4QUVf9fxJw/yy+3rAbNaJWA/WaA4cuUFoVym13qJiGnCA7BPyCTRNyvYv7WA==", null, false, "d53d1344-6dde-43c8-a240-5c000e0dd852", false, "admin@admin.com" },
+                    { "User1Id", 0, "9de16b10-509e-46e2-9945-34b7c310c778", null, false, false, null, null, null, null, null, false, "78043227-9fcd-4fd3-b9bb-4b0f5a6bb076", false, null },
+                    { "User2Id", 0, "6a5a1ba5-7c7b-48f5-a1b3-ffdbd7975148", null, false, false, null, null, null, null, null, false, "5e9abcfe-329d-46d7-8b30-546dffed5cee", false, null }
                 });
 
             migrationBuilder.InsertData(
@@ -576,6 +566,25 @@ namespace Models.Migrations
                     { 7, 5, null },
                     { 8, 6, null },
                     { 9, 6, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "OwnedCards",
+                columns: new[] { "Id", "CardId", "PlayerId" },
+                values: new object[,]
+                {
+                    { 1, 1, 1 },
+                    { 2, 2, 1 },
+                    { 3, 3, 1 },
+                    { 4, 4, 1 },
+                    { 5, 5, 1 },
+                    { 6, 6, 1 },
+                    { 7, 7, 1 },
+                    { 8, 8, 1 },
+                    { 9, 9, 1 },
+                    { 10, 10, 1 },
+                    { 11, 11, 1 },
+                    { 12, 12, 1 }
                 });
 
             migrationBuilder.CreateIndex(

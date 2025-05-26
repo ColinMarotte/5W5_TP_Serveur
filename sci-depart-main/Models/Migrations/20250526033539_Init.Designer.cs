@@ -12,20 +12,15 @@ using Super_Cartes_Infinies.Data;
 namespace Models.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<<< HEAD:sci-depart-main/Models/Migrations/20250507200352_Initiale.Designer.cs
-    [Migration("20250507200352_Initiale")]
-    partial class Initiale
-========
-    [Migration("20250519150457_init")]
-    partial class init
->>>>>>>> origin/dev:sci-depart-main/Models/Migrations/20250519150457_init.Designer.cs
+    [Migration("20250526033539_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.11")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Proxies:ChangeTracking", false)
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true)
@@ -162,25 +157,15 @@ namespace Models.Migrations
                         {
                             Id = "11111111-1111-1111-1111-111111111111",
                             AccessFailedCount = 0,
-<<<<<<<< HEAD:sci-depart-main/Models/Migrations/20250507200352_Initiale.Designer.cs
-                            ConcurrencyStamp = "e3b20dc1-1791-4163-9f16-e524dd39cc84",
-========
-                            ConcurrencyStamp = "21a646c4-00fe-4f3b-b24f-d5a5ff4f375e",
->>>>>>>> origin/dev:sci-depart-main/Models/Migrations/20250519150457_init.Designer.cs
+                            ConcurrencyStamp = "4f48b2b4-d55b-49a7-bf65-3173a84ca189",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-<<<<<<<< HEAD:sci-depart-main/Models/Migrations/20250507200352_Initiale.Designer.cs
-                            PasswordHash = "AQAAAAIAAYagAAAAEHF27XfitbOxNuLL//nu/tvziUvBvNYWJCc6KXX7PQ3eeEYjQfscyPVKKJBR2LXzZw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENfm/N4QUVf9fxJw/yy+3rAbNaJWA/WaA4cuUFoVym13qJiGnCA7BPyCTRNyvYv7WA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f2935100-00d3-418b-a206-fffe954ce456",
-========
-                            PasswordHash = "AQAAAAIAAYagAAAAEKz6xuNyiZt8OoEhC0j/GZFcO/hAI74J4JIUbND4WaIV7BdHGoPOSbEqWpi7I9g1uA==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "22a3bdc9-3d7f-41ad-84f0-3dff62e52804",
->>>>>>>> origin/dev:sci-depart-main/Models/Migrations/20250519150457_init.Designer.cs
+                            SecurityStamp = "d53d1344-6dde-43c8-a240-5c000e0dd852",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         },
@@ -188,38 +173,22 @@ namespace Models.Migrations
                         {
                             Id = "User1Id",
                             AccessFailedCount = 0,
-<<<<<<<< HEAD:sci-depart-main/Models/Migrations/20250507200352_Initiale.Designer.cs
-                            ConcurrencyStamp = "f66c77c7-680d-4ad4-89d2-8d1459fe24ad",
+                            ConcurrencyStamp = "9de16b10-509e-46e2-9945-34b7c310c778",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "582620af-faea-4e8a-8a77-8a46612521a7",
-========
-                            ConcurrencyStamp = "79b76e46-2c58-472d-91f5-7dee6e895e13",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "f25cf804-3eff-466d-86c3-4aaa06b3aed5",
->>>>>>>> origin/dev:sci-depart-main/Models/Migrations/20250519150457_init.Designer.cs
+                            SecurityStamp = "78043227-9fcd-4fd3-b9bb-4b0f5a6bb076",
                             TwoFactorEnabled = false
                         },
                         new
                         {
                             Id = "User2Id",
                             AccessFailedCount = 0,
-<<<<<<<< HEAD:sci-depart-main/Models/Migrations/20250507200352_Initiale.Designer.cs
-                            ConcurrencyStamp = "5ccabd11-49b7-4c8b-99ff-7fecdb6a5e6c",
+                            ConcurrencyStamp = "6a5a1ba5-7c7b-48f5-a1b3-ffdbd7975148",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3a84f0e0-350c-4ef0-9a30-17ec98df6417",
-========
-                            ConcurrencyStamp = "40063c3a-073b-457a-aa55-acdbad1f1d6d",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "3cddab5e-154e-4992-88b7-f8166dc93143",
->>>>>>>> origin/dev:sci-depart-main/Models/Migrations/20250519150457_init.Designer.cs
+                            SecurityStamp = "5e9abcfe-329d-46d7-8b30-546dffed5cee",
                             TwoFactorEnabled = false
                         });
                 });
@@ -759,6 +728,80 @@ namespace Models.Migrations
                     b.HasIndex("PlayerId");
 
                     b.ToTable("OwnedCards");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CardId = 1,
+                            PlayerId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CardId = 2,
+                            PlayerId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CardId = 3,
+                            PlayerId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CardId = 4,
+                            PlayerId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CardId = 5,
+                            PlayerId = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CardId = 6,
+                            PlayerId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CardId = 7,
+                            PlayerId = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CardId = 8,
+                            PlayerId = 1
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CardId = 9,
+                            PlayerId = 1
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CardId = 10,
+                            PlayerId = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CardId = 11,
+                            PlayerId = 1
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CardId = 12,
+                            PlayerId = 1
+                        });
                 });
 
             modelBuilder.Entity("Super_Cartes_Infinies.Models.PlayableCard", b =>
