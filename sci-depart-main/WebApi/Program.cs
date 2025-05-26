@@ -26,7 +26,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>()
 
 SymmetricSecurityKey signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("C'est tellement la meilleure cle qui a jamais ete cree dans l'histoire de l'humanite (doit etre longue)"));
 
-string serverAdress = "https://localhost:7179";
+string serverAdress = "https://serveursci5w5-bzf6fkb9cjcyh4dz.canadacentral-01.azurewebsites.net";
 
 builder.Services.AddAuthentication(options =>
 {
